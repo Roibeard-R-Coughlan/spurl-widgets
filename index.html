@@ -1,7 +1,18 @@
 <html>
 <head>
-    /* PLAYERS WIDGET CSS HERE */
+    <!-- PLAYERS WIDGET CSS HERE -->
 <style>
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+.carousel-section {
+  overflow: hidden;
+}
+
 .carousel-section {
   background: linear-gradient(180deg, #0d231b 0%, #10251e 100%);
   color: #fff8ed;
@@ -167,7 +178,7 @@
           <p>Soft light opens across the turf, giving the field a broad and timeless feel.</p>
         </div>
       </article>
-      <article class="carousel-card"> <img class="carousel-image" src="https://unsplash.com/photos/a-cliff-side-with-a-road-and-a-body-of-water-below-9cGL_LXZGOY" alt="Hurling field in County Cork with rolling hills" loading="lazy" />
+      <article class="carousel-card"> <img class="carousel-image" src="https://unsplash.com/photos/person-standing-on-rocks-SfKTmgt3zi8" alt="Hurling field in County Cork with rolling hills" loading="lazy" />
         <div class="carousel-card-overlay">
           <p class="carousel-card-label">County Cork</p>
           <h3>Rolling hill framing</h3>
@@ -222,7 +233,7 @@
 </section>
 
 <script>
-    /* PLAYERS JS HERE */
+    // PLAYERS JS HERE
 document.addEventListener("DOMContentLoaded", () => {
 
   const track = document.querySelector(".carousel-track");
