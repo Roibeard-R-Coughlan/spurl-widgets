@@ -1,0 +1,200 @@
+<html>
+<head>
+<style>
+.carousel-section {
+  background: linear-gradient(180deg, #0d231b 0%, #10251e 100%);
+  color: #fff8ed;
+  padding: 6rem 2rem;
+}
+
+.carousel-header,
+.carousel-toolbar,
+.carousel-strip,
+.carousel-quote {
+  max-width: 1100px;
+  margin-inline: auto;
+}
+
+.carousel-header {
+  margin-bottom: 2rem;
+}
+
+.carousel-header h2 {
+  color: #fff8ed;
+  margin-bottom: 1rem;
+}
+
+.carousel-intro {
+  max-width: 32rem;
+  color: rgba(255,248,237,0.78);
+}
+
+.carousel-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.carousel-controls {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.carousel-button {
+  min-width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  border: 1px solid rgba(194,160,90,0.3);
+  background: rgba(7,21,17,0.88);
+  color: #fff8ed;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.carousel-button:hover {
+  border-color: #c2a05a;
+  color: #c2a05a;
+}
+
+.carousel-strip {
+  overflow: clip;
+  margin-bottom: 2rem;
+}
+
+.carousel-track {
+  display: flex;
+  gap: 1rem;
+  transition: transform 0.9s cubic-bezier(0.2,0.8,0.2,1);
+}
+
+.carousel-card {
+  position: relative;
+  width: clamp(18rem, 26vw, 22rem);
+  height: clamp(24rem, 36vw, 28rem);
+  overflow: hidden;
+  border-radius: 1rem;
+  flex: 0 0 auto;
+  background: #1a2e1e;
+}
+
+.carousel-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-card-overlay {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1.25rem;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(7,21,17,0.9) 68%
+  );
+}
+
+.carousel-card-overlay h3 {
+  color: #fff8ed;
+  margin-bottom: 0.5rem;
+}
+
+.carousel-card-overlay p {
+  color: rgba(255,248,237,0.82);
+}
+
+.carousel-card-label {
+  color: #c2a05a;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+
+.carousel-status {
+  color: rgba(255,248,237,0.75);
+}
+
+.carousel-quote {
+  font-family: Georgia, serif;
+  font-size: 1.25rem;
+  color: rgba(255,248,237,0.86);
+}
+
+@media (max-width: 768px) {
+  .carousel-section {
+    padding: 4rem 1rem;
+  }
+
+  .carousel-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .carousel-card {
+    width: 85vw;
+  }
+}
+</style>
+
+</head>
+
+<body>
+
+<!--  HTML HERE -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const track = document.querySelector(".carousel-track");
+  const cards = document.querySelectorAll(".carousel-card");
+
+  const prevButton = document.getElementById("carouselPrev");
+  const nextButton = document.getElementById("carouselNext");
+
+  let activeIndex = 0;
+
+  const visibleCards = () => {
+    if (window.innerWidth < 768) return 1;
+    if (window.innerWidth < 1100) return 2;
+    return 3;
+  };
+
+  const maxIndex = () => {
+    return cards.length - visibleCards();
+  };
+
+  const getStep = () => {
+    const cardWidth = cards[0].offsetWidth;
+    return cardWidth + 16;
+  };
+
+  const updateCarousel = () => {
+    track.style.transform =
+      `translateX(-${activeIndex * getStep()}px)`;
+  };
+
+  nextButton.addEventListener("click", () => {
+    if (activeIndex < maxIndex()) {
+      activeIndex++;
+      updateCarousel();
+    }
+  });
+
+  prevButton.addEventListener("click", () => {
+    if (activeIndex > 0) {
+      activeIndex--;
+      updateCarousel();
+    }
+  });
+
+  window.addEventListener("resize", updateCarousel);
+
+});
+</script>
+
+</body>
+</html>
