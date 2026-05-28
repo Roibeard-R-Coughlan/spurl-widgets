@@ -1,3 +1,7 @@
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+<title>Pitches Across Ireland</title>
 <html>
 <head>
     <!-- PLAYERS WIDGET CSS HERE -->
@@ -84,8 +88,10 @@ body {
 
 .carousel-card {
   position: relative;
-  width: clamp(18rem, 26vw, 22rem);
-  height: clamp(24rem, 36vw, 28rem);
+  /* width: clamp(18rem, 26vw, 22rem); */
+  width: 320px;
+  /* height: clamp(24rem, 36vw, 28rem); */
+  height: 420px;
   overflow: hidden;
   border-radius: 1rem;
   flex: 0 0 auto;
@@ -166,7 +172,10 @@ body {
     <p class="carousel-intro">From island pitches to mountain valleys, hurling is woven into the very landscape of Ireland. </p>
   </div>
   <div class="carousel-toolbar">
-    <div class="carousel-controls"> <button type="button" class="carousel-button" id="carouselPrev" aria-label="Show previous carousel item">←</button> <button type="button" class="carousel-button" id="carouselNext" aria-label="Show next carousel item">→</button> <button type="button" class="carousel-button carousel-toggle" id="carouselToggle" aria-label="Pause the carousel"> <img src="assets/pause-button.png" alt="" aria-hidden="true" /> </button> </div>
+    <div class="carousel-controls"> 
+        <button type="button" class="carousel-button" id="carouselPrev" aria-label="Show previous carousel item">&#8592;</button>
+        <button type="button" class="carousel-button" id="carouselNext" aria-label="Show next carousel item">&#8594;</button>
+        <button type="button" class="carousel-button carousel-toggle" id="carouselToggle" aria-label="Pause the carousel">❚❚</button>
     <p class="carousel-status" id="carouselStatus" aria-live="polite">1 of 8</p>
   </div>
   <div class="carousel-strip" id="carouselStrip">
@@ -178,49 +187,49 @@ body {
           <p>Soft light opens across the turf, giving the field a broad and timeless feel.</p>
         </div>
       </article>
-      <article class="carousel-card"> <img class="carousel-image" src="https://unsplash.com/photos/person-standing-on-rocks-SfKTmgt3zi8" alt="Hurling field in County Cork with rolling hills" loading="lazy" />
+      <article class="carousel-card"> <img class="carousel-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="Hurling field in County Cork with rolling hills" loading="lazy" />
         <div class="carousel-card-overlay">
           <p class="carousel-card-label">County Cork</p>
           <h3>Rolling hill framing</h3>
           <p>Gentle slopes and a clear horizon make the scene feel quietly monumental.</p>
         </div>
       </article>
-      <article class="carousel-card"> <img class="carousel-image" src="https://unsplash.com/photos/a-large-body-of-water-surrounded-by-rocks-u9dCuw7AX9o" alt="Hurling field in County Galway among stone walls" loading="lazy" />
+      <article class="carousel-card"> <img class="carousel-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="Hurling field in County Galway among stone walls" loading="lazy" />
         <div class="carousel-card-overlay">
           <p class="carousel-card-label">County Galway</p>
           <h3>Stone and grass</h3>
           <p>The contrast of dry stone and emerald turf gives the field a strong sense of place.</p>
         </div>
       </article>
-      <article class="carousel-card"> <img class="carousel-image" src="https://unsplash.com/photos/a-large-body-of-water-near-a-rocky-cliff-9RpEZPKiFPs" alt="Hurling field in County Kerry with dramatic skies" loading="lazy" />
+      <article class="carousel-card"> <img class="carousel-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="Hurling field in County Kerry with dramatic skies" loading="lazy" />
         <div class="carousel-card-overlay">
           <p class="carousel-card-label">County Kerry</p>
           <h3>Skyline drama</h3>
           <p>Cloud-led skies and broad terrain make the field feel expansive and cinematic.</p>
         </div>
       </article>
-      <article class="carousel-card"> <img class="carousel-image" src="https://unsplash.com/photos/a-bridge-over-a-body-of-water-with-buildings-in-the-background-iM7J-TYCwUg" alt="Hurling field in County Tipperary with golden light" loading="lazy" />
+      <article class="carousel-card"> <img class="carousel-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="Hurling field in County Tipperary with golden light" loading="lazy" />
         <div class="carousel-card-overlay">
           <p class="carousel-card-label">County Tipperary</p>
           <h3>Golden hour turf</h3>
           <p>Late light settles over the pitch, bringing warmth and depth to the scene.</p>
         </div>
       </article>
-      <article class="carousel-card"> <img class="carousel-image" src="https://unsplash.com/photos/a-person-walking-on-a-beach-with-a-surfboard-oGZFR1uHjeI" alt="Hurling field in County Limerick with weathered hedges" loading="lazy" />
+      <article class="carousel-card"> <img class="carousel-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="Hurling field in County Limerick with weathered hedges" loading="lazy" />
         <div class="carousel-card-overlay">
           <p class="carousel-card-label">County Limerick</p>
           <h3>Weathered edges</h3>
           <p>Hedges and texture bring a grounded, tactile quality to the landscape.</p>
         </div>
       </article>
-      <article class="carousel-card"> <img class="carousel-image" src="https://unsplash.com/photos/person-standing-on-rocks-SfKTmgt3zi8" alt="Hurling field in County Waterford under soft evening light" loading="lazy" />
+      <article class="carousel-card"> <img class="carousel-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="Hurling field in County Waterford under soft evening light" loading="lazy" />
         <div class="carousel-card-overlay">
           <p class="carousel-card-label">County Waterford</p>
           <h3>Evening hush</h3>
           <p>Soft evening tones allow the field to hold quiet drama without losing clarity.</p>
         </div>
       </article>
-      <article class="carousel-card"> <img class="carousel-image" src="https://unsplash.com/photos/green-mountain-beside-body-of-water-during-daytime-kvQgZqRRpDA" alt="Hurling field in County Mayo with cloud-heavy skies" loading="lazy" />
+      <article class="carousel-card"> <img class="carousel-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb" alt="Hurling field in County Mayo with cloud-heavy skies" loading="lazy" />
         <div class="carousel-card-overlay">
           <p class="carousel-card-label">County Mayo</p>
           <h3>Cloud-heavy horizon</h3>
