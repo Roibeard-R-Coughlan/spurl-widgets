@@ -240,9 +240,8 @@ body {
   </div>
   <p class="carousel-quote">“Every pitch tells a story — this is the land that shaped the game.”</p>
 </section>
-
+     <!-- PLAYERS JS HERE -->
 <script>
-    // PLAYERS JS HERE
 document.addEventListener("DOMContentLoaded", () => {
 
   const track = document.querySelector(".carousel-track");
@@ -250,8 +249,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const prevButton = document.getElementById("carouselPrev");
   const nextButton = document.getElementById("carouselNext");
+  const toggleButton = document.getElementById("carouselToggle");
+  const status = document.getElementById("carouselStatus");
 
   let activeIndex = 0;
+  let isPlaying = true;
+  let autoPlay;
 
   const visibleCards = () => {
     if (window.innerWidth < 768) return 1;
@@ -273,6 +276,20 @@ document.addEventListener("DOMContentLoaded", () => {
       `translateX(-${activeIndex * getStep()}px)`;
   };
 
+  const startAutoPlay = () => {
+    autoPlay = setInterval(() => {
+
+      if (activeIndex < maxIndex()) {
+        activeIndex++;
+      } else {
+        activeIndex = 0;
+      }
+
+      updateCarousel();
+
+    }, 4000);
+  };
+
   nextButton.addEventListener("click", () => {
     if (activeIndex < maxIndex()) {
       activeIndex++;
@@ -286,6 +303,29 @@ document.addEventListener("DOMContentLoaded", () => {
       updateCarousel();
     }
   });
+
+  toggleButton.addEventListener("click", () => {
+
+    if (isPlaying) {
+
+      clearInterval(autoPlay);
+
+      toggleButton.textContent = "▶";
+
+      isPlaying = false;
+
+    } else {
+
+      startAutoPlay();
+
+      toggleButton.textContent = "❚❚";
+
+      isPlaying = true;
+    }
+
+  });
+
+  startAutoPlay();
 
   window.addEventListener("resize", updateCarousel);
 
