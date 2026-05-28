@@ -273,8 +273,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const updateCarousel = () => {
     track.style.transform =
-      `translateX(-${activeIndex * getStep()}px)`;
-  };
+        `translateX(-${activeIndex * getStep()}px)`;
+
+    status.textContent =
+        `${activeIndex + 1} of ${cards.length}`;
+    };
 
   const startAutoPlay = () => {
     autoPlay = setInterval(() => {
@@ -289,6 +292,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     }, 4000);
   };
+
+  track.addEventListener("mouseenter", () => {
+  clearInterval(autoPlay);
+});
+
+track.addEventListener("mouseleave", () => {
+  if (isPlaying) {
+    startAutoPlay();
+  }
+});
 
   nextButton.addEventListener("click", () => {
     if (activeIndex < maxIndex()) {
