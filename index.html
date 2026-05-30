@@ -6,6 +6,9 @@
 <head>
     <!-- PLAYERS WIDGET CSS BELOW -->
 <style>
+* {
+  box-sizing: border-box;
+}
 
 html,
 body {
@@ -21,9 +24,10 @@ body {
 }
 
 .carousel-section {
-  background: linear-gradient(180deg, #0d231b 0%, #10251e 100%);
-  color: #fff8ed;
-  padding: 6rem 2rem;
+  background: transparent;
+  padding: 0;
+  min-height: auto !important;
+  height: auto !important;
 }
 
 .carousel-header,
@@ -81,19 +85,24 @@ body {
 
 .carousel-strip {
   overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
   margin-bottom: 2rem;
 }
 
 .carousel-track {
   display: flex;
+  width: max-content;
   gap: 1rem;
   transition: transform 0.9s cubic-bezier(0.2,0.8,0.2,1);
 }
 
 .carousel-card {
   position: relative;
-  width: 31%;
-  min-width: 320px;
+  /* height: 300px !important;
+  width: 31%; */
+  width: calc((100% - 2rem) / 3);
+  min-width: 0;
   max-width: 420px;
   height: 420px;
   overflow: hidden;
@@ -174,14 +183,7 @@ body {
 
 <body>
     <!-- PLAYERS HTML HERE -->
-    <section class="carousel-section section-pad reveal" id="stories" aria-labelledby="carousel-title">
-  <div class="carousel-header">
-    <div>
-      <p class="section-kicker">A living sequence</p>
-      <h2 id="carousel-title">Where the Game Meets the Land</h2>
-    </div>
-    <p class="carousel-intro">From island pitches to mountain valleys, hurling is woven into the very landscape of Ireland. </p>
-  </div>
+    <section class="carousel-section section-pad reveal" id="stories">
   <div class="carousel-toolbar">
 
     <div class="carousel-controls">
@@ -253,7 +255,7 @@ body {
       </article>
     </div>
   </div>
-  <p class="carousel-quote">“Every pitch tells a story — this is the land that shaped the game.”</p>
+  <!-- <p class="carousel-quote">“Every pitch tells a story — this is the land that shaped the game.”</p> -->
 </section>
      <!-- PLAYERS JS HERE -->
 <script>
