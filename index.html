@@ -87,6 +87,7 @@ body {
   width: max-content;
   gap: 1rem;
   transition: transform 0.9s cubic-bezier(0.2,0.8,0.2,1);
+  touch-action: pan-y;
 }
 
 .carousel-card {
@@ -95,7 +96,7 @@ body {
   width: 31%; */
   width: calc((100% - 2rem) / 3);
   min-width: 0;
-  max-width: 420px;
+  max-width: 100%;
   height: 420px;
   overflow: hidden;
   border-radius: 1rem;
