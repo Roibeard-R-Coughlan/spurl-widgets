@@ -9,13 +9,15 @@
 
 html,
 body {
-  margin: 0;
-  padding: 0;
+  margin:0;
+  padding:0;
+  min-height:100%;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   overflow-x: hidden !important;
 }
 
 .carousel-section {
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
 .carousel-section {
@@ -78,7 +80,7 @@ body {
 }
 
 .carousel-strip {
-  overflow: clip;
+  overflow: hidden;
   margin-bottom: 2rem;
 }
 
@@ -90,16 +92,14 @@ body {
 
 .carousel-card {
   position: relative;
-  width: clamp(260px, 28vw, 360px);
-  height: clamp(360px, 38vw, 460px);
+  width: 31%;
+  min-width: 320px;
+  max-width: 420px;
+  height: 420px;
   overflow: hidden;
   border-radius: 1rem;
   flex: 0 0 auto;
   background: #1a2e1e;
-  /* mobile responsiveness */
-  width: 82vw;
-  height: 60vh;
-  max-height: 520px;
 }
 
 .carousel-image {
@@ -164,6 +164,8 @@ body {
 
   .carousel-card {
     width: 85vw;
+    height: 60vh;
+    max-height: 520px;
   }
 }
 </style>
@@ -181,11 +183,15 @@ body {
     <p class="carousel-intro">From island pitches to mountain valleys, hurling is woven into the very landscape of Ireland. </p>
   </div>
   <div class="carousel-toolbar">
-    <div class="carousel-controls"> 
-        <button type="button" class="carousel-button" id="carouselPrev" aria-label="Show previous carousel item">&#8592;</button>
-        <button type="button" class="carousel-button" id="carouselNext" aria-label="Show next carousel item">&#8594;</button>
-        <button type="button" class="carousel-button carousel-toggle" id="carouselToggle" aria-label="Pause the carousel">❚❚</button>
-    <p class="carousel-status" id="carouselStatus" aria-live="polite">1 of 8</p>
+
+    <div class="carousel-controls">
+      <button type="button" class="carousel-button" id="carouselPrev">←</button>
+      <button type="button" class="carousel-button" id="carouselNext">→</button>
+      <button type="button" class="carousel-button carousel-toggle" id="carouselToggle">❚❚</button>
+    </div>
+
+    <p class="carousel-status" id="carouselStatus">1 of 8</p>
+
   </div>
   <div class="carousel-strip" id="carouselStrip">
     <div class="carousel-track" id="carouselTrack">
