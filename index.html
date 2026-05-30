@@ -360,6 +360,37 @@ track.addEventListener("mouseleave", () => {
   window.addEventListener("resize", updateCarousel);
 
 });
+//  Test a swipe gesture on mobile devices
+let startX = 0;
+let endX = 0;
+
+track.addEventListener("touchstart", (e) => {
+  startX = e.touches[0].clientX;
+});
+
+track.addEventListener("touchend", (e) => {
+  endX = e.changedTouches[0].clientX;
+
+  const swipeDistance = startX - endX;
+
+  // Swipe left
+  if (swipeDistance > 50) {
+    if (activeIndex < maxIndex()) {
+      activeIndex++;
+    } else {
+      activeIndex = 0;
+    }
+    updateCarousel();
+  }
+
+  // Swipe right
+  if (swipeDistance < -50) {
+    if (activeIndex > 0) {
+      activeIndex--;
+    }
+    updateCarousel();
+  }
+});
 </script>
 
 </body>
