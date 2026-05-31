@@ -92,12 +92,10 @@ body {
 
 .carousel-card {
   position: relative;
-  flex: 1 1 31%;
-  min-width: 280px;
+  flex: 0 0 calc((100% - 2rem) / 3);
   height: 420px;
   overflow: hidden;
   border-radius: 1rem;
-  aspect-ratio: 4 / 3;
   background: #1a2e1e;
 }
 
@@ -168,6 +166,15 @@ body {
   }
 }
 
+@media (max-width: 900px) and (orientation: landscape) {
+
+  .carousel-card {
+    flex: 0 0 calc((100% - 1rem) / 2);
+    height: 65vh;
+  }
+
+}
+
 @media (max-width: 768px) {
   .carousel-section {
     padding: .3rem 1rem
@@ -179,10 +186,10 @@ body {
   }
 
   .carousel-card {
-    width: 85vw;
-    height: 80vh; 
-    max-height: 520px;
-    /* flex: 0 0 100%; */
+    flex: 0 0 92%;
+    height: 70vh;
+    max-height: 500px;
+    min-height: 380px;
   }
 }
 @media (max-width: 768px) {
@@ -191,11 +198,13 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* gap: 1rem; */
+    gap: .5rem;
+    margin-top: .5rem;
   }
 
   .carousel-controls {
     justify-content: center;
+    gap: .75rem;
   }
 
   .carousel-status {
@@ -305,10 +314,19 @@ document.addEventListener("DOMContentLoaded", () => {
   let autoPlay;
 
   const visibleCards = () => {
-    if (window.innerWidth < 768) return 1;
-    if (window.innerWidth < 1100) return 2;
-    return 3;
-  };
+  if (window.innerWidth < 768) return 1;
+
+  if (
+      window.innerWidth < 900 &&
+      window.innerWidth > window.innerHeight
+  ) {
+      return 2;
+  }
+
+  if (window.innerWidth < 1100) return 2;
+
+  return 3;
+};
 
   const maxIndex = () => {
     return cards.length - visibleCards();
