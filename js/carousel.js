@@ -1,7 +1,3 @@
-// const track = document.querySelector("[data-carousel-track]");
-// const cards = track.querySelectorAll("[data-carousel-card]");
-
-
 document.addEventListener("DOMContentLoaded", () => {
 
   const track = document.querySelector(".carousel-track");

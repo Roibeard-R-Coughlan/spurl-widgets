@@ -1,3 +1,7 @@
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+<title>Heritage of hurling</title>
 <html>
 <head>
 <style>
@@ -6,6 +10,10 @@
   max-width: 1400px;
   margin: 0 auto;
   padding: 5rem 1.5rem;
+}
+
+.timeline-overlay{
+  padding:2rem;
 }
 
 .timeline-heading {
@@ -25,16 +33,16 @@
   font-size: clamp(2rem,4vw,3.5rem);
 }
 
-.timeline-strip {
+.carousel-strip {
   overflow: hidden;
 }
 
-.timeline-track {
+.carousel-track {
   display: flex;
   gap: 2rem;
 }
 
-.timeline-card {
+.carousel-card carousel-card timeline-card {
   position: relative;
   min-width: 420px;
   max-width: 420px;
@@ -44,7 +52,7 @@
   box-shadow: 0 10px 30px rgba(0,0,0,.08);
 }
 
-.timeline-card::before {
+.carousel-card carousel-card timeline-card::before {
   content: "";
   position: absolute;
   top: 0;
@@ -97,15 +105,10 @@
 <!-- PLAYERS HTML HERE -->
  <section class="heritage-timeline">
 
-  <div class="timeline-heading">
-    <p class="timeline-kicker">Origins of the Game</p>
-    <h2>The Story Begins</h2>
-  </div>
+  <div class="carousel-strip">
+    <div class="carousel-track">
 
-  <div class="timeline-strip">
-    <div class="timeline-track">
-
-      <article class="timeline-card">
+      <article class="carousel-card timeline-card">
 
         <img
           class="timeline-image"
@@ -131,7 +134,7 @@
 
       </article>
       <!-- Card 2 -->
-       <article class="timeline-card">
+       <article class="carousel-card timeline-card">
 
         <img
           class="timeline-image"
@@ -156,7 +159,7 @@
 
       </article>
       <!-- Card 3 -->
-       <article class="timeline-card">
+       <article class="carousel-card timeline-card">
 
   <img
     class="timeline-image"
@@ -181,7 +184,7 @@
 
 </article>
 <!-- Card 4 -->
-        <article class="timeline-card">
+        <article class="carousel-card timeline-card">
 
   <img
     class="timeline-image"
@@ -207,7 +210,7 @@
 </article>
 
 <!-- Card 5 -->
- <article class="timeline-card">
+ <article class="carousel-card timeline-card">
 
   <img
     class="timeline-image"
@@ -233,7 +236,7 @@
 </article>
 
 <!-- Card 6 -->
- <article class="timeline-card">
+ <article class="carousel-card timeline-card">
 
   <img
     class="timeline-image"
@@ -257,7 +260,7 @@
   </div>
 
 </article>
-<article class="timeline-card">
+<article class="carousel-card timeline-card">
 
   <img
     class="timeline-image"
@@ -281,7 +284,7 @@
 
 </article>
  <!-- Card 8 --> 
-  <article class="timeline-card">
+  <article class="carousel-card timeline-card">
 
   <img
     class="timeline-image"
