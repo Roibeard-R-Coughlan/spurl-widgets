@@ -1,8 +1,94 @@
 <html>
 <head>
 <style>
-
 /* PLAYERS WIDGET CSS HERE */
+.heritage-timeline {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 5rem 1.5rem;
+}
+
+.timeline-heading {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.timeline-kicker {
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  color: #c2a05a;
+  margin-bottom: .5rem;
+}
+
+.timeline-heading h2 {
+  color: #173629;
+  font-size: clamp(2rem,4vw,3.5rem);
+}
+
+.timeline-strip {
+  overflow: hidden;
+}
+
+.timeline-track {
+  display: flex;
+  gap: 2rem;
+}
+
+.timeline-card {
+  position: relative;
+  min-width: 420px;
+  max-width: 420px;
+  background: #fff8ed;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,.08);
+}
+
+.timeline-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 2rem;
+  width: 4px;
+  height: 100%;
+  background: #c2a05a;
+}
+
+.timeline-year {
+  position: absolute;
+  top: 1.5rem;
+  left: 3rem;
+  z-index: 3;
+
+  background: #173629;
+  color: #fff8ed;
+
+  padding: .5rem 1rem;
+  border-radius: 999px;
+
+  font-weight: 600;
+}
+
+.timeline-image {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+}
+
+.timeline-content {
+  padding: 2rem;
+}
+
+.timeline-content h3 {
+  color: #173629;
+  margin-bottom: 1rem;
+}
+
+.timeline-content p {
+  color: #4f5a54;
+  line-height: 1.7;
+}
 
 </style>
 </head>
