@@ -41,6 +41,38 @@
 
 .carousel-strip {
   position: relative;
+  overflow: visible;
+}
+
+.carousel-strip::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  top: 435px;
+
+  height: 3px;
+  background: #c2a05a;
+
+  z-index: 1;
+}
+
+.carousel-strip::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  top: 435px;
+
+  height: 3px;
+  background: #c2a05a;
+
+  z-index: 1;
+}
+
+.carousel-track-wrapper {
   overflow: hidden;
 }
 
@@ -60,16 +92,6 @@
   z-index: 2;
 }
 
-.timeline-card::before {
-  content: "";
-  position: absolute;
-  left: 2.5rem;
-  top: 0;
-  width: 4px;
-  height: 280px;
-  background: #c2a05a;
-}
-
 .timeline-card::after {
   content: "";
   position: absolute;
@@ -79,7 +101,7 @@
   background: #c2a05a;
   left: 50%;
   transform: translateX(-50%);
-  top: 52%;
+  top: 460px;
 }
 
 .timeline-year {
@@ -119,9 +141,10 @@
   position: absolute;
   left: 0;
   right: 0;
-  top: 52%;
+  top: 428px;
   height: 3px;
   background: #c2a05a;
+  transform: translateX(-50%);
 }
 
 </style>
