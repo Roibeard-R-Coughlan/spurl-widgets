@@ -55,8 +55,19 @@
   width: 100%;
 }
 
-.carousel-track-wrapper {
+.player-carousel-wrapper {
   overflow: hidden;
+  position: relative;
+}
+
+/* Hide scrollbar everywhere */
+.player-carousel-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.player-carousel-wrapper {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .carousel-track {
@@ -188,6 +199,71 @@
   transform: translateX(-50%);
 }
 
+ /* Buttons for carousel */
+
+ .player-nav {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+
+  width: 60px;
+  height: 60px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(243,238,227,.95);
+  color: #c2a05a;
+
+  font-size: 2rem;
+  font-weight: bold;
+
+  cursor: pointer;
+
+  z-index: 10;
+
+  opacity: .45;
+  transition: all .3s ease;
+}
+
+.player-nav:hover {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.player-prev {
+  left: 12px;
+}
+
+.player-next {
+  right: 12px;
+}
+
+/* Auto-hide after page load */
+
+.player-nav {
+  animation: navFade 4s forwards;
+}
+
+.player-carousel-wrapper:hover .player-nav {
+  opacity: 1;
+  animation: none;
+}
+
+@keyframes navFade {
+  0% {
+    opacity: .8;
+  }
+
+  70% {
+    opacity: .8;
+  }
+
+  100% {
+    opacity: .15;
+  }
+}
+
 @media (min-width: 1200px) {
   .timeline-card {
     flex: 0 0 460px;
@@ -266,6 +342,13 @@
 
   <div class="carousel-strip">
     <div class="carousel-track-wrapper">
+      <button class="player-nav player-prev" id="playerPrev">
+    &#10094;
+      </button>
+
+      <button class="player-nav player-next" id="playerNext">
+        &#10095;
+      </button>
       <div class="carousel-track">
 
         <article class="timeline-card carousel-card">
