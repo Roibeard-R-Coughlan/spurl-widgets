@@ -55,17 +55,6 @@
   width: 100%;
 }
 
-.carousel-strip::before {
-  content: "";
-  position: absolute;
-  left: 8%;
-  right: 8%;
-  top: 446px;
-  height: 3px;
-  background: #c2a05a;
-  z-index: 1;
-}
-
 .carousel-track-wrapper {
   overflow: hidden;
 }
@@ -87,17 +76,73 @@
   box-shadow: 0 10px 30px rgba(0,0,0,.08);
   z-index: 2;
 }
+/* left half of the line */
+.timeline-card::before {
+  content: "";
+  position: absolute;
+
+  top: 446px;
+
+  left: 0;
+  width: calc(50% - 20px);
+
+  height: 2px;
+  background: #c2a05a;
+}
+   /* right half of the line */
+.timeline-overlay::before {
+  content: "";
+  position: absolute;
+
+  top: 446px;
+
+  right: 0;
+  width: calc(50% - 20px);
+
+  height: 2px;
+  background: #c2a05a;
+}
 
 .timeline-card::after {
+  width: 24px;
+  height: 24px;
+
+  left: 50%;
+  top: 416px;
+
+  transform: translateX(-50%);
+}
+
+/* .timeline-card::after {
   content: "";
   position: absolute;
   width: 18px;
   height: 18px;
-  border-radius: 50%;
-  background: #c2a05a;
   left: 50%;
   transform: translateX(-50%);
   top: 437px;
+  border-radius: 50%;
+  background: #c2a05a;
+  box-shadow:
+  inset 0 0 0 1px rgba(255,255,255,.25)
+} */
+
+.timeline-card::after {
+  content: "";
+  position: absolute;
+
+  width: 20px;
+  height: 20px;
+
+  background-image: url("/assets/colorkit-sliotar-test.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  left: 50%;
+  transform: translateX(-50%);
+  top: 437px;
+
+  z-index: .5;
 }
 
 .timeline-year {
@@ -193,6 +238,10 @@
 
   .timeline-content {
     padding: 1.25rem;
+  }
+
+  .timeline-date {
+    margin-top: 1.4rem;
   }
 
   .carousel-strip::before {
