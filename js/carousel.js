@@ -203,6 +203,52 @@ if (playerTrack && playerCards.length) {
 
   let playerIndex = 0;
 
+  // Players carousel swipe support
+
+let playerStartX = 0;
+let playerEndX = 0;
+
+if (playerTrack) {
+
+  playerTrack.addEventListener("touchstart", (e) => {
+    playerStartX = e.touches[0].clientX;
+  });
+
+  playerTrack.addEventListener("touchend", (e) => {
+
+    playerEndX = e.changedTouches[0].clientX;
+
+    const swipeDistance =
+      playerStartX - playerEndX;
+
+    // Swipe left
+    if (swipeDistance > 50) {
+
+      if (playerIndex < playerMaxIndex()) {
+        playerIndex++;
+      } else {
+        playerIndex = 0;
+      }
+
+      updatePlayers();
+    }
+
+    // Swipe right
+    if (swipeDistance < -50) {
+
+      if (playerIndex > 0) {
+        playerIndex--;
+      } else {
+        playerIndex = playerMaxIndex();
+      }
+
+      updatePlayers();
+    }
+
+  });
+
+}
+
   const visiblePlayers = () => {
 
     if (window.innerWidth < 768) return 1;
