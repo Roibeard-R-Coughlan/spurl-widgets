@@ -9,7 +9,7 @@
 .heritage-timeline {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 1.5rem 3rem;
+  padding: 0 1.5rem 2rem;
 }
 
 .timeline-overlay {
@@ -35,21 +35,25 @@
 }
 
 .carousel-strip {
+  position: relative;
   overflow: hidden;
+}
+
+.carousel-strip::before {
+  content: "";
+  position: absolute;
+  top: 210px;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: #c2a05a;
+  z-index: 0;
 }
 
 .carousel-track {
   display:flex;
   gap:2rem;
 }
-
-/* .carousel-card timeline-card {
-  position: relative;
-  overflow: hidden;
-  border-radius: 1rem;
-  background: #fff8ed;
-  box-shadow: 0 10px 30px rgba(0,0,0,.08);
-} */
 
 .timeline-card {
   position: relative;
@@ -59,6 +63,7 @@
   overflow: hidden;
   background: #fff8ed;
   box-shadow: 0 10px 30px rgba(0,0,0,.08);
+  z-index: 2;
 }
 
 .timeline-card::before {
