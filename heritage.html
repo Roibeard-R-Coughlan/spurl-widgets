@@ -14,17 +14,17 @@
 
 .timeline-overlay {
   padding: 2rem;
+  margin-top: 10px;
 }
 
 .timeline-date {
   color: #c2a05a;
   font-size: 0.85rem;
   text-transform: uppercase;
-  margin-bottom: .75rem;
   opacity: .8;
   letter-spacing: 0.15em;
   text-align: center;
-  margin-top: 1rem;
+  margin-bottom: 0.75rem 0;
 }
 
 .timeline-title {
@@ -104,8 +104,8 @@
 }
 
 .timeline-card::after {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
 
   left: 50%;
   top: 416px;
@@ -228,8 +228,16 @@
     max-width: calc(100vw - 4rem);
   }
 
-  .timeline-card::after {
+  .timeline-card::before {
     top: 312px;
+  }
+
+  .timeline-overlay::before {
+    top: 312px;
+  }
+
+  .timeline-card::after {
+    top: 304px;
   }
 
   .timeline-image {
