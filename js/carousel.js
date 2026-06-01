@@ -9,6 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleButton = document.getElementById("carouselToggle");
   const status = document.getElementById("carouselStatus");
 
+  const heritageTrack = document.querySelector(".heritage-track");
+  const playerTrack = document.querySelector(".player-track");
+
+  const playerPrev = document.getElementById("playerPrev");
+  const playerNext = document.getElementById("playerNext");
+
   let activeIndex = 0;
   let isPlaying = true;
   let autoPlay;
@@ -122,6 +128,33 @@ if (toggleButton) {
   updateCarousel();
 
 });
+
+//  Carousel buttons for heritage page
+if (playerNext) {
+  playerNext.addEventListener("click", () => {
+
+    if (activeIndex < maxIndex()) {
+      activeIndex++;
+    } else {
+      activeIndex = 0;
+    }
+
+    updateCarousel();
+  });
+}
+
+if (playerPrev) {
+  playerPrev.addEventListener("click", () => {
+
+    if (activeIndex > 0) {
+      activeIndex--;
+    } else {
+      activeIndex = maxIndex();
+    }
+
+    updateCarousel();
+  });
+}
 
 //  Test a swipe gesture on mobile devices
 let startX = 0;
