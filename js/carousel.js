@@ -188,3 +188,93 @@ track.addEventListener("touchend", (e) => {
   }
   });
 });
+
+/* ==========================
+   PLAYERS CAROUSEL
+========================== */
+
+const playerTrack = document.querySelector(".player-track");
+const playerCards = document.querySelectorAll(".player-card");
+
+const playerPrev = document.getElementById("playerPrev");
+const playerNext = document.getElementById("playerNext");
+
+if (playerTrack && playerCards.length) {
+
+  let playerIndex = 0;
+
+  const visiblePlayers = () => {
+
+    if (window.innerWidth < 768) return 1;
+
+    if (
+      window.innerWidth < 900 &&
+      window.innerWidth > window.innerHeight
+    ) {
+      return 2;
+    }
+
+    if (window.innerWidth < 1100) return 2;
+
+    return 3;
+  };
+
+  const playerMaxIndex = () => {
+    return playerCards.length - visiblePlayers();
+  };
+
+  const playerStep = () => {
+    return playerCards[0].getBoundingClientRect().width +
+      parseFloat(getComputedStyle(playerTrack).gap);
+  };
+
+  const updatePlayers = () => {
+
+    playerTrack.style.transform =
+      `translateX(-${playerIndex * playerStep()}px)`;
+
+  };
+
+  if (playerNext) {
+
+    playerNext.addEventListener("click", () => {
+
+      if (playerIndex < playerMaxIndex()) {
+        playerIndex++;
+      } else {
+        playerIndex = 0;
+      }
+
+      updatePlayers();
+
+    });
+
+  }
+
+  if (playerPrev) {
+
+    playerPrev.addEventListener("click", () => {
+
+      if (playerIndex > 0) {
+        playerIndex--;
+      } else {
+        playerIndex = playerMaxIndex();
+      }
+
+      updatePlayers();
+
+    });
+
+  }
+
+  window.addEventListener("resize", () => {
+
+    if (playerIndex > playerMaxIndex()) {
+      playerIndex = playerMaxIndex();
+    }
+
+    updatePlayers();
+
+  });
+
+}
