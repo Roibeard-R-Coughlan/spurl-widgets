@@ -22,8 +22,8 @@
   text-transform: uppercase;
   margin-bottom: .75rem;
   opacity: .8;
-  letter-spacing: .2em;
-   text-align: center;
+   letter-spacing: 0.15em;
+  text-align: center;
 }
 
 .timeline-title {
@@ -56,28 +56,11 @@
 .carousel-strip::before {
   content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-
-  top: 435px;
-
-  height: 3px;
-  background: #c2a05a;
-
-  z-index: 1;
-}
-
-.carousel-strip::before {
-  content: "";
-  position: absolute;
   left: 8%;
   right: 8%;
-
   top: 435px;
-
   height: 3px;
   background: #c2a05a;
-
   z-index: 1;
 }
 
@@ -92,7 +75,9 @@
 
 .timeline-card {
   position: relative;
-  width: 460px;
+  width: 36vw;
+  min-width: 500px;
+  max-width: 600px;
   flex: 0 0 460px;
   border-radius: 1rem;
   overflow: hidden;
@@ -155,6 +140,32 @@
   background: #c2a05a;
   transform: translateX(-50%);
 }
+
+@media (min-width: 1200px) {
+  .timeline-card {
+    width: 36vw;
+    min-width: 500px;
+    max-width: 600px;
+    flex: 0 0 460px;
+  }
+}
+
+@media (max-width: 1199px) {
+  .timeline-card {
+    width: 85vw;
+    min-width: auto;
+    max-width: none;
+    flex: 0 0 85%;
+  }
+}
+
+@media (max-width: 768px) {
+  .timeline-card {
+    width: 90vw;
+    min-width: auto;
+    max-width: none;
+    flex: 0 0 9%;
+  }
 
 </style>
 </head>
