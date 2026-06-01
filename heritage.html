@@ -20,8 +20,13 @@
   color: #c2a05a;
   font-size: 0.85rem;
   text-transform: uppercase;
-  letter-spacing: .15em;
   margin-bottom: .75rem;
+  opacity: .8;
+  letter-spacing: .2em;
+}
+
+.timeline-card.active {
+  transform: scale(1.03);
 }
 
 .timeline-overlay h3 {
@@ -37,17 +42,6 @@
 .carousel-strip {
   position: relative;
   overflow: hidden;
-}
-
-.carousel-strip::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 300px;
-  height: 3px;
-  background: #c2a05a;
-  z-index: 1;
 }
 
 .carousel-track {
@@ -72,8 +66,20 @@
   left: 2.5rem;
   top: 0;
   width: 4px;
-  height: 300px;
+  height: 280px;
   background: #c2a05a;
+}
+
+.timeline-card::after {
+  content: "";
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #c2a05a;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 52%;
 }
 
 .timeline-year {
@@ -107,6 +113,15 @@
 .timeline-content p {
   color: #4f5a54;
   line-height: 1.7;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 52%;
+  height: 3px;
+  background: #c2a05a;
 }
 
 </style>
@@ -300,7 +315,7 @@
 
   <img
     class="timeline-image"
-    src="assets/Heritage/croke-park.jpg"
+    src="assets/gaa-pitches/croke-park.jpg"
     alt="Croke Park">
 
   <div class="timeline-overlay">
@@ -326,7 +341,7 @@
 
   <img
     class="timeline-image"
-    src="assets/Heritage/global-hurling.jpg"
+    src="assets/gaa-pitches/7.jpg"
     alt="Global Hurling">
 
   <div class="timeline-overlay">

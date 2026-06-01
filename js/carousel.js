@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const track = document.querySelector(".carousel-track");
   const cards = document.querySelectorAll(".carousel-card");
+  if (!track || cards.length === 0) return;
 
   const prevButton = document.getElementById("carouselPrev");
   const nextButton = document.getElementById("carouselNext");
@@ -40,9 +41,10 @@ document.addEventListener("DOMContentLoaded", () => {
     track.style.transform =
         `translateX(-${activeIndex * getStep()}px)`;
 
-    status.textContent =
-        `${activeIndex + 1} of ${cards.length}`;
-    };
+    if (status) {
+  status.textContent =
+    `${activeIndex + 1} of ${cards.length}`;
+}};
 
   const startAutoPlay = () => {
     autoPlay = setInterval(() => {
@@ -68,20 +70,25 @@ track.addEventListener("mouseleave", () => {
   }
 });
 
+if (nextButton) {
   nextButton.addEventListener("click", () => {
     if (activeIndex < maxIndex()) {
       activeIndex++;
       updateCarousel();
     }
   });
+}
 
+if (prevButton) {
   prevButton.addEventListener("click", () => {
     if (activeIndex > 0) {
       activeIndex--;
       updateCarousel();
     }
   });
+}
 
+if (toggleButton) {
   toggleButton.addEventListener("click", () => {
 
     if (isPlaying) {
@@ -102,6 +109,7 @@ track.addEventListener("mouseleave", () => {
     }
 
   });
+}
 
   startAutoPlay();
 
