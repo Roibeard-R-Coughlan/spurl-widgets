@@ -33,14 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const getStep = () => {
-  const cardWidth = cards[0].offsetWidth;
-
-  const gap =
-      parseFloat(
-          getComputedStyle(track).gap
-      ) || 0;
-
-  return cardWidth + gap;
+  return cards[0].getBoundingClientRect().width +
+         parseFloat(getComputedStyle(track).gap);
 };
 
   const updateCarousel = () => {
@@ -119,7 +113,15 @@ if (toggleButton) {
 
   startAutoPlay();
 
-  window.addEventListener("resize", updateCarousel);
+  window.addEventListener("resize", () => {
+
+  if (activeIndex > maxIndex()) {
+    activeIndex = maxIndex();
+  }
+
+  updateCarousel();
+
+});
 
 //  Test a swipe gesture on mobile devices
 let startX = 0;

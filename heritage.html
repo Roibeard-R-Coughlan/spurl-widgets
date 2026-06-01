@@ -51,7 +51,8 @@
 
 .carousel-strip {
   position: relative;
-  overflow: visible;
+  overflow: hidden;
+  width: 100%;
 }
 
 .carousel-strip::before {
@@ -70,8 +71,8 @@
 }
 
 .carousel-track {
-  display:flex;
-  gap:2rem;
+  display: flex;
+  gap: 2rem;
 }
 
 .timeline-card {
@@ -79,7 +80,7 @@
   width: 36vw;
   min-width: 500px;
   max-width: 600px;
-  flex: 0 0 460px;
+  flex: 0 0 auto;
   border-radius: 1rem;
   overflow: hidden;
   background: #fff8ed;
@@ -96,7 +97,7 @@
   background: #c2a05a;
   left: 50%;
   transform: translateX(-50%);
-  top: 438px;
+  top: 437px;
 }
 
 .timeline-year {
@@ -144,28 +145,46 @@
 
 @media (min-width: 1200px) {
   .timeline-card {
-    width: 36vw;
+    flex: 0 0 460px;
+    width: 460px;
     min-width: 500px;
     max-width: 600px;
     flex: 0 0 460px;
   }
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 1199px) and (min-width: 769px) {
+
   .timeline-card {
-    width: 85vw;
-    min-width: auto;
+    flex: 0 0 calc(50% - 1rem);
+    width: calc(50% - 1rem);
+    min-width: 0;
     max-width: none;
-    flex: 0 0 85%;
   }
+
+}
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+  .timeline-card {
+    flex: 0 0 calc(50% - 1rem);
+    width: calc(50% - 1rem);
+    min-width: 0;
+  }
+
 }
 
 @media (max-width: 768px) {
 
   .timeline-card {
-    width: 90vw;
-    min-width: 90vw;
-    max-width: 90vw;
+    flex: 0 0 calc(100vw - 4rem);
+    width: calc(100vw - 4rem);
+    min-width: calc(100vw - 4rem);
+    max-width: calc(100vw - 4rem);
+  }
+
+  .timeline-card::after {
+    top: 312px;
   }
 
   .timeline-image {
@@ -189,14 +208,15 @@
  <section class="heritage-timeline">
 
   <div class="carousel-strip">
-    <div class="carousel-track">
+    <div class="carousel-track-wrapper">
+      <div class="carousel-track">
 
-      <article class="timeline-card carousel-card">
+        <article class="timeline-card carousel-card">
 
-        <img
-          class="timeline-image"
-          src="assets/Heritage/Setanta.png"
-          alt="Setanta and Cú Chulainn">
+          <img
+            class="timeline-image"
+            src="assets/Heritage/Setanta.png"
+            alt="Setanta and Cú Chulainn">
 
         <div class="timeline-overlay">
 
@@ -221,7 +241,7 @@
 
         <img
           class="timeline-image"
-          src="assets/Heritage/generated-A1aPB4Q1lPcL695o.png"
+          src="assets/heritage/generated-A1aPB4Q1lPcL695o.png"
           alt="Ancient Irish games">
 
         <div class="timeline-overlay">
@@ -246,7 +266,7 @@
 
         <img
           class="timeline-image"
-          src="assets/Heritage/generated-A1aPB4Q1lPcL695o.png"
+          src="assets/heritage/generated-A1aPB4Q1lPcL695o.png"
           alt="Statute of Kilkenny">
 
         <div class="timeline-overlay">
@@ -271,7 +291,7 @@
 
   <img
     class="timeline-image"
-    src="assets/Heritage/warrior.png"
+    src="assets/heritage/warrior.png"
     alt="Game survives">
 
   <div class="timeline-overlay">
@@ -297,7 +317,7 @@
 
   <img
     class="timeline-image"
-    src="assets/Heritage/finn_mccool_comes_to_aid_the_fianna.webp"
+    src="assets/heritage/finn_mccool_comes_to_aid_the_fianna.webp"
     alt="Parish heritage">
 
   <div class="timeline-overlay">
@@ -323,7 +343,7 @@
 
   <img
     class="timeline-image"
-    src="assets/Heritage/michael_cusack_portrait.jpg"
+    src="assets/heritage/michael_cusack_portrait.jpg"
     alt="GAA founded">
 
   <div class="timeline-overlay">
@@ -348,7 +368,7 @@
 
   <img
     class="timeline-image"
-    src="assets/Heritage/1920-hurling.jpg"
+    src="assets/heritage/1920-hurling.jpg"
     alt="Bloody Sunday">
 
   <div class="timeline-overlay">
@@ -444,7 +464,8 @@
   </div>
 
 </article>
-     
+        
+      </div>     
     </div>
   </div>
 
