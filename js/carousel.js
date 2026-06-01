@@ -33,9 +33,15 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const getStep = () => {
-    const cardWidth = cards[0].offsetWidth;
-    return cardWidth + 16;
-  };
+  const cardWidth = cards[0].offsetWidth;
+
+  const gap =
+      parseFloat(
+          getComputedStyle(track).gap
+      ) || 0;
+
+  return cardWidth + gap;
+};
 
   const updateCarousel = () => {
     track.style.transform =

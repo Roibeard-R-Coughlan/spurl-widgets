@@ -22,8 +22,9 @@
   text-transform: uppercase;
   margin-bottom: .75rem;
   opacity: .8;
-   letter-spacing: 0.15em;
+  letter-spacing: 0.15em;
   text-align: center;
+  margin-top: 1rem;
 }
 
 .timeline-title {
@@ -58,7 +59,7 @@
   position: absolute;
   left: 8%;
   right: 8%;
-  top: 435px;
+  top: 446px;
   height: 3px;
   background: #c2a05a;
   z-index: 1;
@@ -95,7 +96,7 @@
   background: #c2a05a;
   left: 50%;
   transform: translateX(-50%);
-  top: 428px;
+  top: 438px;
 }
 
 .timeline-year {
@@ -160,13 +161,26 @@
 }
 
 @media (max-width: 768px) {
+
   .timeline-card {
     width: 90vw;
-    min-width: auto;
-    max-width: none;
-    flex: 0 0 9%;
+    min-width: 90vw;
+    max-width: 90vw;
   }
 
+  .timeline-image {
+    height: 280px;
+  }
+
+  .timeline-content {
+    padding: 1.25rem;
+  }
+
+  .carousel-strip::before {
+      top: 320px;
+
+}
+}
 </style>
 </head>
 
