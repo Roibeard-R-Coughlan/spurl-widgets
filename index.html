@@ -201,41 +201,20 @@ body {
 .pitch-next {
   right: 12px;
 }
-  /* Create lightbox styles for image viewing when a carousel image is clicked */
-.image-lightbox {
-  position: fixed;
-  inset: 0;
+   /* Use mobile focus class to make the card full screen on mobile when clicked */
+.carousel-card.mobile-focus {
 
-  background: rgba(0,0,0,.95);
+    position: fixed;
 
-  display: none;
+    inset: 0;
 
-  align-items: center;
-  justify-content: center;
+    width: 100vw !important;
+    height: 100vh !important;
 
-  z-index: 9999;
-}
+    z-index: 9999;
 
-.image-lightbox.active {
-  display: flex;
-}
-
-.image-lightbox img {
-  max-width: 95%;
-  max-height: 95%;
-  object-fit: contain;
-}
-
-.lightbox-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-
-  color: white;
-  font-size: 2rem;
-
-  cursor: pointer;
-}
+    border-radius: 0;
+  }
 
 @media (max-width: 1100px) {
   .carousel-card {
@@ -265,9 +244,8 @@ body {
   }
 
   .carousel-card {
-    width: 92vw;
-    height: 78vh;
-    max-height: 700px;
+    /* width: 92vw; */
+    height: calc(100vh - 120px);
   }
 }
 @media (max-width: 768px) {
@@ -457,19 +435,6 @@ body {
 
     </div>
   </div>
-
-<div class="image-lightbox" id="imageLightbox">
-
-  <span
-    class="lightbox-close"
-    id="lightboxClose"
-  >
-    ✕
-  </span>
-
-  <img id="lightboxImage">
-
-</div>
 
 </section>
 

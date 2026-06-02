@@ -12,9 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const heritagePrev = document.getElementById("heritagePrev");
   const heritageNext = document.getElementById("heritageNext");
 
-  const lightbox = document.getElementById("imageLightbox");
-  const lightboxImage = document.getElementById("lightboxImage");
-
   let activeIndex = 0;
   let isPlaying = true;
   let autoPlay;
@@ -82,6 +79,20 @@ if (prevButton) {
       activeIndex--;
       updateCarousel();
     }
+  });
+}
+
+if (nextButton) {
+  nextButton.addEventListener("click", () => {
+
+    if (activeIndex < maxIndex()) {
+      activeIndex++;
+    } else {
+      activeIndex = 0;
+    }
+
+    updateCarousel();
+
   });
 }
 
@@ -166,29 +177,20 @@ if (heritagePrev) {
     updateCarousel();
   });
 }
-
+  // Add mobile focus toggle for carousel cards on mobile devices
 document
-.querySelectorAll(".carousel-image")
-.forEach(img => {
+.querySelectorAll(".carousel-card")
+.forEach(card => {
 
-  img.addEventListener("click", () => {
+  card.addEventListener("click", () => {
 
-    lightboxImage.src = img.src;
-
-    lightbox.classList.add("active");
+    if (window.innerWidth <= 768) {
+      card.classList.toggle("mobile-focus");
+    }
 
   });
 
 });
-//  Add event listener to close lightbox when clicking outside the image
-const lightboxClose =
-  document.getElementById("lightboxClose");
-
-if (lightboxClose) {
-  lightboxClose.addEventListener("click", () => {
-    lightbox.classList.remove("active");
-  });
-}
 
 //  Test a swipe gesture on mobile devices
 let startX = 0;
