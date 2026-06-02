@@ -9,8 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleButton = document.getElementById("carouselToggle");
   const status = document.getElementById("carouselStatus");
 
-  const playerTrack = document.querySelector(".player-track");
-
   const heritagePrev = document.getElementById("heritagePrev");
   const heritageNext = document.getElementById("heritageNext");
 
@@ -37,8 +35,8 @@ document.addEventListener("DOMContentLoaded", () => {
 };
 
   const maxIndex = () => {
-    return cards.length - 1();
-  };
+  return cards.length - 1;
+};
 
   const getStep = () => {
   return cards[0].getBoundingClientRect().width +
@@ -119,17 +117,25 @@ if (toggleButton) {
   });
 }
   // User can navigate carousel with left and right arrow keys
-document.addEventListener("keydown", (e) => {
-
-  if (e.key === "ArrowRight") {
-    nextSlide();
+function nextSlide() {
+  if (activeIndex < maxIndex()) {
+    activeIndex++;
+  } else {
+    activeIndex = 0;
   }
 
-  if (e.key === "ArrowLeft") {
-    prevSlide();
+  updateCarousel();
+}
+
+function prevSlide() {
+  if (activeIndex > 0) {
+    activeIndex--;
+  } else {
+    activeIndex = maxIndex();
   }
 
-});
+  updateCarousel();
+}
 
   startAutoPlay();
 
@@ -199,13 +205,14 @@ document
 
 });
 //  Add event listener to close lightbox when clicking outside the image
-document
-.getElementById("lightboxClose")
-.addEventListener("click", () => {
+const lightboxClose =
+  document.getElementById("lightboxClose");
 
-  lightbox.classList.remove("active");
-
-});
+if (lightboxClose) {
+  lightboxClose.addEventListener("click", () => {
+    lightbox.classList.remove("active");
+  });
+}
 
 //  Test a swipe gesture on mobile devices
 let startX = 0;
