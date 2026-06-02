@@ -35,7 +35,7 @@ document.addEventListener("DOMContentLoaded", () => {
 };
 
   const maxIndex = () => {
-  return cards.length - 1;
+  return cards.length - visibleCards();
 };
 
   const getStep = () => {
@@ -75,15 +75,6 @@ track.addEventListener("mouseleave", () => {
     startAutoPlay();
   }
 });
-
-if (nextButton) {
-  nextButton.addEventListener("click", () => {
-    if (activeIndex < maxIndex()) {
-      activeIndex++;
-      updateCarousel();
-    }
-  });
-}
 
 if (prevButton) {
   prevButton.addEventListener("click", () => {
@@ -148,21 +139,6 @@ function prevSlide() {
   updateCarousel();
 
 });
-  
-  //  Make carousel functions available for heritage page
-function nextSlide() {
-  currentIndex =
-    (currentIndex + 1) % totalSlides;
-
-  updateCarousel();
-}
-
-function prevSlide() {
-  currentIndex =
-    (currentIndex - 1 + totalSlides) % totalSlides;
-
-  updateCarousel();
-}
 
 //  Carousel buttons for heritage page
 if (heritageNext) {
