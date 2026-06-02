@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const heritagePrev = document.getElementById("heritagePrev");
   const heritageNext = document.getElementById("heritageNext");
 
+  const lightbox = document.getElementById("imageLightbox");
+  const lightboxImage = document.getElementById("lightboxImage");
+
   let activeIndex = 0;
   let isPlaying = true;
   let autoPlay;
@@ -34,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
 };
 
   const maxIndex = () => {
-    return cards.length - visibleCards();
+    return cards.length - 1();
   };
 
   const getStep = () => {
@@ -115,6 +118,18 @@ if (toggleButton) {
 
   });
 }
+  // User can navigate carousel with left and right arrow keys
+document.addEventListener("keydown", (e) => {
+
+  if (e.key === "ArrowRight") {
+    nextSlide();
+  }
+
+  if (e.key === "ArrowLeft") {
+    prevSlide();
+  }
+
+});
 
   startAutoPlay();
 
@@ -127,6 +142,21 @@ if (toggleButton) {
   updateCarousel();
 
 });
+  
+  //  Make carousel functions available for heritage page
+function nextSlide() {
+  currentIndex =
+    (currentIndex + 1) % totalSlides;
+
+  updateCarousel();
+}
+
+function prevSlide() {
+  currentIndex =
+    (currentIndex - 1 + totalSlides) % totalSlides;
+
+  updateCarousel();
+}
 
 //  Carousel buttons for heritage page
 if (heritageNext) {
@@ -154,6 +184,28 @@ if (heritagePrev) {
     updateCarousel();
   });
 }
+
+document
+.querySelectorAll(".carousel-image")
+.forEach(img => {
+
+  img.addEventListener("click", () => {
+
+    lightboxImage.src = img.src;
+
+    lightbox.classList.add("active");
+
+  });
+
+});
+//  Add event listener to close lightbox when clicking outside the image
+document
+.getElementById("lightboxClose")
+.addEventListener("click", () => {
+
+  lightbox.classList.remove("active");
+
+});
 
 //  Test a swipe gesture on mobile devices
 let startX = 0;
