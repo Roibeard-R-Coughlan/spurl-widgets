@@ -190,7 +190,6 @@
  .heritage-nav {
   position: absolute;
   top: 45%;
-  transform: translateY(-50%);
 
   width: 60px;
   height: 60px;
@@ -208,48 +207,24 @@
 
   z-index: 10;
 
-  opacity: .45;
+  opacity: .35;
   transition: all .3s ease;
-}
-
-.heritage-nav:hover {
-  opacity: 1;
-  transform: translateY(-50%) scale(1.05);
 }
 
 .heritage-prev {
   left: 2px;
-  top: 72%;
+  top: 28%;
 }
 
 .heritage-next {
   right: 2px;
-  top: 72%;
+  top: 28%;
 }
 
 /* Auto-hide after page load */
 
-.heritage-nav {
-  animation: navFade 4s forwards;
-}
-
-.heritage-carousel-wrapper:hover .heritage-nav {
+.carousel-track-wrapper:hover .heritage-nav {
   opacity: 1;
-  animation: none;
-}
-
-@keyframes navFade {
-  0% {
-    opacity: .8;
-  }
-
-  70% {
-    opacity: .8;
-  }
-
-  100% {
-    opacity: .15;
-  }
 }
 
 @media (min-width: 1200px) {
@@ -321,12 +296,12 @@
 }
   .heritage-prev {
     left: 2px;
-    top: 56%;
+    top: 18%;
 }
 
   .heritage-next {
     right: 2px;
-    top: 56%;
+    top: 18%;
 }
 }
 </style>
