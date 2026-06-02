@@ -93,12 +93,15 @@ body {
 
 .carousel-card {
   position: relative;
-  width: 420px;
-  min-width: 0;
-  height: 420px;
+  width: calc((100vw - 6rem) / 2);
+  max-width: 700px;
+  height: 650px;
+
   overflow: hidden;
   border-radius: 1rem;
+
   flex: 0 0 auto;
+  min-width: 0;
   background: #1a2e1e;
 }
 
@@ -162,10 +165,48 @@ body {
   transition: transform 0.9s cubic-bezier(0.2,0.8,0.2,1);
 }
 
+.pitch-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 60px;
+  height: 60px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: rgba(243,238,227,.92);
+  color: #173629;
+
+  font-size: 2rem;
+  cursor: pointer;
+
+  z-index: 20;
+
+  opacity: .35;
+  transition: .3s;
+}
+
+.pitch-nav:hover {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.05);
+}
+
+.pitch-prev {
+  left: 12px;
+}
+
+.pitch-next {
+  right: 12px;
+}
+
 @media (max-width: 1100px) {
   .carousel-card {
-    width: calc((100vw - 4rem) / 2);
+    width: calc((100vw - 5rem) / 2);
+    height: 520px;
   }
+
 }
 
 @media (max-width: 900px) and (orientation: landscape) {
@@ -188,9 +229,9 @@ body {
   }
 
   .carousel-card {
-    width: 90vw;
-    height: 70vh;
-    max-height: 500px;
+    width: 92vw;
+    height: 78vh;
+    max-height: 700px;
   }
 }
 @media (max-width: 768px) {
@@ -229,6 +270,10 @@ body {
   <section class="carousel-section" id="stories">
   
   <div class="carousel-strip" id="carouselStrip">
+    <button class="pitch-nav pitch-prev" id="carouselPrev">&#10094;
+    </button>
+    <button class="pitch-nav pitch-next" id="carouselNext">&#10095;
+    </button>
     <div class="carousel-track" id="carouselTrack">
       <article class="carousel-card"> <img class="carousel-image" src="assets/gaa-pitches/1.webp" alt="Lush hurling field in County Clare under a bright sky" loading="lazy" />
         <div class="carousel-card-overlay">
@@ -288,14 +333,7 @@ body {
       </article>
     </div>
   </div>
-  <div class="carousel-toolbar">
-    <div class="carousel-status" id="carouselStatus">1 of 9</div>
-    <div class="carousel-controls">
-      <button type="button" class="carousel-button" id="carouselPrev">←</button>
-      <button type="button" class="carousel-button carousel-toggle" id="carouselToggle">❚❚</button>
-      <button type="button" class="carousel-button" id="carouselNext">→</button>
-    </div>
-  </div>
+ 
   <!-- <p class="carousel-quote">“Every pitch tells a story — this is the land that shaped the game.”</p> -->
 </section>
      <!-- PLAYERS JS HERE -->
