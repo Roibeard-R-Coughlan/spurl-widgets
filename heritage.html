@@ -5,7 +5,7 @@
 <html>
 <head>
 <style>
-/* PLAYERS WIDGET CSS HERE */
+/* HERITAGE WIDGET CSS HERE */
 .heritage-timeline {
   max-width: 1400px;
   margin: 0 auto;
@@ -124,20 +124,6 @@
   transform: translateX(-50%);
 }
 
-/* .timeline-card::after {
-  content: "";
-  position: absolute;
-  width: 18px;
-  height: 18px;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 437px;
-  border-radius: 50%;
-  background: #c2a05a;
-  box-shadow:
-  inset 0 0 0 1px rgba(255,255,255,.25)
-} */
-
 .timeline-card::after {
   content: "";
   position: absolute;
@@ -199,9 +185,9 @@
   transform: translateX(-50%);
 }
 
- /* Buttons for carousel */
+/* Buttons for carousel */
 
- .player-nav {
+ .heritage-nav {
   position: absolute;
   top: 45%;
   transform: translateY(-50%);
@@ -226,26 +212,26 @@
   transition: all .3s ease;
 }
 
-.player-nav:hover {
+.heritage-nav:hover {
   opacity: 1;
   transform: translateY(-50%) scale(1.05);
 }
 
-.player-prev {
+.heritage-prev {
   left: 12px;
 }
 
-.player-next {
+.heritage-next {
   right: 12px;
 }
 
 /* Auto-hide after page load */
 
-.player-nav {
+.heritage-nav {
   animation: navFade 4s forwards;
 }
 
-.player-carousel-wrapper:hover .player-nav {
+.heritage-carousel-wrapper:hover .heritage-nav {
   opacity: 1;
   animation: none;
 }
@@ -337,16 +323,16 @@
 </head>
 
 <body>
-<!-- PLAYERS HTML HERE -->
+<!-- HERITAGE HTML HERE -->
  <section class="heritage-timeline">
 
   <div class="carousel-strip">
     <div class="carousel-track-wrapper">
-      <button class="player-nav player-prev" id="playerPrev">
+      <button class="heritage-nav heritage-prev" id="heritagePrev">
     &#10094;
       </button>
 
-      <button class="player-nav player-next" id="playerNext">
+      <button class="heritage-nav heritage-next" id="heritageNext">
         &#10095;
       </button>
       <div class="carousel-track">

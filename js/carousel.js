@@ -9,11 +9,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const toggleButton = document.getElementById("carouselToggle");
   const status = document.getElementById("carouselStatus");
 
-  const heritageTrack = document.querySelector(".heritage-track");
   const playerTrack = document.querySelector(".player-track");
 
-  const playerPrev = document.getElementById("playerPrev");
-  const playerNext = document.getElementById("playerNext");
+  const heritagePrev = document.getElementById("heritagePrev");
+  const heritageNext = document.getElementById("heritageNext");
 
   let activeIndex = 0;
   let isPlaying = true;
@@ -130,8 +129,8 @@ if (toggleButton) {
 });
 
 //  Carousel buttons for heritage page
-if (playerNext) {
-  playerNext.addEventListener("click", () => {
+if (heritageNext) {
+  heritageNext.addEventListener("click", () => {
 
     if (activeIndex < maxIndex()) {
       activeIndex++;
@@ -143,8 +142,8 @@ if (playerNext) {
   });
 }
 
-if (playerPrev) {
-  playerPrev.addEventListener("click", () => {
+if (heritagePrev) {
+  heritagePrev.addEventListener("click", () => {
 
     if (activeIndex > 0) {
       activeIndex--;
@@ -323,49 +322,4 @@ if (playerTrack) {
 
   });
   
-}
-// Players carousel swipe support
-
-let playerStartX = 0;
-let playerEndX = 0;
-
-if (playerTrack) {
-
-  playerTrack.addEventListener("touchstart", (e) => {
-    playerStartX = e.touches[0].clientX;
-  });
-
-  playerTrack.addEventListener("touchend", (e) => {
-
-    playerEndX = e.changedTouches[0].clientX;
-
-    const swipeDistance =
-      playerStartX - playerEndX;
-
-    // Swipe left
-    if (swipeDistance > 50) {
-
-      if (playerIndex < playerMaxIndex()) {
-        playerIndex++;
-      } else {
-        playerIndex = 0;
-      }
-
-      updatePlayers();
-    }
-
-    // Swipe right
-    if (swipeDistance < -50) {
-
-      if (playerIndex > 0) {
-        playerIndex--;
-      } else {
-        playerIndex = playerMaxIndex();
-      }
-
-      updatePlayers();
-    }
-
-  });
-
 }
