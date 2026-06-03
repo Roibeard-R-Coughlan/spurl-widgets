@@ -20,11 +20,11 @@ body {
   overflow-x: hidden !important;
 }
 
-pitch-carousel-section {
+.carousel-section {
   overflow: hidden !important;
 }
 
-pitch-carousel-section {
+.carousel-section {
   background: transparent;
   padding: 0;
   min-height: auto !important;
@@ -39,7 +39,7 @@ pitch-carousel-section {
 
 .carousel-header,
 .carousel-toolbar,
-pitch-carousel-strip,
+.carousel-strip,
 .carousel-quote {
   width: 100%;
   max-width: 1400px;
@@ -76,14 +76,14 @@ pitch-carousel-strip,
   color: #c2a05a;
 }
 
-pitch-carousel-strip {
+.carousel-strip {
   overflow: hidden;
   overflow-x: hidden;
   overflow-y: visible;
   margin-bottom: .5rem;
 }
 
-pitch-carousel-track {
+.carousel-track {
   display: flex;
   width: max-content;
   gap: 1rem;
@@ -91,7 +91,7 @@ pitch-carousel-track {
   touch-action: pan-y;
 }
 
-pitch-carousel-card {
+.carousel-card {
   position: relative;
   width: calc((100vw - 6rem) / 2);
   max-width: 700px;
@@ -114,7 +114,7 @@ pitch-carousel-card {
   display: block;
 }
 
-pitch-carousel-card-overlay {
+.carousel-card-overlay {
   position: absolute;
   inset: auto 0 0 0;
   padding: 1.25rem;
@@ -125,16 +125,16 @@ pitch-carousel-card-overlay {
   );
 }
 
-pitch-carousel-card-overlay h3 {
+.carousel-card-overlay h3 {
   color: #fff8ed;
   margin-bottom: 0.5rem;
 }
 
-pitch-carousel-card-overlay p {
+.carousel-card-overlay p {
   color: rgba(255,248,237,0.82);
 }
 
-pitch-carousel-card-label {
+.carousel-card-label {
   color: #c2a05a;
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -142,7 +142,7 @@ pitch-carousel-card-label {
   margin-bottom: 0.5rem;
 }
 
-pitch-carousel-card:hover .carousel-image {
+.carousel-card:hover .carousel-image {
   transform: scale(1.04);
 }
 
@@ -159,7 +159,7 @@ pitch-carousel-card:hover .carousel-image {
   color: rgba(255,248,237,0.86);
 }
 
-pitch-carousel-track {
+.carousel-track {
   display: flex;
   width: max-content;
   gap: 1rem;
@@ -202,7 +202,7 @@ pitch-carousel-track {
   right: 12px;
 }
    /* Use mobile focus class to make the card full screen on mobile when clicked */
-pitch-carousel-card.mobile-focus {
+.carousel-card.mobile-focus {
 
     position: fixed;
 
@@ -217,7 +217,7 @@ pitch-carousel-card.mobile-focus {
   }
 
 @media (max-width: 1100px) {
-  pitch-carousel-card {
+  .carousel-card {
     width: calc((100vw - 5rem) / 2);
     height: 520px;
   }
@@ -226,7 +226,7 @@ pitch-carousel-card.mobile-focus {
 
 @media (max-width: 900px) and (orientation: landscape) {
 
-  pitch-carousel-card {
+  .carousel-card {
     flex: 0 0 calc((100% - 1rem) / 2);
     height: 65vh;
   }
@@ -234,7 +234,8 @@ pitch-carousel-card.mobile-focus {
 }
 
 @media (max-width: 768px) {
-  pitch-carousel-section {
+
+  .carousel-section {
     padding: .3rem 1rem
   }
 
@@ -243,12 +244,11 @@ pitch-carousel-card.mobile-focus {
     align-items: flex-start;
   }
 
-  pitch-carousel-card {
-    /* width: 92vw; */
-    height: calc(100vh - 120px);
+  .carousel-card {
+    height: 70vh;
+    min-height: 520px;
+    max-height: 700px;
   }
-}
-@media (max-width: 768px) {
 
   .carousel-toolbar {
     display: flex;
@@ -271,7 +271,7 @@ pitch-carousel-card.mobile-focus {
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  pitch-carousel-section {
+  .carousel-section {
     padding: 2rem 1.5rem;
   }
 }

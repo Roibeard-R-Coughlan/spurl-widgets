@@ -141,6 +141,18 @@ function prevSlide() {
   updateCarousel();
 }
 
+document.addEventListener("keydown", e => {
+
+  if (e.key === "ArrowRight") {
+      nextSlide();
+  }
+
+  if (e.key === "ArrowLeft") {
+      prevSlide();
+  }
+
+});
+
   startAutoPlay();
 
   window.addEventListener("resize", () => {
