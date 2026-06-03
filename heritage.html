@@ -49,13 +49,13 @@
   color: #4f5a54;
 }
 
-.carousel-strip {
+.heritage-strip {
   position: relative;
   overflow: hidden;
   width: 100%;
 }
 
-.player-carousel-wrapper {
+.heritage-track-wrapper {
   overflow: hidden;
   position: relative;
 }
@@ -70,7 +70,7 @@
   scrollbar-width: none;
 }
 
-.carousel-track {
+.heritage-track {
   display: flex;
   gap: 2rem;
 }
@@ -224,7 +224,7 @@
 
 /* Auto-hide after page load */
 
-.carousel-track-wrapper:hover .heritage-nav {
+.heritage-track-wrapper:hover .heritage-nav {
   opacity: 1;
 }
 
@@ -292,7 +292,7 @@
     margin-top: 1.4rem;
   }
 
-  .carousel-strip::before {
+  .heritage-strip::before {
       top: 320px;
 }
   .heritage-prev {
@@ -312,8 +312,8 @@
 <!-- HERITAGE HTML HERE -->
  <section class="heritage-timeline">
 
-  <div class="carousel-strip">
-    <div class="carousel-track-wrapper">
+  <div class="heritage-strip">
+    <div class="heritage-track-wrapper">
       <button class="heritage-nav heritage-prev" id="heritagePrev">
     &#10094;
       </button>
@@ -321,7 +321,7 @@
       <button class="heritage-nav heritage-next" id="heritageNext">
         &#10095;
       </button>
-      <div class="carousel-track">
+      <div class="heritage-track">
 
         <article class="timeline-card">
 
