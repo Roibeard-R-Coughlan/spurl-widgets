@@ -1,9 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // const track = document.querySelector(".carousel-track");
-  const track = document.querySelector("pitch-carousel-track");
-  // const cards = document.querySelectorAll(".carousel-card");
-  const cards = document.querySelectorAll("pitch-carousel-card");
+  const track = document.querySelector(".carousel-track");
+  const cards = document.querySelectorAll(".carousel-card");
   if (!track || cards.length === 0) return;
 
   const prevButton = document.getElementById("carouselPrev");
