@@ -2,10 +2,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const track = document.querySelector(".carousel-track");
   const cards = document.querySelectorAll(".carousel-card");
-  if (!track || cards.length === 0) return;
 
   const prevButton = document.getElementById("carouselPrev");
   const nextButton = document.getElementById("carouselNext");
+
+  console.log("Track:", track);
+  console.log("Cards:", cards.length);
+  console.log("Prev:", prevButton);
+  console.log("Next:", nextButton);
+
   const toggleButton = document.getElementById("carouselToggle");
   const status = document.getElementById("carouselStatus");
 
