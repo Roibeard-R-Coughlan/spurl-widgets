@@ -20,11 +20,11 @@ body {
   overflow-x: hidden !important;
 }
 
-.carousel-section {
+pitch-carousel-section {
   overflow: hidden !important;
 }
 
-.carousel-section {
+pitch-carousel-section {
   background: transparent;
   padding: 0;
   min-height: auto !important;
@@ -39,7 +39,7 @@ body {
 
 .carousel-header,
 .carousel-toolbar,
-.carousel-strip,
+pitch-carousel-strip,
 .carousel-quote {
   width: 100%;
   max-width: 1400px;
@@ -76,14 +76,14 @@ body {
   color: #c2a05a;
 }
 
-.carousel-strip {
+pitch-carousel-strip {
   overflow: hidden;
   overflow-x: hidden;
   overflow-y: visible;
   margin-bottom: .5rem;
 }
 
-.carousel-track {
+pitch-carousel-track {
   display: flex;
   width: max-content;
   gap: 1rem;
@@ -91,7 +91,7 @@ body {
   touch-action: pan-y;
 }
 
-.carousel-card {
+pitch-carousel-card {
   position: relative;
   width: calc((100vw - 6rem) / 2);
   max-width: 700px;
@@ -114,7 +114,7 @@ body {
   display: block;
 }
 
-.carousel-card-overlay {
+pitch-carousel-card-overlay {
   position: absolute;
   inset: auto 0 0 0;
   padding: 1.25rem;
@@ -125,16 +125,16 @@ body {
   );
 }
 
-.carousel-card-overlay h3 {
+pitch-carousel-card-overlay h3 {
   color: #fff8ed;
   margin-bottom: 0.5rem;
 }
 
-.carousel-card-overlay p {
+pitch-carousel-card-overlay p {
   color: rgba(255,248,237,0.82);
 }
 
-.carousel-card-label {
+pitch-carousel-card-label {
   color: #c2a05a;
   text-transform: uppercase;
   letter-spacing: 0.14em;
@@ -142,7 +142,7 @@ body {
   margin-bottom: 0.5rem;
 }
 
-.carousel-card:hover .carousel-image {
+pitch-carousel-card:hover .carousel-image {
   transform: scale(1.04);
 }
 
@@ -159,7 +159,7 @@ body {
   color: rgba(255,248,237,0.86);
 }
 
-.carousel-track {
+pitch-carousel-track {
   display: flex;
   width: max-content;
   gap: 1rem;
@@ -202,7 +202,7 @@ body {
   right: 12px;
 }
    /* Use mobile focus class to make the card full screen on mobile when clicked */
-.carousel-card.mobile-focus {
+pitch-carousel-card.mobile-focus {
 
     position: fixed;
 
@@ -217,7 +217,7 @@ body {
   }
 
 @media (max-width: 1100px) {
-  .carousel-card {
+  pitch-carousel-card {
     width: calc((100vw - 5rem) / 2);
     height: 520px;
   }
@@ -226,7 +226,7 @@ body {
 
 @media (max-width: 900px) and (orientation: landscape) {
 
-  .carousel-card {
+  pitch-carousel-card {
     flex: 0 0 calc((100% - 1rem) / 2);
     height: 65vh;
   }
@@ -234,7 +234,7 @@ body {
 }
 
 @media (max-width: 768px) {
-  .carousel-section {
+  pitch-carousel-section {
     padding: .3rem 1rem
   }
 
@@ -243,7 +243,7 @@ body {
     align-items: flex-start;
   }
 
-  .carousel-card {
+  pitch-carousel-card {
     /* width: 92vw; */
     height: calc(100vh - 120px);
   }
@@ -271,7 +271,7 @@ body {
 }
 
 @media (min-width: 769px) and (max-width: 1024px) {
-  .carousel-section {
+  pitch-carousel-section {
     padding: 2rem 1.5rem;
   }
 }
