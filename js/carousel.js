@@ -1,388 +1,250 @@
+"use strict";
+
+/* =========================================================
+   SECTION 1 - Shared Utilities
+   Reusable carousel controller with isolated state per instance.
+   Carousel-specific behaviour is passed through options only.
+========================================================= */
+
 document.addEventListener("DOMContentLoaded", () => {
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-  const track = document.querySelector(".carousel-track");
-  const cards = document.querySelectorAll(".carousel-card");
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
-  const prevButton = document.getElementById("carouselPrev");
-  const nextButton = document.getElementById("carouselNext");
-
-  const toggleButton = document.getElementById("carouselToggle");
-  const status = document.getElementById("carouselStatus");
-
-  const heritagePrev = document.getElementById("heritagePrev");
-  const heritageNext = document.getElementById("heritageNext");
-
-  let activeIndex = 0;
-  let isPlaying = true;
-  let autoPlay;
-
-  const visibleCards = () => {
-  if (window.innerWidth < 768) return 1;
-
-  if (
-      window.innerWidth < 900 &&
-      window.innerWidth > window.innerHeight
-  ) {
-      return 2;
-  }
-
-  if (window.innerWidth < 1100) return 2;
-
-  return 3;
-};
-
-  const maxIndex = () => {
-  return cards.length - 1;
-};
-
-  const getStep = () => {
-  return cards[0].getBoundingClientRect().width +
-         parseFloat(getComputedStyle(track).gap);
-};
-
-  const updateCarousel = () => {
-    track.style.transform =
-        `translateX(-${activeIndex * getStep()}px)`;
-
-    if (status) {
-  status.textContent =
-    `${activeIndex + 1} of ${cards.length}`;
-}};
-
-  const startAutoPlay = () => {
-    autoPlay = setInterval(() => {
-
-      if (activeIndex < maxIndex()) {
-        activeIndex++;
-      } else {
-        activeIndex = 0;
-      }
-
-      updateCarousel();
-
-    }, 6000);
+  const getGap = (element) => {
+    const gap = window.getComputedStyle(element).columnGap || window.getComputedStyle(element).gap;
+    return Number.parseFloat(gap) || 0;
   };
 
-  track.addEventListener("mouseenter", () => {
-  clearInterval(autoPlay);
-});
-
-track.addEventListener("mouseleave", () => {
-  if (isPlaying) {
-    startAutoPlay();
-  }
-});
-
-if (prevButton) {
-  prevButton.addEventListener("click", () => {
-    if (activeIndex > 0) {
-      activeIndex--;
-      updateCarousel();
-    }
-  });
-}
-
-if (nextButton) {
-  nextButton.addEventListener("click", () => {
-
-    
-
-    if (activeIndex < maxIndex()) {
-      activeIndex++;
-    } else {
-      activeIndex = 0;
-    }
-    console.log(
-  "activeIndex:",
-  activeIndex,
-  "maxIndex:",
-  maxIndex(),
-  "cards:",
-  cards.length
-);
-
-    updateCarousel();
-    
-
-  });
-  
-}
-
-if (toggleButton) {
-  toggleButton.addEventListener("click", () => {
-
-    if (isPlaying) {
-
-      clearInterval(autoPlay);
-
-      toggleButton.textContent = "▶";
-
-      isPlaying = false;
-
-    } else {
-
-      startAutoPlay();
-
-      toggleButton.textContent = "❚❚";
-
-      isPlaying = true;
-    }
-
-  });
-}
-  // User can navigate carousel with left and right arrow keys
-function nextSlide() {
-  if (activeIndex < maxIndex()) {
-    activeIndex++;
-  } else {
-    activeIndex = 0;
-  }
-
-  updateCarousel();
-}
-
-function prevSlide() {
-  if (activeIndex > 0) {
-    activeIndex--;
-  } else {
-    activeIndex = maxIndex();
-  }
-
-  updateCarousel();
-}
-
-document.addEventListener("keydown", e => {
-
-  if (e.key === "ArrowRight") {
-      nextSlide();
-  }
-
-  if (e.key === "ArrowLeft") {
-      prevSlide();
-  }
-
-});
-
-  startAutoPlay();
-
-  window.addEventListener("resize", () => {
-
-  if (activeIndex > maxIndex()) {
-    activeIndex = maxIndex();
-  }
-
-  updateCarousel();
-
-});
-
-//  Carousel buttons for heritage page
-if (heritageNext) {
-  heritageNext.addEventListener("click", () => {
-
-    if (activeIndex < maxIndex()) {
-      activeIndex++;
-    } else {
-      activeIndex = 0;
-    }
-
-    updateCarousel();
-  });
-}
-
-if (heritagePrev) {
-  heritagePrev.addEventListener("click", () => {
-
-    if (activeIndex > 0) {
-      activeIndex--;
-    } else {
-      activeIndex = maxIndex();
-    }
-
-    updateCarousel();
-  });
-}
-
-
-  // Add mobile focus toggle for carousel cards on mobile devices
-document
-.querySelectorAll(".carousel-card")
-.forEach(card => {
-
-  card.addEventListener("click", () => {
-
-    if (window.innerWidth <= 768) {
-      card.classList.toggle("mobile-focus");
-    }
-
-  });
-
-});
-
-//  Test a swipe gesture on mobile devices
-let startX = 0;
-let endX = 0;
-
-track.addEventListener("touchstart", (e) => {
-  startX = e.touches[0].clientX;
-});
-
-track.addEventListener("touchend", (e) => {
-  endX = e.changedTouches[0].clientX;
-
-  const swipeDistance = startX - endX;
-
-  // Swipe left
-  if (swipeDistance > 50) {
-    if (activeIndex < maxIndex()) {
-      activeIndex++;
-    } else {
-      activeIndex = 0;
-    }
-    updateCarousel();
-  }
-
-  // Swipe right
-  if (swipeDistance < -50) {
-    if (activeIndex > 0) {
-      activeIndex--;
-    }
-    updateCarousel();
-  }
-  });
-});
-
-/* ==========================
-   PLAYERS CAROUSEL
-========================== */
-
-const playerTrack = document.querySelector(".player-track");
-const playerCards = document.querySelectorAll(".player-card");
-
-const playerPrev = document.getElementById("playerPrev");
-const playerNext = document.getElementById("playerNext");
-
-if (playerTrack && playerCards.length) {
-
-  let playerIndex = 0;
-
-  // Players carousel swipe support
-
-let playerStartX = 0;
-let playerEndX = 0;
-
-if (playerTrack) {
-
-  playerTrack.addEventListener("touchstart", (e) => {
-    playerStartX = e.touches[0].clientX;
-  });
-
-  playerTrack.addEventListener("touchend", (e) => {
-
-    playerEndX = e.changedTouches[0].clientX;
-
-    const swipeDistance =
-      playerStartX - playerEndX;
-
-    // Swipe left
-    if (swipeDistance > 50) {
-
-      if (playerIndex < playerMaxIndex()) {
-        playerIndex++;
-      } else {
-        playerIndex = 0;
-      }
-
-      updatePlayers();
-    }
-
-    // Swipe right
-    if (swipeDistance < -50) {
-
-      if (playerIndex > 0) {
-        playerIndex--;
-      } else {
-        playerIndex = playerMaxIndex();
-      }
-
-      updatePlayers();
-    }
-
-  });
-
-}
-
-  const visiblePlayers = () => {
+  const getVisibleCards = () => {
+    const isTabletPortrait = window.matchMedia(
+      "(min-width: 768px) and (max-width: 1024px) and (orientation: portrait)"
+    ).matches;
 
     if (window.innerWidth < 768) return 1;
-
-    if (
-      window.innerWidth < 900 &&
-      window.innerWidth > window.innerHeight
-    ) {
-      return 2;
-    }
-
+    if (isTabletPortrait) return 1;
     if (window.innerWidth < 1100) return 2;
-
     return 3;
   };
 
-  const playerMaxIndex = () => {
-    return playerCards.length - visiblePlayers();
-  };
+  const createCarousel = ({
+    rootSelector,
+    trackSelector,
+    cardSelector,
+    prevSelector,
+    nextSelector,
+    loop = false,
+    autoplay = false,
+    autoplayDelay = 4000,
+    enableKeyboard = true,
+    enableSwipe = true
+  }) => {
+    const root = document.querySelector(rootSelector);
+    if (!root) return;
 
-  const playerStep = () => {
-    return playerCards[0].getBoundingClientRect().width +
-      parseFloat(getComputedStyle(playerTrack).gap);
-  };
+    const track = root.querySelector(trackSelector);
+    const cards = Array.from(root.querySelectorAll(cardSelector));
+    const prevButton = root.querySelector(prevSelector);
+    const nextButton = root.querySelector(nextSelector);
 
-  const updatePlayers = () => {
+    if (!track || cards.length === 0 || !prevButton || !nextButton) return;
 
-    playerTrack.style.transform =
-      `translateX(-${playerIndex * playerStep()}px)`;
+    let activeIndex = 0;
+    let autoplayTimer = null;
+    let pointerStartX = 0;
+    let pointerStartY = 0;
+    let resizeFrame = null;
 
-  };
+    const visibleCount = () => clamp(getVisibleCards(), 1, cards.length);
+    const maxIndex = () => Math.max(0, cards.length - visibleCount());
 
-  if (playerNext) {
+    const step = () => {
+      const cardWidth = cards[0].getBoundingClientRect().width;
+      return cardWidth + getGap(track);
+    };
 
-    playerNext.addEventListener("click", () => {
-
-      if (playerIndex < playerMaxIndex()) {
-        playerIndex++;
-      } else {
-        playerIndex = 0;
+    const updateButtons = () => {
+      if (loop) {
+        prevButton.disabled = false;
+        nextButton.disabled = false;
+        prevButton.removeAttribute("aria-disabled");
+        nextButton.removeAttribute("aria-disabled");
+        return;
       }
 
-      updatePlayers();
+      const lastIndex = maxIndex();
+      prevButton.disabled = activeIndex === 0;
+      nextButton.disabled = activeIndex === lastIndex;
+      prevButton.setAttribute("aria-disabled", String(prevButton.disabled));
+      nextButton.setAttribute("aria-disabled", String(nextButton.disabled));
+    };
 
-    });
+    const update = () => {
+      activeIndex = clamp(activeIndex, 0, maxIndex());
+      track.style.transform = `translate3d(-${activeIndex * step()}px, 0, 0)`;
+      updateButtons();
+    };
 
-  }
+    const stopAutoplay = () => {
+      if (autoplayTimer) {
+        window.clearInterval(autoplayTimer);
+        autoplayTimer = null;
+      }
+    };
 
-  if (playerPrev) {
+    const startAutoplay = () => {
+      if (!autoplay || prefersReducedMotion.matches || cards.length <= visibleCount()) return;
 
-    playerPrev.addEventListener("click", () => {
+      stopAutoplay();
 
-      if (playerIndex > 0) {
-        playerIndex--;
-      } else {
-        playerIndex = playerMaxIndex();
+      autoplayTimer = window.setInterval(() => {
+        goToNext(false);
+      }, autoplayDelay);
+    };
+
+    const restartAutoplay = () => {
+      if (!autoplay) return;
+      startAutoplay();
+    };
+
+    const goToPrevious = (manual = true) => {
+      if (activeIndex > 0) {
+        activeIndex -= 1;
+      } else if (loop) {
+        activeIndex = maxIndex();
       }
 
-      updatePlayers();
+      update();
+      if (manual) restartAutoplay();
+    };
 
-    });
+    const goToNext = (manual = true) => {
+      const lastIndex = maxIndex();
 
-  }
+      if (activeIndex < lastIndex) {
+        activeIndex += 1;
+      } else if (loop) {
+        activeIndex = 0;
+      }
 
-  window.addEventListener("resize", () => {
+      update();
+      if (manual) restartAutoplay();
+    };
 
-    if (playerIndex > playerMaxIndex()) {
-      playerIndex = playerMaxIndex();
+    const handleResize = () => {
+      if (resizeFrame) window.cancelAnimationFrame(resizeFrame);
+
+      resizeFrame = window.requestAnimationFrame(() => {
+        update();
+        restartAutoplay();
+      });
+    };
+
+    prevButton.addEventListener("click", () => goToPrevious(true));
+    nextButton.addEventListener("click", () => goToNext(true));
+
+    if (enableKeyboard) {
+      root.setAttribute("tabindex", "0");
+
+      root.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          goToPrevious(true);
+        }
+
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          goToNext(true);
+        }
+      });
     }
 
-    updatePlayers();
+    if (enableSwipe) {
+      track.addEventListener("pointerdown", (event) => {
+        if (event.pointerType === "mouse") return;
 
+        pointerStartX = event.clientX;
+        pointerStartY = event.clientY;
+      });
+
+      track.addEventListener("pointerup", (event) => {
+        if (event.pointerType === "mouse") return;
+
+        const deltaX = pointerStartX - event.clientX;
+        const deltaY = pointerStartY - event.clientY;
+
+        if (Math.abs(deltaY) > Math.abs(deltaX)) return;
+        if (Math.abs(deltaX) < 45) return;
+
+        if (deltaX > 0) {
+          goToNext(true);
+        } else {
+          goToPrevious(true);
+        }
+      });
+    }
+
+    root.addEventListener("mouseenter", stopAutoplay);
+    root.addEventListener("mouseleave", startAutoplay);
+    root.addEventListener("focusin", stopAutoplay);
+    root.addEventListener("focusout", startAutoplay);
+
+    window.addEventListener("resize", handleResize, { passive: true });
+
+    if (prefersReducedMotion.matches) {
+      track.style.transition = "none";
+    }
+
+    update();
+    startAutoplay();
+  };
+
+  /* =========================================================
+     SECTION 2 - Pitches Carousel
+     Controls homepage pitch cards.
+     Autoplays every 4 seconds and loops continuously.
+  ========================================================= */
+
+  createCarousel({
+    rootSelector: ".pitches-carousel",
+    trackSelector: "[data-carousel-track]",
+    cardSelector: ".pitch-card",
+    prevSelector: "[data-carousel-prev]",
+    nextSelector: "[data-carousel-next]",
+    loop: true,
+    autoplay: true,
+    autoplayDelay: 4000
   });
-  
-}
+
+  /* =========================================================
+     SECTION 3 - Heritage Carousel
+     Controls the heritage timeline cards.
+     Uses the shared controller but keeps separate state.
+  ========================================================= */
+
+  createCarousel({
+    rootSelector: ".heritage-carousel",
+    trackSelector: "[data-carousel-track]",
+    cardSelector: ".timeline-card",
+    prevSelector: "[data-carousel-prev]",
+    nextSelector: "[data-carousel-next]",
+    loop: false,
+    autoplay: false
+  });
+
+  /* =========================================================
+     SECTION 4 - Players Carousel
+     Controls legendary player cards.
+     Buttons stay outside the moving track.
+  ========================================================= */
+
+  createCarousel({
+    rootSelector: ".players-carousel",
+    trackSelector: "[data-carousel-track]",
+    cardSelector: ".player-card",
+    prevSelector: "[data-carousel-prev]",
+    nextSelector: "[data-carousel-next]",
+    loop: false,
+    autoplay: false
+  });
+});

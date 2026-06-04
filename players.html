@@ -2,441 +2,227 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Legendary Hurling Players</title>
 
-<style>
-/* PLAYERS WIDGET CSS HERE */
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
 
-.players-section {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem;
-}
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      overflow-x: hidden;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: transparent;
+    }
 
-.player-carousel-wrapper {
-  position: relative;
-  overflow: hidden;
-}
+    .players-carousel {
+      --carousel-gap: 1rem;
+      --carousel-padding: 1.5rem;
+      position: relative;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 2rem var(--carousel-padding);
+      outline: none;
+    }
 
-.player-track {
-  display: flex;
-  gap: 2rem;
-  transition: transform .5s ease;
-  touch-action: pan-y;
-  cursor: grab;
-}
+    .players-carousel:focus-visible {
+      outline: 2px solid #c2a05a;
+      outline-offset: 4px;
+    }
 
-.player-track:active {
-  cursor: grabbing;
-}
+    .players-viewport {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
 
-.player-card {
-  flex: 0 0 360px;
+    .player-track {
+      display: flex;
+      gap: var(--carousel-gap);
+      width: max-content;
+      touch-action: pan-y;
+      transition: transform 650ms cubic-bezier(.2,.8,.2,1);
+      will-change: transform;
+    }
 
-  background: #fff8ed;
-  border-radius: 1rem;
+    .player-card {
+      flex: 0 0 calc((min(100vw, 1400px) - (var(--carousel-padding) * 2) - (var(--carousel-gap) * 2)) / 3);
+      overflow: hidden;
+      border-radius: 1rem;
+      background: #fff8ed;
+      box-shadow: 0 10px 30px rgba(0,0,0,.08);
+      transition: transform 250ms ease, box-shadow 250ms ease;
+    }
 
-  overflow: hidden;
+    .player-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 40px rgba(0,0,0,.12);
+    }
 
-  box-shadow: 0 10px 30px rgba(0,0,0,.08);
-}
+    .player-image-wrap {
+      width: 100%;
+      height: 420px;
+      overflow: hidden;
+      background: #173629;
+    }
 
-.player-image {
-  width: 100%;
-  height: 420px;
-  object-fit: cover;
-  display: block;
-}
+    .player-image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
 
-.player-content {
-  padding: 1.5rem;
-}
+    .player-content {
+      padding: 1.5rem;
+    }
 
-.player-county {
-  color: #c2a05a;
-  font-size: .85rem;
-  text-transform: uppercase;
-  letter-spacing: .15em;
-  margin-bottom: .75rem;
-}
+    .player-county {
+      margin: 0 0 .75rem;
+      color: #c2a05a;
+      font-size: .78rem;
+      line-height: 1.3;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+    }
 
-.player-name {
-  color: #173629;
-  margin-bottom: .75rem;
-}
+    .player-name {
+      margin: 0 0 .75rem;
+      color: #173629;
+      font-size: clamp(1.25rem, 1.7vw, 1.55rem);
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
 
-.player-description {
-  color: #4f5a54;
-  line-height: 1.7;
-}
- 
-.player-card {
-  transition:
-    transform .35s ease,
-    box-shadow .35s ease;
-}
+    .player-description {
+      margin: 0;
+      color: #4f5a54;
+      font-size: .96rem;
+      line-height: 1.65;
+    }
 
-.player-card:hover {
-  transform: translateY(-8px);
+    .player-nav {
+      position: absolute;
+      top: 45%;
+      z-index: 5;
+      display: grid;
+      place-items: center;
+      width: 3.75rem;
+      height: 3.75rem;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(243,238,227,.95);
+      color: #173629;
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+      transform: translateY(-50%);
+      transition: transform 180ms ease, background 180ms ease, opacity 180ms ease;
+    }
 
-  box-shadow:
-    0 18px 40px rgba(0,0,0,.12);
-}
+    .player-nav:hover:not(:disabled),
+    .player-nav:focus-visible:not(:disabled) {
+      background: #fff8ed;
+      transform: translateY(-50%) scale(1.04);
+    }
 
-/* Navigation */
+    .player-nav:disabled {
+      cursor: default;
+      opacity: .28;
+    }
 
-.player-nav {
-  position: absolute;
-  top: 45%;
-  transform: translateY(-50%);
+    .player-nav--prev { left: .75rem; }
+    .player-nav--next { right: .75rem; }
 
-  width: 60px;
-  height: 60px;
+    @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+      .player-card {
+        flex-basis: calc(100vw - (var(--carousel-padding) * 2));
+      }
 
-  border: none;
-  border-radius: 50%;
+      .player-image-wrap {
+        height: 560px;
+      }
+    }
 
-  background: rgba(243,238,227,.95);
-  color: #173629;
+    @media (min-width: 768px) and (max-width: 1099px) and (orientation: landscape) {
+      .player-card {
+        flex-basis: calc((100vw - (var(--carousel-padding) * 2) - var(--carousel-gap)) / 2);
+      }
 
-  font-size: 2rem;
-  cursor: pointer;
+      .player-image-wrap {
+        height: 360px;
+      }
+    }
 
-  z-index: 10;
+    @media (max-width: 767px) {
+      .players-carousel {
+        --carousel-gap: .85rem;
+        --carousel-padding: .75rem;
+        padding-top: 1rem;
+        padding-bottom: 1.5rem;
+      }
 
-  opacity: .45;
-  transition: .3s;
-}
+      .player-card {
+        flex-basis: calc(100vw - (var(--carousel-padding) * 2));
+      }
 
-.player-nav:hover {
-  opacity: 1;
-}
+      .player-image-wrap {
+        height: 340px;
+      }
 
-.player-prev {
-  left: 12px;
-}
+      .player-content {
+        padding: 1.25rem;
+      }
 
-.player-next {
-  right: 12px;
-}
+      .player-description {
+        font-size: .92rem;
+      }
 
+      .player-nav {
+        width: 3.1rem;
+        height: 3.1rem;
+        font-size: 1.65rem;
+      }
 
+      .player-nav--prev { left: 1rem; }
+      .player-nav--next { right: 1rem; }
+    }
 
-@media (max-width: 768px) {
-
-  .player-card {
-    flex: 0 0 calc(100vw - 4rem);
-  }
-
-  .player-image {
-    height: 320px;
-  }
-
-  .player-nav {
-  top: 45%;
-  }
-}
-
-</style>
+    @media (prefers-reduced-motion: reduce) {
+      .player-track,
+      .player-card,
+      .player-nav {
+        transition: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
-<!-- PLAYERS HTML HERE -->
- <section class="players-section">
+  <section class="players-carousel" aria-label="Legendary hurling players carousel">
+    <div class="players-viewport">
+      <button class="player-nav player-nav--prev" type="button" data-carousel-prev aria-label="Previous player">&#10094;</button>
 
-  <div class="player-carousel-wrapper">
+      <div class="player-track" data-carousel-track>
+        <article class="player-card"><div class="player-image-wrap"><img class="player-image" src="assets/players/christy-ring.jpg" alt="Christy Ring" loading="lazy"></div><div class="player-content"><p class="player-county">Cork</p><h3 class="player-name">Christy Ring</h3><p class="player-description">Widely regarded as one of the greatest hurlers in history, Christy Ring won eight All-Ireland titles and became an icon of the game.</p></div></article>
+        <article class="player-card"><div class="player-image-wrap"><img class="player-image" src="assets/players/mick-mackey.jpg" alt="Mick Mackey" loading="lazy"></div><div class="player-content"><p class="player-county">Limerick</p><h3 class="player-name">Mick Mackey</h3><p class="player-description">A legendary forward whose skill, athleticism and influence helped shape modern hurling.</p></div></article>
+        <article class="player-card"><div class="player-image-wrap"><img class="player-image" src="assets/players/jimmy-doyle.jpg" alt="Jimmy Doyle" loading="lazy"></div><div class="player-content"><p class="player-county">Tipperary</p><h3 class="player-name">Jimmy Doyle</h3><p class="player-description">One of Tipperary's finest forwards, Jimmy Doyle combined scoring brilliance with remarkable consistency throughout the golden era of Tipp hurling.</p></div></article>
+        <article class="player-card"><div class="player-image-wrap"><img class="player-image" src="assets/players/nicky-rackard.webp" alt="Nicky Rackard" loading="lazy"></div><div class="player-content"><p class="player-county">Wexford</p><h3 class="player-name">Nicky Rackard</h3><p class="player-description">A towering figure in Wexford hurling whose scoring exploits and leadership made him one of the game's enduring legends.</p></div></article>
+        <article class="player-card"><div class="player-image-wrap"><img class="player-image" src="assets/players/eddie-keher.jpg" alt="Eddie Keher" loading="lazy"></div><div class="player-content"><p class="player-county">Kilkenny</p><h3 class="player-name">Eddie Keher</h3><p class="player-description">Widely regarded as one of the greatest forwards ever to play the game, renowned for his scoring accuracy and vision.</p></div></article>
+        <article class="player-card"><div class="player-image-wrap"><img class="player-image" src="assets/players/pat-hartigan.jpg" alt="Pat Hartigan" loading="lazy"></div><div class="player-content"><p class="player-county">Limerick</p><h3 class="player-name">Pat Hartigan</h3><p class="player-description">A central figure in Limerick's success during the 1970s, celebrated for his athleticism and commanding presence.</p></div></article>
+        <article class="player-card"><div class="player-image-wrap"><img class="player-image" src="assets/players/brian-whelahan.jpg" alt="Brian Whelahan" loading="lazy"></div><div class="player-content"><p class="player-county">Offaly</p><h3 class="player-name">Brian Whelahan</h3><p class="player-description">A versatile and inspirational leader who helped define one of Offaly's most successful periods in hurling history.</p></div></article>
+        <article class="player-card"><div class="player-image-wrap"><img class="player-image" src="assets/players/henry-shefflin.jpg" alt="Henry Shefflin" loading="lazy"></div><div class="player-content"><p class="player-county">Kilkenny</p><h3 class="player-name">Henry Shefflin</h3><p class="player-description">The most decorated hurler of the modern era, whose leadership and scoring records helped define Kilkenny's dominance.</p></div></article>
+        <article class="player-card"><div class="player-image-wrap"><img class="player-image" src="assets/players/joe-canning.webp" alt="Joe Canning" loading="lazy"></div><div class="player-content"><p class="player-county">Galway</p><h3 class="player-name">Joe Canning</h3><p class="player-description">A modern icon whose skill, composure and memorable scores inspired a new generation of hurling supporters.</p></div></article>
+        <article class="player-card"><div class="player-image-wrap"><img class="player-image" src="assets/players/tj-reid.jpg" alt="TJ Reid" loading="lazy"></div><div class="player-content"><p class="player-county">Kilkenny</p><h3 class="player-name">TJ Reid</h3><p class="player-description">One of the defining players of the modern game, combining power, accuracy and leadership at the highest level.</p></div></article>
+      </div>
 
-    <div class="player-track">
-    <button class="player-nav player-prev"
-            id="playerPrev">
-      &#10094;
-    </button>
-
-    <button class="player-nav player-next"
-            id="playerNext">
-      &#10095;
-    </button>
-
-      <article class="player-card">
-
-        <img
-          class="player-image"
-          src="assets/players/christy-ring.jpg"
-          alt="Christy Ring">
-
-        <div class="player-content">
-
-          <div class="player-county">
-            Cork
-          </div>
-
-          <h3 class="player-name">
-            Christy Ring
-          </h3>
-
-          <p class="player-description">
-            Widely regarded as one of the greatest
-            hurlers in history, Christy Ring won
-            eight All-Ireland titles and became an
-            icon of the game.
-          </p>
-
-        </div>
-
-      </article>
-
-      <article class="player-card">
-
-        <img
-          class="player-image"
-          src="assets/players/mick-mackey.jpg"
-          alt="Mick Mackey">
-
-        <div class="player-content">
-
-          <div class="player-county">
-            Limerick
-          </div>
-
-          <h3 class="player-name">
-            Mick Mackey
-          </h3>
-
-          <p class="player-description">
-            A legendary forward whose skill,
-            athleticism and influence helped shape
-            modern hurling.
-          </p>
-
-        </div>
-
-      </article>
-
-      <article class="player-card">
-
-  <img
-    class="player-image"
-    src="assets/players/jimmy-doyle.jpg"
-    alt="Jimmy Doyle">
-
-  <div class="player-content">
-
-    <div class="player-county">
-      Tipperary
+      <button class="player-nav player-nav--next" type="button" data-carousel-next aria-label="Next player">&#10095;</button>
     </div>
+  </section>
 
-    <h3 class="player-name">
-      Jimmy Doyle
-    </h3>
-
-    <p class="player-description">
-      One of Tipperary's finest forwards, Jimmy Doyle
-      combined scoring brilliance with remarkable
-      consistency throughout the golden era of Tipp hurling.
-    </p>
-
-  </div>
-
-</article>
-
-<article class="player-card">
-
-  <img
-    class="player-image"
-    src="assets/players/nicky-rackard.webp"
-    alt="Nicky Rackard">
-
-  <div class="player-content">
-
-    <div class="player-county">
-      Wexford
-    </div>
-
-    <h3 class="player-name">
-      Nicky Rackard
-    </h3>
-
-    <p class="player-description">
-      A towering figure in Wexford hurling whose
-      scoring exploits and leadership made him one
-      of the game's enduring legends.
-    </p>
-
-  </div>
-
-</article>
-
-<article class="player-card">
-
-  <img
-    class="player-image"
-    src="assets/players/eddie-keher.jpg"
-    alt="Eddie Keher">
-
-  <div class="player-content">
-
-    <div class="player-county">
-      Kilkenny
-    </div>
-
-    <h3 class="player-name">
-      Eddie Keher
-    </h3>
-
-    <p class="player-description">
-      Widely regarded as one of the greatest forwards
-      ever to play the game, renowned for his scoring
-      accuracy and vision.
-    </p>
-
-  </div>
-
-</article>
-
-<article class="player-card">
-
-  <img
-    class="player-image"
-    src="assets/players/pat-hartigan.jpg"
-    alt="Pat Hartigan">
-
-  <div class="player-content">
-
-    <div class="player-county">
-      Limerick
-    </div>
-
-    <h3 class="player-name">
-      Pat Hartigan
-    </h3>
-
-    <p class="player-description">
-      A central figure in Limerick's success during
-      the 1970s, celebrated for his athleticism and
-      commanding presence.
-    </p>
-
-  </div>
-
-</article>
-
-<article class="player-card">
-
-  <img
-    class="player-image"
-    src="assets/players/brian-whelahan.jpg"
-    alt="Brian Whelahan">
-
-  <div class="player-content">
-
-    <div class="player-county">
-      Offaly
-    </div>
-
-    <h3 class="player-name">
-      Brian Whelahan
-    </h3>
-
-    <p class="player-description">
-      A versatile and inspirational leader who helped
-      define one of Offaly's most successful periods
-      in hurling history.
-    </p>
-
-  </div>
-
-</article>
-
-<article class="player-card">
-
-  <img
-    class="player-image"
-    src="assets/players/henry-shefflin.jpg"
-    alt="Henry Shefflin">
-
-  <div class="player-content">
-
-    <div class="player-county">
-      Kilkenny
-    </div>
-
-    <h3 class="player-name">
-      Henry Shefflin
-    </h3>
-
-    <p class="player-description">
-      The most decorated hurler of the modern era,
-      whose leadership and scoring records helped
-      define Kilkenny's dominance.
-    </p>
-
-  </div>
-
-</article>
-
-<article class="player-card">
-
-  <img
-    class="player-image"
-    src="assets/players/joe-canning.webp"
-    alt="Joe Canning">
-
-  <div class="player-content">
-
-    <div class="player-county">
-      Galway
-    </div>
-
-    <h3 class="player-name">
-      Joe Canning
-    </h3>
-
-    <p class="player-description">
-      A modern icon whose skill, composure and
-      memorable scores inspired a new generation
-      of hurling supporters.
-    </p>
-
-  </div>
-
-</article>
-
-<article class="player-card">
-
-  <img
-    class="player-image"
-    src="assets/players/tj-reid.jpg"
-    alt="TJ Reid">
-
-  <div class="player-content">
-
-    <div class="player-county">
-      Kilkenny
-    </div>
-
-    <h3 class="player-name">
-      TJ Reid
-    </h3>
-
-    <p class="player-description">
-      One of the defining players of the modern game,
-      combining power, accuracy and leadership at the
-      highest level.
-    </p>
-
-  </div>
-
-</article>
-
-      <!-- Add more players here -->
-
-    </div>
-
-  </div>
-
-</section>
-
-<script src="js/carousel.js"></script>
-
+  <script src="js/carousel.js"></script>
 </body>
 </html>

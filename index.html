@@ -2,442 +2,351 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="/assets/favicon-16x16.png" type="image/png">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>GAA Pitches of Ireland</title>
-  
-<style>
-    *{
-  box-sizing: border-box;
-}
+  <link rel="icon" href="/assets/favicon-16x16.png" type="image/png">
 
-html,
-body {
-  margin:0;
-  padding:0;
-  min-height:100%;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  overflow-x: hidden !important;
-}
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
 
-.carousel-section {
-  overflow: hidden !important;
-}
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      overflow-x: hidden;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: transparent;
+    }
 
-.carousel-section {
-  background: transparent;
-  padding: 0;
-  min-height: auto !important;
-  height: auto !important;
-  overflow-x: hidden;
-}
+    .pitches-carousel {
+      --carousel-gap: 1rem;
+      --carousel-padding: 0rem;
+      position: relative;
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 var(--carousel-padding);
+      color: #fff8ed;
+      outline: none;
+    }
 
-#stories {
-  min-height: auto !important;
-  height: auto !important;
-}
+    .pitches-carousel:focus-visible {
+      outline: 2px solid #c2a05a;
+      outline-offset: 4px;
+    }
 
-.carousel-header,
-.carousel-toolbar,
-.carousel-strip,
-.carousel-quote {
-  width: 100%;
-  max-width: 1400px;
-  margin-inline: auto;
-}
+    .carousel-viewport {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+    }
 
-.carousel-toolbar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0;
-  gap: 0.25rem;
-}
+    .carousel-track {
+      display: flex;
+      gap: var(--carousel-gap);
+      width: max-content;
+      touch-action: pan-y;
+      transition: transform 650ms cubic-bezier(.2,.8,.2,1);
+      will-change: transform;
+    }
 
-.carousel-controls {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-}
+    .pitch-card {
+      position: relative;
+      flex: 0 0 calc((min(100vw, 1400px) - (var(--carousel-padding) * 2) - (var(--carousel-gap) * 2)) / 3);
+      height: clamp(560px, 62vh, 720px);
+      overflow: hidden;
+      border-radius: 1rem;
+      background: #173629;
+      isolation: isolate;
+    }
 
-.carousel-button {
-  min-width: 2.75rem;
-  height: 2.75rem;
-  border-radius: 999px;
-  border: 1px solid rgba(194,160,90,0.3);
-  background: rgba(7,21,17,0.88);
-  color: #fff8ed;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
+    .pitch-card__image {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 800ms ease;
+    }
 
-.carousel-button:hover {
-  border-color: #c2a05a;
-  color: #c2a05a;
-}
+    .pitch-card:hover .pitch-card__image {
+      transform: scale(1.04);
+    }
 
-.carousel-strip {
-  overflow: hidden;
-  overflow-x: hidden;
-  overflow-y: visible;
-  margin-bottom: .5rem;
-}
+    .pitch-card__overlay {
+      position: absolute;
+      inset: auto 0 0;
+      padding: 1.35rem;
+      background: linear-gradient(180deg, transparent, rgba(7,21,17,.92) 70%);
+    }
 
-.carousel-track {
-  display: flex;
-  width: max-content;
-  gap: 1rem;
-  transition: transform 0.9s cubic-bezier(0.2,0.8,0.2,1);
-  touch-action: pan-y;
-}
+    .pitch-card__label {
+      margin: 0 0 .55rem;
+      color: #c2a05a;
+      font-size: .72rem;
+      line-height: 1.3;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
 
-.carousel-card {
-  position: relative;
-  width: calc((100vw - 6rem) / 2);
-  max-width: 700px;
-  height: 650px;
+    .pitch-card__title {
+      margin: 0 0 .55rem;
+      color: #fff8ed;
+      font-size: clamp(1.2rem, 1.7vw, 1.55rem);
+      line-height: 1.15;
+      letter-spacing: 0;
+    }
 
-  overflow: hidden;
-  border-radius: 1rem;
+    .pitch-card__text {
+      margin: 0;
+      color: rgba(255,248,237,.84);
+      font-size: .96rem;
+      line-height: 1.55;
+    }
 
-  flex: 0 0 auto;
-  min-width: 0;
-  background: #1a2e1e;
-}
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      z-index: 5;
+      display: grid;
+      place-items: center;
+      width: 3.75rem;
+      height: 3.75rem;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(243,238,227,.94);
+      color: #173629;
+      font-size: 2rem;
+      line-height: 1;
+      cursor: pointer;
+      transform: translateY(-50%);
+      transition: transform 180ms ease, background 180ms ease, opacity 180ms ease;
+    }
 
-.carousel-image {
-  width: 100%;
-  height: 100%;
-  transition: transform 0.8s ease;
-  object-fit: cover;
-  object-position: center center;
-  display: block;
-}
+    .carousel-nav:hover,
+    .carousel-nav:focus-visible {
+      background: #fff8ed;
+      transform: translateY(-50%) scale(1.04);
+    }
 
-.carousel-card-overlay {
-  position: absolute;
-  inset: auto 0 0 0;
-  padding: 1.25rem;
-  background: linear-gradient(
-    180deg,
-    transparent,
-    rgba(7,21,17,0.9) 68%
-  );
-}
+    .carousel-nav--prev { left: .75rem; }
+    .carousel-nav--next { right: .75rem; }
 
-.carousel-card-overlay h3 {
-  color: #fff8ed;
-  margin-bottom: 0.5rem;
-}
+    @media (min-width: 768px) and (max-width: 1024px) and (orientation: portrait) {
+      .pitches-carousel {
+        --carousel-padding: 1rem;
+      }
 
-.carousel-card-overlay p {
-  color: rgba(255,248,237,0.82);
-}
+      .pitch-card {
+        flex-basis: calc(100vw - (var(--carousel-padding) * 2));
+        height: clamp(680px, 76vh, 820px);
+      }
+    }
 
-.carousel-card-label {
-  color: #c2a05a;
-  text-transform: uppercase;
-  letter-spacing: 0.14em;
-  font-size: 0.7rem;
-  margin-bottom: 0.5rem;
-}
+    @media (min-width: 768px) and (max-width: 1099px) and (orientation: landscape) {
+      .pitches-carousel {
+        --carousel-padding: 1rem;
+      }
 
-.carousel-card:hover .carousel-image {
-  transform: scale(1.04);
-}
+      .pitch-card {
+        flex-basis: calc((100vw - (var(--carousel-padding) * 2) - var(--carousel-gap)) / 2);
+        height: clamp(500px, 74vh, 640px);
+      }
+    }
 
-.carousel-status {
-  color: #000000;
-  font-size: 1rem;
-  text-align: center;
-  margin: 0;
-}
+    @media (max-width: 767px) {
+      .pitches-carousel {
+        --carousel-gap: .85rem;
+        --carousel-padding: .75rem;
+      }
 
-.carousel-quote {
-  font-family: Georgia, serif;
-  font-size: 1.25rem;
-  color: rgba(255,248,237,0.86);
-}
+      .pitch-card {
+        flex-basis: calc(100vw - (var(--carousel-padding) * 2));
+        height: clamp(560px, 78vh, 700px);
+      }
 
-.carousel-track {
-  display: flex;
-  width: max-content;
-  gap: 1rem;
-  transition: transform 0.9s cubic-bezier(0.2,0.8,0.2,1);
-}
+      .pitch-card__overlay {
+        padding: 1.1rem;
+      }
 
-.pitch-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+      .pitch-card__text {
+        font-size: .92rem;
+      }
 
-  width: 60px;
-  height: 60px;
+      .carousel-nav {
+        width: 3.1rem;
+        height: 3.1rem;
+        font-size: 1.65rem;
+      }
 
-  border: none;
-  border-radius: 50%;
+      .carousel-nav--prev { left: 1rem; }
+      .carousel-nav--next { right: 1rem; }
+    }
 
-  background: rgba(243,238,227,.92);
-  color: #173629;
-
-  font-size: 2rem;
-  cursor: pointer;
-
-  z-index: 20;
-
-  opacity: .35;
-  transition: .3s;
-}
-
-.pitch-nav:hover {
-  opacity: 1;
-  transform: translateY(-50%) scale(1.05);
-}
-
-.pitch-prev {
-  left: 12px;
-}
-
-.pitch-next {
-  right: 12px;
-}
-   /* Use mobile focus class to make the card full screen on mobile when clicked */
-.carousel-card.mobile-focus {
-
-    position: fixed;
-
-    inset: 0;
-
-    width: 100vw !important;
-    height: 100vh !important;
-
-    z-index: 9999;
-
-    border-radius: 0;
-  }
-
-@media (max-width: 1100px) {
-  .carousel-card {
-    width: calc((100vw - 5rem) / 2);
-    height: 520px;
-  }
-
-}
-
-@media (max-width: 900px) and (orientation: landscape) {
-
-  .carousel-card {
-    flex: 0 0 calc((100% - 1rem) / 2);
-    height: 65vh;
-  }
-
-}
-
-@media (max-width: 768px) {
-
-  .carousel-section {
-    padding: .3rem 1rem
-  }
-
-  .carousel-toolbar {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .carousel-card {
-    width: calc(100vw - 3rem);
-    height: 70vh;
-    max-width:none;
-
-  .carousel-toolbar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: .5rem;
-    margin-top: .5rem;
-  }
-
-  .carousel-controls {
-    justify-content: center;
-    gap: .75rem;
-  }
-
-  .carousel-status {
-    text-align: center;
-    margin-top: 0;
-  }
-
-}
-
-@media (min-width: 769px) and (max-width: 1024px) {
-  .carousel-section {
-    padding: 2rem 1.5rem;
-  }
-}
-}
-</style>
-
+    @media (prefers-reduced-motion: reduce) {
+      .carousel-track,
+      .pitch-card__image,
+      .carousel-nav {
+        transition: none;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <!-- PLAYERS HTML HERE -->
-  <section class="carousel-section" id="stories">
-  
-  <div class="carousel-strip" id="carouselStrip">
-    <button class="pitch-nav pitch-prev" id="carouselPrev">&#10094;
-    </button>
-    <button class="pitch-nav pitch-next" id="carouselNext">&#10095;
-    </button>
-    <div class="carousel-track" id="carouselTrack">
-      <article class="carousel-card">
-        <img class="carousel-image" src="assets/gaa-pitches/gaa-pitches.png" alt="Fintra GAA pitch beside the beach in Donegal" loading="lazy" />
-        <div class="carousel-card-overlay">
-          <p class="carousel-card-label">Explore the Grounds →</p>
-          <h3>Every Field. Every Club. All of Ireland.</h3>
-          <p>More than 2,000 GAA grounds connect communities across Ireland. The pitches featured here represent just a small sample of the remarkable places 
-            where Gaelic games are played.</p>
-        </div>
-      </article>
-      <article class="carousel-card">
-        <img class="carousel-image" src="assets/gaa-pitches/inistuk.jpg" alt="Inishturk GAA pitch surrounded by mountains and stone walls" loading="lazy" />
-        <div class="carousel-card-overlay">
-          <p class="carousel-card-label">Inishturk, Mayo</p>
-          <h3>Hurling at the edge of the Atlantic</h3>
-          <p>One of Ireland's most remote pitches, tucked between rugged hills on a tiny Atlantic island.</p>
-        </div>
-      </article>
+  <section class="pitches-carousel" id="stories" aria-label="GAA pitches of Ireland carousel">
+    <div class="carousel-viewport">
+      <button class="carousel-nav carousel-nav--prev" type="button" data-carousel-prev aria-label="Previous pitch">&#10094;</button>
 
-<article class="carousel-card">
-  <img class="carousel-image" src="assets/gaa-pitches/killybegs-donegal.webp" alt="Fintra GAA pitch beside the beach in Donegal" loading="lazy" />
-  <div class="carousel-card-overlay">
-    <p class="carousel-card-label">Fintra, Donegal</p>
-    <h3>Where the game meets the ocean</h3>
-    <p>Golden sands, Atlantic waves and a football pitch create one of Ireland's most iconic sporting landscapes.</p>
-  </div>
-</article>
+      <div class="carousel-track" data-carousel-track>
+        <article class="pitch-card">
+          <img class="pitch-card__image" src="assets/gaa-pitches/gaa-pitches.png" alt="GAA pitch beside the coast in Ireland" loading="lazy">
+          <div class="pitch-card__overlay">
+            <p class="pitch-card__label">Explore the Grounds</p>
+            <h3 class="pitch-card__title">Every Field. Every Club. All of Ireland.</h3>
+            <p class="pitch-card__text">More than 2,000 GAA grounds connect communities across Ireland. The pitches featured here represent just a small sample of the remarkable places where Gaelic games are played.</p>
+          </div>
+        </article>
 
-<article class="carousel-card">
-  <img class="carousel-image" src="assets/gaa-pitches/markievicz-park.jpg" style="object-position:center left" alt="Markievicz Park with Benbulben mountain in the background" loading="lazy" />
-  <div class="carousel-card-overlay">
-    <p class="carousel-card-label">Sligo</p>
-    <h3>Beneath Benbulben</h3>
-    <p>The unmistakable silhouette of Benbulben provides a dramatic backdrop to Gaelic games.</p>
-  </div>
-</article>
+        <article class="pitch-card">
+          <img class="pitch-card__image" src="assets/gaa-pitches/inistuk.jpg" alt="Inishturk GAA pitch surrounded by mountains and stone walls" loading="lazy">
+          <div class="pitch-card__overlay">
+            <p class="pitch-card__label">Inishturk, Mayo</p>
+            <h3 class="pitch-card__title">Hurling at the edge of the Atlantic</h3>
+            <p class="pitch-card__text">One of Ireland's most remote pitches, tucked between rugged hills on a tiny Atlantic island.</p>
+          </div>
+        </article>
 
-<article class="carousel-card">
-  <img class="carousel-image" src="assets/gaa-pitches/mayo-peninsula-2.jpg" alt="GAA pitch located on a peninsula between two lakes" loading="lazy" />
-  <div class="carousel-card-overlay">
-    <p class="carousel-card-label">County Mayo</p>
-    <h3>Between the waters</h3>
-    <p>A remarkable pitch set on a narrow peninsula, surrounded by water on almost every side.</p>
-  </div>
-</article>
+        <article class="pitch-card">
+          <img class="pitch-card__image" src="assets/gaa-pitches/killybegs-donegal.webp" alt="Fintra GAA pitch beside the beach in Donegal" loading="lazy">
+          <div class="pitch-card__overlay">
+            <p class="pitch-card__label">Fintra, Donegal</p>
+            <h3 class="pitch-card__title">Where the game meets the ocean</h3>
+            <p class="pitch-card__text">Golden sands, Atlantic waves and a football pitch create one of Ireland's most iconic sporting landscapes.</p>
+          </div>
+        </article>
 
-<article class="carousel-card">
-  <img class="carousel-image" src="assets/gaa-pitches/achill-sound-mayo.jpg" alt="Achill Sound pitch overlooking the sea and mountains" loading="lazy" />
-  <div class="carousel-card-overlay">
-    <p class="carousel-card-label">Achill Sound, Mayo</p>
-    <h3>Sea, sky and sport</h3>
-    <p>Mountain views and Atlantic waters frame every training session and match.</p>
-  </div>
-</article>
+        <article class="pitch-card">
+          <img class="pitch-card__image" src="assets/gaa-pitches/markievicz-park.jpg" alt="Markievicz Park with Benbulben mountain in the background" loading="lazy" style="object-position:center left">
+          <div class="pitch-card__overlay">
+            <p class="pitch-card__label">Sligo</p>
+            <h3 class="pitch-card__title">Beneath Benbulben</h3>
+            <p class="pitch-card__text">The unmistakable silhouette of Benbulben provides a dramatic backdrop to Gaelic games.</p>
+          </div>
+        </article>
 
-<article class="carousel-card">
-  <img class="carousel-image" src="assets/gaa-pitches/castlewellan-county-down.jpg" alt="Castlewellan GAA pitch with the Mourne Mountains in the distance" loading="lazy" />
-  <div class="carousel-card-overlay">
-    <p class="carousel-card-label">Castlewellan, Down</p>
-    <h3>Under the Mournes</h3>
-    <p>The Mourne Mountains provide one of the most spectacular backdrops in Irish sport.</p>
-  </div>
-</article>
+        <article class="pitch-card">
+          <img class="pitch-card__image" src="assets/gaa-pitches/mayo-peninsula-2.jpg" alt="GAA pitch located on a peninsula between two lakes" loading="lazy">
+          <div class="pitch-card__overlay">
+            <p class="pitch-card__label">County Mayo</p>
+            <h3 class="pitch-card__title">Between the waters</h3>
+            <p class="pitch-card__text">A remarkable pitch set on a narrow peninsula, surrounded by water on almost every side.</p>
+          </div>
+        </article>
 
-<article class="carousel-card">
-  <img class="carousel-image" src="assets/gaa-pitches/dingle-peninsula-kerry.jpg" alt="Gallaras pitch beside the beach on the Dingle Peninsula" loading="lazy" />
-  <div class="carousel-card-overlay">
-    <p class="carousel-card-label">Gallaras, Kerry</p>
-    <h3>Football on the shoreline</h3>
-    <p>A unique pitch where Atlantic beaches meet one of Kerry's most beautiful landscapes.</p>
-  </div>
-</article>
+        <article class="pitch-card">
+          <img class="pitch-card__image" src="assets/gaa-pitches/achill-sound-mayo.jpg" alt="Achill Sound pitch overlooking the sea and mountains" loading="lazy">
+          <div class="pitch-card__overlay">
+            <p class="pitch-card__label">Achill Sound, Mayo</p>
+            <h3 class="pitch-card__title">Sea, sky and sport</h3>
+            <p class="pitch-card__text">Mountain views and Atlantic waters frame every training session and match.</p>
+          </div>
+        </article>
 
-<article class="carousel-card">
-  <img class="carousel-image" src="assets/gaa-pitches/inis-oir.jpg" style="object-position:center right" alt="Inis Oirr GAA pitch on the Aran Islands" loading="lazy" />
-  <div class="carousel-card-overlay">
-    <p class="carousel-card-label">Inis Oírr, Galway</p>
-    <h3>Beyond the mainland</h3>
-    <p>Island life, stone walls and Gaelic games combine in one of Ireland's most celebrated settings.</p>
-  </div>
-</article>
+        <article class="pitch-card">
+          <img class="pitch-card__image" src="assets/gaa-pitches/castlewellan-county-down.jpg" alt="Castlewellan GAA pitch with the Mourne Mountains in the distance" loading="lazy">
+          <div class="pitch-card__overlay">
+            <p class="pitch-card__label">Castlewellan, Down</p>
+            <h3 class="pitch-card__title">Under the Mournes</h3>
+            <p class="pitch-card__text">The Mourne Mountains provide one of the most spectacular backdrops in Irish sport.</p>
+          </div>
+        </article>
 
-<article class="carousel-card">
-  <img class="carousel-image" src="assets/gaa-pitches/grange-sligo.jpg" alt="Grange GAA pitch with Benbulben mountain nearby" loading="lazy" />
-  <div class="carousel-card-overlay">
-    <p class="carousel-card-label">Grange, Sligo</p>
-    <h3>Shadow of the mountain</h3>
-    <p>With Benbulben dominating the skyline, few pitches feel more connected to place.</p>
-  </div>
-</article>
+        <article class="pitch-card">
+          <img class="pitch-card__image" src="assets/gaa-pitches/dingle-peninsula-kerry.jpg" alt="Gallarus pitch beside the beach on the Dingle Peninsula" loading="lazy">
+          <div class="pitch-card__overlay">
+            <p class="pitch-card__label">Gallarus, Kerry</p>
+            <h3 class="pitch-card__title">Football on the shoreline</h3>
+            <p class="pitch-card__text">A unique pitch where Atlantic beaches meet one of Kerry's most beautiful landscapes.</p>
+          </div>
+        </article>
 
-<article class="carousel-card">
-  <img class="carousel-image" src="assets/gaa-pitches/strangford-lough-co-down.jpg" alt="GAA pitch beside Strangford Lough" loading="lazy" />
-  <div class="carousel-card-overlay">
-    <p class="carousel-card-label">Strangford Lough, Down</p>
-    <h3>Surrounded by water</h3>
-    <p>A remarkable setting where sport and landscape meet at the edge of the lough.</p>
-  </div>
-</article>
+        <article class="pitch-card">
+          <img class="pitch-card__image" src="assets/gaa-pitches/inis-oir.jpg" alt="Inis Oírr GAA pitch on the Aran Islands" loading="lazy" style="object-position:center right">
+          <div class="pitch-card__overlay">
+            <p class="pitch-card__label">Inis Oírr, Galway</p>
+            <h3 class="pitch-card__title">Beyond the mainland</h3>
+            <p class="pitch-card__text">Island life, stone walls and Gaelic games combine in one of Ireland's most celebrated settings.</p>
+          </div>
+        </article>
 
-<article class="carousel-card">
-  <img class="carousel-image" src="assets/gaa-pitches/an-spideal.jpg" alt="An Spidéal GAA pitch overlooking the Atlantic" loading="lazy" />
-  <div class="carousel-card-overlay">
-    <p class="carousel-card-label">An Spidéal, Galway</p>
-    <h3>Games in the Gaeltacht</h3>
-    <p>A proud sporting community on the Connemara coast where language and culture thrive.</p>
-  </div>
-</article>
+        <article class="pitch-card">
+          <img class="pitch-card__image" src="assets/gaa-pitches/grange-sligo.jpg" alt="Grange GAA pitch with Benbulben mountain nearby" loading="lazy">
+          <div class="pitch-card__overlay">
+            <p class="pitch-card__label">Grange, Sligo</p>
+            <h3 class="pitch-card__title">Shadow of the mountain</h3>
+            <p class="pitch-card__text">With Benbulben dominating the skyline, few pitches feel more connected to place.</p>
+          </div>
+        </article>
 
-<article class="carousel-card">
-  <img class="carousel-image" src="assets/gaa-pitches/achill-island.jpg" alt="Achill Island GAA pitch with Atlantic scenery" loading="lazy" />
-  <div class="carousel-card-overlay">
-    <p class="carousel-card-label">Achill Island, Mayo</p>
-    <h3>Where mountains meet the sea</h3>
-    <p>One of Ireland's most dramatic island landscapes and a fitting home for Gaelic games.</p>
-  </div>
-</article>
+        <article class="pitch-card">
+          <img class="pitch-card__image" src="assets/gaa-pitches/strangford-lough-co-down.jpg" alt="GAA pitch beside Strangford Lough" loading="lazy">
+          <div class="pitch-card__overlay">
+            <p class="pitch-card__label">Strangford Lough, Down</p>
+            <h3 class="pitch-card__title">Surrounded by water</h3>
+            <p class="pitch-card__text">A remarkable setting where sport and landscape meet at the edge of the lough.</p>
+          </div>
+        </article>
 
-<article class="carousel-card">
-  <img class="carousel-image" src="assets/gaa-pitches/fitsgerald-stadium-kilarney-2.avif" alt="Fitzgerald Stadium with Kerry mountains in the background" loading="lazy" />
-  <div class="carousel-card-overlay">
-    <p class="carousel-card-label">Killarney, Kerry</p>
-    <h3>Beneath the Kerry mountains</h3>
-    <p>Championship football framed by some of Ireland's most famous scenery.</p>
-  </div>
-</article>
+        <article class="pitch-card">
+          <img class="pitch-card__image" src="assets/gaa-pitches/an-spideal.jpg" alt="An Spidéal GAA pitch overlooking the Atlantic" loading="lazy">
+          <div class="pitch-card__overlay">
+            <p class="pitch-card__label">An Spidéal, Galway</p>
+            <h3 class="pitch-card__title">Games in the Gaeltacht</h3>
+            <p class="pitch-card__text">A proud sporting community on the Connemara coast where language and culture thrive.</p>
+          </div>
+        </article>
 
-<article class="carousel-card">
-  <img class="carousel-image" src="assets/gaa-pitches/aran-islands.jpg" alt="Aran Islands GAA pitch beside the sea" loading="lazy" />
-  <div class="carousel-card-overlay">
-    <p class="carousel-card-label">Aran Islands</p>
-    <h3>Island tradition</h3>
-    <p>Generations have played Gaelic games here, surrounded by the Atlantic Ocean.</p>
-  </div>
-</article>
+        <article class="pitch-card">
+          <img class="pitch-card__image" src="assets/gaa-pitches/achill-island.jpg" alt="Achill Island GAA pitch with Atlantic scenery" loading="lazy">
+          <div class="pitch-card__overlay">
+            <p class="pitch-card__label">Achill Island, Mayo</p>
+            <h3 class="pitch-card__title">Where mountains meet the sea</h3>
+            <p class="pitch-card__text">One of Ireland's most dramatic island landscapes and a fitting home for Gaelic games.</p>
+          </div>
+        </article>
 
-<article class="carousel-card">
-  <img class="carousel-image" src="assets/gaa-pitches/croke-park.jpg" alt="Croke Park filled with supporters" loading="lazy" />
-  <div class="carousel-card-overlay">
-    <p class="carousel-card-label">Dublin</p>
-    <h3>The home of Gaelic games</h3>
-    <p>From parish fields to Ireland's largest sporting stage, every journey can lead here.</p>
-  </div>
-</article>
+        <article class="pitch-card">
+          <img class="pitch-card__image" src="assets/gaa-pitches/fitsgerald-stadium-kilarney-2.avif" alt="Fitzgerald Stadium with Kerry mountains in the background" loading="lazy">
+          <div class="pitch-card__overlay">
+            <p class="pitch-card__label">Killarney, Kerry</p>
+            <h3 class="pitch-card__title">Beneath the Kerry mountains</h3>
+            <p class="pitch-card__text">Championship football framed by some of Ireland's most famous scenery.</p>
+          </div>
+        </article>
 
+        <article class="pitch-card">
+          <img class="pitch-card__image" src="assets/gaa-pitches/aran-islands.jpg" alt="Aran Islands GAA pitch beside the sea" loading="lazy">
+          <div class="pitch-card__overlay">
+            <p class="pitch-card__label">Aran Islands</p>
+            <h3 class="pitch-card__title">Island tradition</h3>
+            <p class="pitch-card__text">Generations have played Gaelic games here, surrounded by the Atlantic Ocean.</p>
+          </div>
+        </article>
+
+        <article class="pitch-card">
+          <img class="pitch-card__image" src="assets/gaa-pitches/croke-park.jpg" alt="Croke Park filled with supporters" loading="lazy">
+          <div class="pitch-card__overlay">
+            <p class="pitch-card__label">Dublin</p>
+            <h3 class="pitch-card__title">The home of Gaelic games</h3>
+            <p class="pitch-card__text">From parish fields to Ireland's largest sporting stage, every journey can lead here.</p>
+          </div>
+        </article>
+      </div>
+
+      <button class="carousel-nav carousel-nav--next" type="button" data-carousel-next aria-label="Next pitch">&#10095;</button>
     </div>
-  </div>
+  </section>
 
-</section>
-
-     <!-- PLAYERS JS HERE -->
+  <script src="js/carousel.js"></script>
 </body>
 </html>
