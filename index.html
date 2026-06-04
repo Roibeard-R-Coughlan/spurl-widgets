@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  
-  <style>
+<link rel="icon" href="/assets/favicon-16x16.png" type="image/png">
+  <title>GAA Pitches of Ireland</title>
+<style>
     *{
   box-sizing: border-box;
 }
@@ -243,10 +244,9 @@ body {
   }
 
   .carousel-card {
+    width: calc(100vw - 3rem);
     height: 70vh;
-    min-height: 520px;
-    max-height: 700px;
-  }
+    max-width:none;
 
   .carousel-toolbar {
     display: flex;
@@ -272,6 +272,7 @@ body {
   .carousel-section {
     padding: 2rem 1.5rem;
   }
+}
 }
 </style>
 
@@ -300,7 +301,7 @@ body {
         <img class="carousel-image" src="assets/gaa-pitches/inistuk.jpg" alt="Inishturk GAA pitch surrounded by mountains and stone walls" loading="lazy" />
         <div class="carousel-card-overlay">
           <p class="carousel-card-label">Inishturk, Mayo</p>
-          <h3>Football at the edge of the Atlantic</h3>
+          <h3>Hurling at the edge of the Atlantic</h3>
           <p>One of Ireland's most remote pitches, tucked between rugged hills on a tiny Atlantic island.</p>
         </div>
       </article>
@@ -437,7 +438,5 @@ body {
 </section>
 
      <!-- PLAYERS JS HERE -->
-
-<script src="js/carousel.js"></script>
 </body>
 </html>

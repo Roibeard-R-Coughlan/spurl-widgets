@@ -6,11 +6,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const prevButton = document.getElementById("carouselPrev");
   const nextButton = document.getElementById("carouselNext");
 
-  console.log("Track:", track);
-  console.log("Cards:", cards.length);
-  console.log("Prev:", prevButton);
-  console.log("Next:", nextButton);
-
   const toggleButton = document.getElementById("carouselToggle");
   const status = document.getElementById("carouselStatus");
 
@@ -37,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 };
 
   const maxIndex = () => {
-  return cards.length - visibleCards();
+  return cards.length - 1;
 };
 
   const getStep = () => {
@@ -90,15 +85,27 @@ if (prevButton) {
 if (nextButton) {
   nextButton.addEventListener("click", () => {
 
+    
+
     if (activeIndex < maxIndex()) {
       activeIndex++;
     } else {
       activeIndex = 0;
     }
+    console.log(
+  "activeIndex:",
+  activeIndex,
+  "maxIndex:",
+  maxIndex(),
+  "cards:",
+  cards.length
+);
 
     updateCarousel();
+    
 
   });
+  
 }
 
 if (toggleButton) {
@@ -194,6 +201,8 @@ if (heritagePrev) {
     updateCarousel();
   });
 }
+
+
   // Add mobile focus toggle for carousel cards on mobile devices
 document
 .querySelectorAll(".carousel-card")
