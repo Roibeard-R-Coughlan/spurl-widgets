@@ -162,7 +162,15 @@
       }
     }
 
-    @media (max-width: 767px) {
+    @media (max-width: 767px) {    
+      .mobile-pitch-left .pitch-card__image {
+        object-position: left;
+      }
+
+      .mobile-pitch-right .pitch-card__image {
+        object-position: right;
+      } 
+
       .pitches-carousel {
         --carousel-gap: .85rem;
         --carousel-padding: .75rem;
@@ -235,7 +243,7 @@
         </article>
 
         <article class="pitch-card">
-          <img class="pitch-card__image" src="assets/gaa-pitches/markievicz-park.webp" alt="Markievicz Park with Benbulben mountain in the background" loading="lazy" style="object-position:center left">
+          <img class="pitch-card__image mobile-pitch-right" src="assets/gaa-pitches/markievicz-park.webp" alt="Markievicz Park with Benbulben mountain in the background" loading="lazy">
           <div class="pitch-card__overlay">
             <p class="pitch-card__label">Sligo</p>
             <h3 class="pitch-card__title">Beneath Benbulben</h3>
