@@ -105,6 +105,88 @@
       "keywords": ["pages", "heritage page", "players page", "home page", "index html", "heritage html", "players html"]
     }
   ],
+
+  {
+  "shippingFAQ": [
+    {
+      "keywords": ["delivery", "shipping", "ireland", "irish delivery"],
+      "question": "Do you deliver within Ireland?",
+      "answer": "Yes. Orders are dispatched from Galway, Ireland using An Post. Delivery times and shipping options are shown during checkout."
+    },
+
+    {
+      "keywords": ["uk", "united kingdom", "britain", "england", "scotland", "wales"],
+      "question": "Do you deliver to the UK?",
+      "answer": "Yes. We deliver to England, Scotland, Wales and Northern Ireland. Orders are dispatched from Ireland and shipping options are displayed during checkout."
+    },
+
+    {
+      "keywords": ["britain", "great britain"],
+      "question": "Do you deliver to Britain?",
+      "answer": "Yes. We currently deliver throughout Great Britain and Northern Ireland."
+    },
+
+    {
+      "keywords": ["europe", "eu", "european union", "germany", "france", "spain", "italy"],
+      "question": "Do you deliver to mainland Europe?",
+      "answer": "Yes. We ship to most European destinations. Available countries and delivery options can be viewed during checkout."
+    },
+
+    {
+      "keywords": ["usa", "america", "united states"],
+      "question": "Do you deliver to America?",
+      "answer": "Not yet, but US shipping is planned very soon. We are currently finalising international shipping procedures and customs requirements. Join our mailing list or contact us for updates."
+    },
+
+    {
+      "keywords": ["australia", "australian"],
+      "question": "Do you deliver to Australia?",
+      "answer": "Not yet, but Australian shipping is planned very soon. We are currently preparing the required shipping and customs processes for wooden products."
+    },
+
+    {
+      "keywords": ["canada"],
+      "question": "Do you deliver to Canada?",
+      "answer": "Canadian shipping is planned for a future release. Please contact us if you would like to be notified when it becomes available."
+    },
+
+    {
+      "keywords": ["worldwide", "international"],
+      "question": "Do you ship internationally?",
+      "answer": "We currently ship throughout Ireland, the UK and much of mainland Europe. Additional international destinations are being added as shipping and customs processes are finalised."
+    },
+
+    {
+      "keywords": ["tracking", "tracked"],
+      "question": "Will I receive tracking information?",
+      "answer": "Where available, tracking information will be provided once your order has been dispatched."
+    },
+
+    {
+      "keywords": ["dispatch", "when will my order ship"],
+      "question": "How quickly are orders dispatched?",
+      "answer": "We aim to dispatch orders as quickly as possible from Galway, Ireland. Current dispatch estimates are shown during checkout."
+    },
+
+    {
+      "keywords": ["customs", "duties", "taxes"],
+      "question": "Will I have to pay customs charges?",
+      "answer": "International customers may be responsible for local customs duties, import taxes or handling fees depending on their country's regulations."
+    },
+
+    {
+      "keywords": ["where are orders shipped from", "dispatch location"],
+      "question": "Where are orders shipped from?",
+      "answer": "Orders are dispatched from Galway, Ireland."
+    }
+
+    {
+      "keywords": ["delivery cost", "shipping cost", "postage"],
+      "question": "How much does shipping cost?",
+      "answer": "Shipping costs vary depending on destination and service level. The exact cost will be calculated and displayed during checkout before payment."
+    }
+  ]
+}
   "faqs": [
     {
       "id": "faq-pitches",
