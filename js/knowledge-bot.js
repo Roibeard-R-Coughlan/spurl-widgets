@@ -1,5 +1,6 @@
 (function (global) {
-  const KNOWLEDGE_URL = 'data/spurl-knowledge.json';
+  const BASE_URL = (global.__SPURL_WIDGET_BASE_URL__ || '').replace(/\/+$|$/, '/');
+  const KNOWLEDGE_URL = BASE_URL + 'data/spurl-knowledge.json';
 
   function normalizeText(value) {
     return String(value || '')
