@@ -88,7 +88,7 @@
         'What is Spurl.ie about?',
         'Where do you ship from?',
         'Tell me about the heritage timeline',
-        'Where do you deliver to?',
+        'Do you deliver to the UK?',
       ],
       siteOverview: [
         {
