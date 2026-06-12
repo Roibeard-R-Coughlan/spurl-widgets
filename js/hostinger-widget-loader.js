@@ -6,7 +6,7 @@
     const current = document.currentScript && document.currentScript.src
       ? document.currentScript.src
       : global.location.href;
-    return new URL('.', current).toString();
+    return new URL('../', current).toString();
   }
 
   function loadScript(src) {
@@ -432,12 +432,21 @@
     injectWidgetMarkup();
 
     const baseUrl = widgetBaseUrl();
+    const knowledgeUrl = baseUrl + 'js/knowledge-bot.js';
+    const chatbotUrl = baseUrl + 'js/chatbot.js';
+    const sliotarUrl = baseUrl + 'assets/sloitar-chatbot.png';
+
+    console.log('[CAINT] widget base URL:', baseUrl);
+    console.log('[CAINT] knowledge script URL:', knowledgeUrl);
+    console.log('[CAINT] chatbot script URL:', chatbotUrl);
+    console.log('[CAINT] sliotar image URL:', sliotarUrl);
+
     global.__SPURL_WIDGET_BASE_URL__ = baseUrl;
 
-    loadScript(baseUrl + 'js/knowledge-bot.js')
+    loadScript(knowledgeUrl)
       .then(() => {
         console.log('[CAINT] knowledge-bot.js loaded');
-        return loadScript(baseUrl + 'js/chatbot.js');
+        return loadScript(chatbotUrl);
       })
       .then(() => {
         console.log('[CAINT] chatbot.js loaded');
