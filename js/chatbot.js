@@ -13,7 +13,11 @@ function addMessage(text, role = 'bot') {
 
   const avatar = document.createElement('div');
   avatar.className = 'message__avatar';
-  avatar.textContent = role === 'user' ? 'You' : 'S';
+  if (role === 'bot') {
+    avatar.innerHTML = '<img src="assets/sloitar-chatbot.png" alt="" />';
+  } else {
+    avatar.textContent = 'You';
+  }
 
   const bubble = document.createElement('div');
   bubble.className = 'message__bubble';
@@ -96,7 +100,7 @@ function initChat() {
     form.addEventListener('submit', handleSubmit);
   }
 
-  addMessage('Hi! I am the Spurl assistant. Ask me about the hurling, the website features or anything else related to the site.', 'bot');
+  addMessage('Caint is here to guide you through Spurl. Ask about hurling, heritage, players, and the site.', 'bot');
 }
 
 initChat();
