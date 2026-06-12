@@ -1,6 +1,6 @@
 (function (global) {
-  if (global.__SPURL_CAINT_WIDGET_LOADER__) return;
-  global.__SPURL_CAINT_WIDGET_LOADER__ = true;
+  if (global.__SPURL_CHARA_WIDGET_LOADER__) return;
+  global.__SPURL_CHARA_WIDGET_LOADER__ = true;
 
   function widgetBaseUrl() {
     const current = document.currentScript && document.currentScript.src
@@ -36,12 +36,12 @@
   }
 
   function injectStyles() {
-    if (document.getElementById('spurl-caint-loader-styles')) return;
+    if (document.getElementById('spurl-chara-loader-styles')) return;
 
     const style = document.createElement('style');
-    style.id = 'spurl-caint-loader-styles';
+    style.id = 'spurl-chara-loader-styles';
     style.textContent = `
-      .spurl-caint-widget {
+      .spurl-chara-widget {
         position: fixed;
         right: 20px;
         bottom: 20px;
@@ -53,9 +53,9 @@
         pointer-events: none;
         font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       }
-      .spurl-caint-widget * { box-sizing: border-box; }
-      .spurl-caint-widget > * { pointer-events: auto; }
-      .spurl-caint-launcher {
+      .spurl-chara-widget * { box-sizing: border-box; }
+      .spurl-chara-widget > * { pointer-events: auto; }
+      .spurl-chara-launcher {
         position: relative;
         width: 74px;
         height: 74px;
@@ -79,9 +79,9 @@
         text-shadow: 0 2px 4px rgba(7,19,15,0.85);
         transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
         user-select: none;
-        animation: spurl-caint-breathe 4.8s ease-in-out infinite;
+        animation: spurl-chara-breathe 4.8s ease-in-out infinite;
       }
-      .spurl-caint-launcher span {
+      .spurl-chara-launcher span {
         width: 100%;
         height: 100%;
         display: inline-flex;
@@ -93,15 +93,15 @@
         line-height: 1.02;
         text-align: center;
       }
-      .spurl-caint-launcher:hover,
-      .spurl-caint-launcher:focus-visible {
+      .spurl-chara-launcher:hover,
+      .spurl-chara-launcher:focus-visible {
         transform: translateY(-2px) scale(1.03);
         box-shadow: 0 18px 38px rgba(0,0,0,0.36), 0 0 0 1px rgba(194,160,90,0.35) inset;
         filter: saturate(1.08) contrast(1.02);
         outline: none;
       }
-      .spurl-caint-launcher::after {
-        content: "CAINT\AThe Spurl Guide";
+      .spurl-chara-launcher::after {
+        content: "CHARA\AThe Spurl Guide";
         position: absolute;
         right: calc(100% + 10px);
         bottom: 8px;
@@ -124,10 +124,10 @@
         transition: opacity 160ms ease, transform 160ms ease;
       }
       @media (hover: hover) and (pointer: fine) {
-        .spurl-caint-launcher:hover::after,
-        .spurl-caint-launcher:focus-visible::after { opacity: 1; transform: translateY(0); }
+        .spurl-chara-launcher:hover::after,
+        .spurl-chara-launcher:focus-visible::after { opacity: 1; transform: translateY(0); }
       }
-      .spurl-caint-panel {
+      .spurl-chara-panel {
         position: absolute;
         right: 0;
         bottom: calc(100% + 12px);
@@ -148,13 +148,13 @@
         pointer-events: none;
         transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
       }
-      .spurl-caint-widget.is-open .spurl-caint-panel {
+      .spurl-chara-widget.is-open .spurl-chara-panel {
         opacity: 1;
         visibility: visible;
         transform: translateY(0) scale(1);
         pointer-events: auto;
       }
-      .spurl-caint-header {
+      .spurl-chara-header {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -163,20 +163,20 @@
         border-bottom: 1px solid rgba(194,160,90,0.18);
         background: linear-gradient(180deg, rgba(194,160,90,0.12), rgba(7,19,15,0.98));
       }
-      .spurl-caint-title {
+      .spurl-chara-title {
         font-size: 1rem;
         font-weight: 800;
         letter-spacing: 0.03em;
         text-transform: uppercase;
         color: #fff8ed;
       }
-      .spurl-caint-subtitle {
+      .spurl-chara-subtitle {
         color: #ffe9bf;
         font-size: 0.78rem;
         letter-spacing: 0.08em;
         text-transform: uppercase;
       }
-      .spurl-caint-close {
+      .spurl-chara-close {
         border: 1px solid rgba(194,160,90,0.28);
         border-radius: 999px;
         background: rgba(255,255,255,0.04);
@@ -190,37 +190,20 @@
         line-height: 1;
         transition: transform 140ms ease, background 140ms ease;
       }
-      .spurl-caint-close:hover,
-      .spurl-caint-close:focus-visible {
+      .spurl-chara-close:hover,
+      .spurl-chara-close:focus-visible {
         transform: scale(1.05);
         background: rgba(194,160,90,0.14);
         outline: none;
       }
-      .spurl-caint-body {
+      .spurl-chara-body {
         display: flex;
         flex-direction: column;
         min-height: 0;
         padding: 0.65rem 0.75rem 0.75rem;
         background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
       }
-      .spurl-caint-chip-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.35rem;
-        margin-bottom: 0.45rem;
-      }
-      .spurl-caint-chip-row button,
-      .spurl-caint-topic-button {
-        padding: 0.35rem 0.45rem;
-        border: 1px solid rgba(194,160,90,0.24);
-        border-radius: 999px;
-        background: rgba(255,255,255,0.04);
-        color: #fff8ed;
-        font-size: 0.78rem;
-        cursor: pointer;
-        text-align: left;
-      }
-      .spurl-caint-chat-log {
+      .spurl-chara-chat-log {
         display: flex;
         flex-direction: column;
         gap: 0.45rem;
@@ -229,12 +212,12 @@
         min-height: 0;
         padding-right: 0.15rem;
       }
-      .spurl-caint-widget .message {
+      .spurl-chara-widget .message {
         display: flex;
         align-items: flex-end;
         gap: 0.45rem;
       }
-      .spurl-caint-widget .message__avatar {
+      .spurl-chara-widget .message__avatar {
         width: 32px;
         height: 32px;
         display: grid;
@@ -247,12 +230,12 @@
         flex: 0 0 32px;
         overflow: hidden;
       }
-      .spurl-caint-widget .message__avatar img { width: 100%; height: 100%; display: block; object-fit: cover; border-radius: inherit; }
-      .spurl-caint-widget .message--bot .message__bubble { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); }
-      .spurl-caint-widget .message--user { justify-content: flex-end; }
-      .spurl-caint-widget .message--user .message__avatar { order: 2; background: linear-gradient(135deg, #d9f7e5, #c2a05a); }
-      .spurl-caint-widget .message--user .message__bubble { background: linear-gradient(135deg, rgba(194,160,90,0.22), rgba(255,255,255,0.08)); border: 1px solid rgba(194,160,90,0.24); }
-      .spurl-caint-widget .message__bubble {
+      .spurl-chara-widget .message__avatar img { width: 100%; height: 100%; display: block; object-fit: cover; border-radius: inherit; }
+      .spurl-chara-widget .message--bot .message__bubble { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); }
+      .spurl-chara-widget .message--user { justify-content: flex-end; }
+      .spurl-chara-widget .message--user .message__avatar { order: 2; background: linear-gradient(135deg, #d9f7e5, #c2a05a); }
+      .spurl-chara-widget .message--user .message__bubble { background: linear-gradient(135deg, rgba(194,160,90,0.22), rgba(255,255,255,0.08)); border: 1px solid rgba(194,160,90,0.24); }
+      .spurl-chara-widget .message__bubble {
         max-width: 92%;
         padding: 0.45rem 0.55rem;
         border-radius: 12px 12px 12px 4px;
@@ -261,9 +244,9 @@
         line-height: 1.35;
         word-break: break-word;
       }
-      .spurl-caint-widget .message--user .message__bubble { border-radius: 12px 12px 4px 12px; }
-      .spurl-caint-message { display: flex; align-items: flex-end; gap: 0.45rem; }
-      .spurl-caint-message__avatar {
+      .spurl-chara-widget .message--user .message__bubble { border-radius: 12px 12px 4px 12px; }
+      .spurl-chara-message { display: flex; align-items: flex-end; gap: 0.45rem; }
+      .spurl-chara-message__avatar {
         width: 32px;
         height: 32px;
         display: grid;
@@ -276,12 +259,12 @@
         flex: 0 0 32px;
         overflow: hidden;
       }
-      .spurl-caint-message__avatar img { width: 100%; height: 100%; display: block; object-fit: cover; border-radius: inherit; }
-      .spurl-caint-message--bot .spurl-caint-message__bubble { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); }
-      .spurl-caint-message--user { justify-content: flex-end; }
-      .spurl-caint-message--user .spurl-caint-message__avatar { order: 2; background: linear-gradient(135deg, #d9f7e5, #c2a05a); }
-      .spurl-caint-message--user .spurl-caint-message__bubble { background: linear-gradient(135deg, rgba(194,160,90,0.22), rgba(255,255,255,0.08)); border: 1px solid rgba(194,160,90,0.24); }
-      .spurl-caint-message__bubble {
+      .spurl-chara-message__avatar img { width: 100%; height: 100%; display: block; object-fit: cover; border-radius: inherit; }
+      .spurl-chara-message--bot .spurl-chara-message__bubble { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); }
+      .spurl-chara-message--user { justify-content: flex-end; }
+      .spurl-chara-message--user .spurl-chara-message__avatar { order: 2; background: linear-gradient(135deg, #d9f7e5, #c2a05a); }
+      .spurl-chara-message--user .spurl-chara-message__bubble { background: linear-gradient(135deg, rgba(194,160,90,0.22), rgba(255,255,255,0.08)); border: 1px solid rgba(194,160,90,0.24); }
+      .spurl-chara-message__bubble {
         max-width: 92%;
         padding: 0.45rem 0.55rem;
         border-radius: 12px 12px 12px 4px;
@@ -290,9 +273,9 @@
         line-height: 1.35;
         word-break: break-word;
       }
-      .spurl-caint-message--user .spurl-caint-message__bubble { border-radius: 12px 12px 4px 12px; }
-      .spurl-caint-form { display: grid; grid-template-columns: 1fr auto; gap: 0.35rem; margin-top: 0.45rem; }
-      .spurl-caint-input {
+      .spurl-chara-message--user .spurl-chara-message__bubble { border-radius: 12px 12px 4px 12px; }
+      .spurl-chara-form { display: grid; grid-template-columns: 1fr auto; gap: 0.35rem; margin-top: 0.45rem; }
+      .spurl-chara-input {
         width: 100%;
         min-height: 40px;
         padding: 0.52rem 0.55rem;
@@ -303,8 +286,8 @@
         font: inherit;
         box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
       }
-      .spurl-caint-input:focus-visible { outline: 2px solid rgba(194,160,90,0.8); outline-offset: 2px; }
-      .spurl-caint-send {
+      .spurl-chara-input:focus-visible { outline: 2px solid rgba(194,160,90,0.8); outline-offset: 2px; }
+      .spurl-chara-send {
         border: 0;
         border-radius: 10px;
         padding: 0 0.65rem;
@@ -315,49 +298,45 @@
         min-height: 40px;
         box-shadow: 0 8px 16px rgba(194,160,90,0.18);
       }
-      .spurl-caint-send:hover,
-      .spurl-caint-send:focus-visible {
+      .spurl-chara-send:hover,
+      .spurl-chara-send:focus-visible {
         filter: brightness(1.02);
         outline: none;
       }
-      @keyframes spurl-caint-breathe { 0%,100% { box-shadow: 0 14px 28px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.02) inset; } 50% { box-shadow: 0 16px 32px rgba(0,0,0,0.32), 0 0 0 1px rgba(194,160,90,0.18) inset; } }
+      @keyframes spurl-chara-breathe { 0%,100% { box-shadow: 0 14px 28px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.02) inset; } 50% { box-shadow: 0 16px 32px rgba(0,0,0,0.32), 0 0 0 1px rgba(194,160,90,0.18) inset; } }
       @media (max-width: 640px) {
-        .spurl-caint-widget { right: 10px; bottom: 10px; left: 10px; align-items: stretch; }
-        .spurl-caint-launcher { width: 64px; height: 64px; align-self: flex-end; font-size: 0.75rem; }
-        .spurl-caint-launcher::after { right: auto; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%) translateY(4px); }
-        .spurl-caint-panel { width: 100%; max-width: none; }
-        .spurl-caint-message__avatar { width: 28px; height: 28px; flex-basis: 28px; }
+        .spurl-chara-widget { right: 10px; bottom: 10px; left: 10px; align-items: stretch; }
+        .spurl-chara-launcher { width: 64px; height: 64px; align-self: flex-end; font-size: 0.75rem; }
+        .spurl-chara-launcher::after { right: auto; left: 50%; bottom: calc(100% + 8px); transform: translateX(-50%) translateY(4px); }
+        .spurl-chara-panel { width: 100%; max-width: none; }
+        .spurl-chara-message__avatar { width: 28px; height: 28px; flex-basis: 28px; }
       }
     `;
     document.head.appendChild(style);
   }
 
   function injectWidgetMarkup() {
-    if (document.querySelector('.spurl-caint-widget')) return;
+    if (document.querySelector('.spurl-chara-widget')) return;
 
-    console.log('[CAINT] injecting floating widget into page');
 
     const widget = document.createElement('aside');
-    widget.className = 'spurl-caint-widget';
-    widget.setAttribute('aria-label', 'CAINT floating widget');
+    widget.className = 'spurl-chara-widget';
+    widget.setAttribute('aria-label', 'CHARA floating widget');
     widget.innerHTML = `
-      <button class="spurl-caint-launcher" type="button" data-spurl-launcher aria-expanded="false" aria-controls="spurl-caint-panel" aria-label="Open CAINT chatbot">
-        <span>CAINT</span>
-      </button>
-      <section class="spurl-caint-panel" id="spurl-caint-panel" aria-label="CAINT chatbot panel">
-        <header class="spurl-caint-header">
+      <button class="spurl-chara-launcher" type="button" data-spurl-launcher aria-expanded="false" aria-controls="spurl-chara-panel" aria-label="Open CHARA chatbot"></button>
+      <section class="spurl-chara-panel" id="spurl-chara-panel" aria-label="CHARA chatbot panel">
+        <header class="spurl-chara-header">
           <div>
-            <div class="spurl-caint-title">CAINT</div>
-            <div class="spurl-caint-subtitle">The Spurl Guide</div>
+            <div class="spurl-chara-title">CHARA</div>
+            <div class="spurl-chara-subtitle">The Spurl Guide</div>
           </div>
-          <button class="spurl-caint-close" type="button" data-spurl-close aria-label="Close CAINT panel">×</button>
+          <button class="spurl-chara-close" type="button" data-spurl-close aria-label="Close CHARA panel">×</button>
         </header>
-        <div class="spurl-caint-body">
-          <div class="spurl-caint-chip-row" data-suggestions></div>
-          <div class="spurl-caint-chat-log" data-chat-log aria-live="polite"></div>
-          <form class="spurl-caint-form" data-chat-form>
-            <input class="spurl-caint-input" type="text" data-chat-input placeholder="Ask about the site…" autocomplete="off" />
-            <button class="spurl-caint-send" type="submit">Go</button>
+        <div class="spurl-chara-body">
+          <div class="spurl-chara-chat-log" data-chat-log aria-live="polite"></div>
+          <form class="spurl-chara-form" data-chat-form>
+            <input class="spurl-chara-input" type="text" data-chat-input placeholder="Ask about the site…" autocomplete="off" />
+            <button class="spurl-chara-send" type="submit">Go</button>
           </form>
         </div>
       </section>
@@ -377,7 +356,6 @@
     }
 
     function openWidget() {
-      console.log('[CAINT] opening widget panel');
       widget.classList.add('is-open');
       launcher.setAttribute('aria-expanded', 'true');
       updateLauncherVisibility();
@@ -386,8 +364,8 @@
         setTimeout(() => {
           const chatLog = widget.querySelector('[data-chat-log]');
           if (chatLog && !chatLog.textContent.trim()) {
-            const welcome = 'Dia duit 👋\nI\'m CAINT, The Spurl Guide.\nAsk me about Spurl products, shipping, engraving, heritage, players, grounds, or the website.';
-            const evt = new CustomEvent('spurl:caint-welcome', { detail: { text: welcome } });
+            const welcome = 'Dia duit 👋\nI\'m CHARA, The Spurl Guide.\nAsk me about Spurl products, shipping, engraving, heritage, players, grounds, or the website.';
+            const evt = new CustomEvent('spurl:chara-welcome', { detail: { text: welcome } });
             document.dispatchEvent(evt);
           }
         }, 120);
@@ -395,7 +373,6 @@
     }
 
     function closeWidget() {
-      console.log('[CAINT] closing widget panel');
       widget.classList.remove('is-open');
       launcher.setAttribute('aria-expanded', 'false');
       updateLauncherVisibility();
@@ -427,7 +404,6 @@
   }
 
   function initialize() {
-    console.log('[CAINT] widget loader initialized');
     injectStyles();
     injectWidgetMarkup();
 
@@ -436,23 +412,14 @@
     const chatbotUrl = baseUrl + 'js/chatbot.js';
     const sliotarUrl = baseUrl + 'assets/sloitar-chatbot.png';
 
-    console.log('[CAINT] widget base URL:', baseUrl);
-    console.log('[CAINT] knowledge script URL:', knowledgeUrl);
-    console.log('[CAINT] chatbot script URL:', chatbotUrl);
-    console.log('[CAINT] sliotar image URL:', sliotarUrl);
+    // Resolve the widget assets from the repository root so Hostinger loading stays stable.
 
     global.__SPURL_WIDGET_BASE_URL__ = baseUrl;
 
     loadScript(knowledgeUrl)
-      .then(() => {
-        console.log('[CAINT] knowledge-bot.js loaded');
-        return loadScript(chatbotUrl);
-      })
-      .then(() => {
-        console.log('[CAINT] chatbot.js loaded');
-      })
+      .then(() => loadScript(chatbotUrl))
       .catch((error) => {
-        console.error('[CAINT] widget failed to initialize:', error);
+        console.error('[CHARA] widget failed to initialize:', error);
       });
   }
 

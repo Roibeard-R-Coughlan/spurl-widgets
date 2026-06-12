@@ -108,23 +108,23 @@
   }
 
   function loadKnowledge(callback) {
-    console.log('[CAINT] loading knowledge file from:', KNOWLEDGE_URL);
+    console.log('[CHARA] loading knowledge file from:', KNOWLEDGE_URL);
 
     fetch(KNOWLEDGE_URL, { cache: 'no-store' })
       .then((response) => {
         if (!response.ok) {
           const error = new Error('Knowledge file not found (' + response.status + ')');
-          console.error('[CAINT] knowledge request failed:', error.message, 'URL:', KNOWLEDGE_URL);
+          console.error('[CHARA] knowledge request failed:', error.message, 'URL:', KNOWLEDGE_URL);
           throw error;
         }
         return response.json();
       })
       .then((json) => {
-        console.log('[CAINT] knowledge file loaded successfully');
+        console.log('[CHARA] knowledge file loaded successfully');
         callback(null, json);
       })
       .catch((error) => {
-        console.error('[CAINT] failed to load knowledge file, using fallback:', error);
+        console.error('[CHARA] failed to load knowledge file, using fallback:', error);
         callback(error, fallbackKnowledge());
       });
   }

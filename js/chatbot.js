@@ -1,19 +1,19 @@
-const widgetRoot = document.querySelector('.spurl-caint-widget') || document.body;
+const widgetRoot = document.querySelector('.spurl-chara-widget') || document.body;
 const chatLog = widgetRoot.querySelector('[data-chat-log]');
 const input = widgetRoot.querySelector('[data-chat-input]');
 const form = widgetRoot.querySelector('[data-chat-form]');
 const launcher = widgetRoot.querySelector('[data-spurl-launcher]');
-const widget = document.querySelector('.spurl-caint-widget');
+const widget = document.querySelector('.spurl-chara-widget');
 const baseUrl = (window.__SPURL_WIDGET_BASE_URL__ || '').replace(/\/+$/, '/');
 const avatarImage = (baseUrl ? baseUrl : '') + 'assets/sloitar-chatbot.png';
 
 let knowledgeData = null;
 let welcomeShown = false;
 
-if (globalThis.__SPURL_CAINT_CHAT_INIT__) {
-  console.log('[CAINT] chatbot already initialized; skipping duplicate setup');
+if (globalThis.__SPURL_CHARA_CHAT_INIT__) {
+  console.log('[CHARA] chatbot already initialized; skipping duplicate setup');
 } else {
-  globalThis.__SPURL_CAINT_CHAT_INIT__ = true;
+  globalThis.__SPURL_CHARA_CHAT_INIT__ = true;
 }
 
 function addMessage(text, role = 'bot') {
@@ -41,7 +41,7 @@ function addMessage(text, role = 'bot') {
 }
 
 function getFallbackAnswer(query) {
-  console.warn('[CAINT] no direct answer found for:', query);
+  console.warn('[CHARA] no direct answer found for:', query);
   const fallback = knowledgeData && knowledgeData.productInfo ? knowledgeData.productInfo.find((item) => /shipping|delivery|dispatch|engrave|future|product/i.test(item.title || '')) : null;
 
   if (fallback) {
@@ -53,22 +53,22 @@ function getFallbackAnswer(query) {
 
 function getAnswer(text) {
   if (!knowledgeData) {
-    console.warn('[CAINT] knowledge data not ready yet for:', text);
+    console.warn('[CHARA] knowledge data not ready yet for:', text);
     return 'The knowledge base is still loading. Please try again in a moment.';
   }
 
   const match = window.KnowledgeBot.findAnswer(text, knowledgeData);
   if (match) {
-    console.log('[CAINT] answer matched from knowledge base:', match.title || match.question || text);
+    console.log('[CHARA] answer matched from knowledge base:', match.title || match.question || text);
     return match.answer;
   }
 
-  console.warn('[CAINT] no knowledge match found for:', text);
+  console.warn('[CHARA] no knowledge match found for:', text);
   return getFallbackAnswer(text);
 }
 
 function handleSubmit(event) {
-  console.log('[CAINT] submit event received');
+  console.log('[CHARA] submit event received');
   if (event && typeof event.preventDefault === 'function') {
     event.preventDefault();
     event.stopPropagation();
@@ -76,7 +76,7 @@ function handleSubmit(event) {
 
   const text = input && input.value.trim();
   if (!text) {
-    console.warn('[CAINT] submit ignored because the input was empty');
+    console.warn('[CHARA] submit ignored because the input was empty');
     return false;
   }
 
@@ -92,20 +92,20 @@ function showWelcomeMessage() {
   if (welcomeShown) return;
   welcomeShown = true;
 
-  const welcome = "Dia duit 👋\nI'm CAINT, The Spurl Guide.\nAsk me about Spurl products, shipping, engraving, heritage, players, grounds, or the website.";
+  const welcome = "Dia duit 👋\nI'm CHARA, The Spurl Guide.\nAsk me about Spurl products, shipping, engraving, heritage, players, grounds, or the website.";
   addMessage(welcome, 'bot');
 }
 
 function initChat() {
-  console.log('[CAINT] chatbot initialization started');
+  console.log('[CHARA] chatbot initialization started');
 
   if (!window.KnowledgeBot) {
-    console.warn('[CAINT] KnowledgeBot not ready yet; retrying');
+    console.warn('[CHARA] KnowledgeBot not ready yet; retrying');
     setTimeout(initChat, 150);
     return;
   }
 
-  console.log('[CAINT] KnowledgeBot available');
+  console.log('[CHARA] KnowledgeBot available');
 
   if (form) {
     form.noValidate = true;
@@ -119,23 +119,23 @@ function initChat() {
 
   window.KnowledgeBot.loadKnowledge((error, data) => {
     if (error) {
-      console.error('[CAINT] knowledge file request failed:', error);
+      console.error('[CHARA] knowledge file request failed:', error);
       knowledgeData = data || window.KnowledgeBot.fallbackKnowledge();
       addMessage('The knowledge base is temporarily unavailable, but I can still answer general Spurl questions. Try asking about products, shipping, heritage, or players.', 'bot');
     } else {
-      console.log('[CAINT] knowledge data loaded successfully');
+      console.log('[CHARA] knowledge data loaded successfully');
       knowledgeData = data || window.KnowledgeBot.fallbackKnowledge();
     }
   });
 
-  document.addEventListener('spurl:caint-welcome', (event) => {
-    const text = event && event.detail && event.detail.text ? event.detail.text : 'Dia duit 👋\nI\'m CAINT, The Spurl Guide.';
+  document.addEventListener('spurl:chara-welcome', (event) => {
+    const text = event && event.detail && event.detail.text ? event.detail.text : 'Dia duit 👋\nI\'m CHARA, The Spurl Guide.';
     addMessage(text, 'bot');
   }, { once: false });
 
   showWelcomeMessage();
-  console.log('[CAINT] chatbot initialization complete');
+  console.log('[CHARA] chatbot initialization complete');
 }
 
-console.log('[CAINT] widget script loaded');
+console.log('[CHARA] widget script loaded');
 initChat();
