@@ -16,11 +16,80 @@
     "Tell me about the heritage timeline",
     "Who are the legendary hurling players?"
   ],
+  "companyInfo": {
+  "brand": "Spurl",
+  "website": "https://spurl.ie",
+  "location": "Galway, Ireland",
+  "founder": "Roibéard Coughlan",
+  "mission": "Celebrate Irish hurling through craftsmanship, storytelling and heritage.",
+  "currency": "EUR",
+  "countryOfOrigin": "Ireland"
+},
+
+"shipping": {
+  "status": "draft",
+  "dispatchLocation": "Galway, Ireland",
+  "dispatchTime": "To be confirmed",
+  "domesticCarrier": "An Post",
+  "internationalCarrier": "To be confirmed",
+  "tracking": true,
+  "giftPackaging": false,
+  "internationalShipping": true,
+  "regions": ["Ireland", "United Kingdom", "Europe", "United States", "Canada", "Australia", "New Zealand"
+  ]
+},
+"engraving": {
+  "available": false,
+  "status": "coming-soon",
+  "description": "Personalised engraving service currently in development.",
+  "leadTime": "",
+  "maxCharacters": "",
+  "contactRequired": true
+},
+"contact": {
+  "email": "contact@spurl.ie",
+  "responseTime": "1-2 business days",
+  "businessHours": "",
+  "socialMedia": {
+    "facebook": "",
+    "instagram": "",
+    "etsy": ""
+  }
+},
+"navigation": {
+  "home": "/",
+  "heritage": "/heritage",
+  "players": "/players",
+  "contact": "/contact",
+  "shop": "/shop"
+},
+"productCare": {
+"cleaning": "Hand wash only.",
+"dishwasherSafe": false,
+"recommendedOil": "Food-safe mineral oil",
+"oilFrequency": "As required when wood appears dry.",
+"storage": "Store in a cool dry location.",
+"avoid": [
+"Dishwasher use",
+"Long-term soaking",
+"Harsh chemicals"
+]
+},
+"manufacturing": {
+  "createdIn": "Ireland",
+  "ownedIn": "Ireland",
+  "patentedIn": "Ireland",
+  "manufacturedIn": "Overseas specialist production partners",
+  "finishedIn": "Ireland",
+  "engravingInIreland": true,
+  "dispatchLocation": "Galway, Ireland",
+  "description": "Spurl is an Irish-created, Irish-owned and Irish-patented product. Manufacturing is currently carried out by specialist production partners overseas, with final preparation and dispatch completed from Ireland."
+},
   "siteOverview": [
     {
       "id": "about-spurl",
       "title": "What is Spurl.ie about?",
-      "answer": "Spurl.ie is a visual celebration of Irish hurling, with stories about iconic GAA pitches, heritage and legendary players. It is designed to help visitors explore the culture behind the game in a simple, immersive way.",
+      "answer": "Celebrate Irish hurling through craftsmanship, storytelling and heritage.",
       "keywords": ["spurl", "about", "site", "website", "history", "irish hurling", "gaelic games"]
     },
     {
@@ -55,12 +124,11 @@
       "answer": "The players section highlights figures such as Mick Mackey, Christy Ring, Nicky Rackard, Jimmy Doyle, Eddie Keher, Pat Hartigan, Brian Whelahan, Henry Shefflin, Joe Canning, Tony Kelly and TJ Reid.",
       "keywords": ["players", "legendary", "hurling stars", "greatest players", "who are the players"]
     },
-    {
-      "id": "faq-hostinger",
-      "question": "Can this chatbot be used on Hostinger?",
-      "answer": "Yes. The chatbot page and the floating widget page are static files designed for GitHub Pages and can be embedded into a Hostinger site using an iframe or a hosted link.",
-      "keywords": ["hostinger", "embed", "iframe", "website builder", "spurl.ie", "live site"]
-    },
+{   "id": "faq-origin",
+  "question": "Is Spurl made in Ireland?",
+  "answer": "Spurl is Irish-created, Irish-owned and Irish-patented. Manufacturing is currently carried out by specialist production partners overseas, with final preparation and dispatch completed from Ireland.",
+  "keywords": ["origin", "made in ireland", "manufacturing", "production", "where is spurl made"]
+},
     {
       "id": "faq-product",
       "question": "What products does Spurl offer?",
@@ -227,6 +295,8 @@
       "keywords": ["future", "services", "custom order", "gift", "packaging", "made to order"]
     }
   ],
+
+
   "recommendedFaqs": [
     "Do you offer custom sizes for wooden kitchen pieces?",
     "What wood types are used in your products?",
