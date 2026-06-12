@@ -1,0 +1,238 @@
+{
+  "metadata": {
+    "site": "Spurl.ie",
+    "version": "1.0.0",
+    "description": "Static knowledge base for the Spurl assistant. Designed for GitHub Pages and future API migration.",
+    "lastUpdated": "2026-06-12",
+    "notes": [
+      "All answers are static and editable in this file.",
+      "Shipping, engraving and future service details are placeholders until confirmed.",
+      "This structure is suitable for future migration to OpenAI, Claude or Gemini APIs."
+    ]
+  },
+  "quickPrompts": [
+    "What is Spurl.ie about?",
+    "Show me the GAA pitches featured on the site",
+    "Tell me about the heritage timeline",
+    "Who are the legendary hurling players?"
+  ],
+  "siteOverview": [
+    {
+      "id": "about-spurl",
+      "title": "What is Spurl.ie about?",
+      "answer": "Spurl.ie is a visual celebration of Irish hurling, with stories about iconic GAA pitches, heritage and legendary players. It is designed to help visitors explore the culture behind the game in a simple, immersive way.",
+      "keywords": ["spurl", "about", "site", "website", "history", "irish hurling", "gaelic games"]
+    },
+    {
+      "id": "site-purpose",
+      "title": "What can this assistant answer?",
+      "answer": "This assistant can help with the site’s GAA pitches, heritage timeline, player stories, page navigation and current product information placeholders for shipping, engraving and future services.",
+      "keywords": ["help", "what can you do", "guide", "assist", "support", "start"]
+    },
+    {
+      "id": "site-pages",
+      "title": "Which pages are available?",
+      "answer": "The main site includes index.html for the pitch carousel, heritage.html for the history timeline and players.html for the legendary player profiles. The chatbot page is available for embedding on your live website.",
+      "keywords": ["pages", "heritage page", "players page", "home page", "index html", "heritage html", "players html"]
+    }
+  ],
+  "faqs": [
+    {
+      "id": "faq-pitches",
+      "question": "What GAA pitches are featured?",
+      "answer": "The site highlights some of Ireland’s most memorable GAA pitches, including Inishturk, Fintra in Donegal, Markievicz Park in Sligo, Achill Sound, Castlewellan, Dingle, Strangford Lough, Croke Park and several other scenic grounds in Mayo, Galway and Kerry.",
+      "keywords": ["pitch", "pitches", "gaa pitch", "featured", "grounds", "locations", "where are the pitches"]
+    },
+    {
+      "id": "faq-heritage",
+      "question": "What is the heritage section about?",
+      "answer": "The heritage section traces hurling from ancient Ireland through the modern era, covering mythic traditions, the founding of the GAA in 1884, Croke Park, Bloody Sunday and the survival of the sport across generations.",
+      "keywords": ["heritage", "timeline", "history", "origin", "ancient irish", "old", "gaa history"]
+    },
+    {
+      "id": "faq-players",
+      "question": "Who are the legendary hurling players?",
+      "answer": "The players section highlights figures such as Mick Mackey, Christy Ring, Nicky Rackard, Jimmy Doyle, Eddie Keher, Pat Hartigan, Brian Whelahan, Henry Shefflin, Joe Canning, Tony Kelly and TJ Reid.",
+      "keywords": ["players", "legendary", "hurling stars", "greatest players", "who are the players"]
+    },
+    {
+      "id": "faq-hostinger",
+      "question": "Can this chatbot be used on Hostinger?",
+      "answer": "Yes. The chatbot page and the floating widget page are static files designed for GitHub Pages and can be embedded into a Hostinger site using an iframe or a hosted link.",
+      "keywords": ["hostinger", "embed", "iframe", "website builder", "spurl.ie", "live site"]
+    },
+    {
+      "id": "faq-product",
+      "question": "What products does Spurl offer?",
+      "answer": "Spurl is positioned as a handcrafted wooden kitchen products brand. Current information in this knowledge base includes placeholders for product details, custom engraving, shipping costs, dispatch times and future services until confirmed.",
+      "keywords": ["product", "wood", "kitchen", "handcrafted", "wooden products", "custom item"]
+    }
+  ],
+  "heritage": [
+    {
+      "id": "heritage-origins",
+      "title": "The Origins of Hurling",
+      "answer": "Hurling is one of the oldest field games in Ireland, with roots stretching back thousands of years. Ancient folklore and archaeological evidence both point to a game deeply woven into Irish myth, culture and identity.",
+      "keywords": ["ancient", "origins", "hurling history", "oldest field games", "early ireland"]
+    },
+    {
+      "id": "heritage-setanta",
+      "title": "Setanta and Cú Chulainn",
+      "answer": "The story of Setanta becoming Cú Chulainn links hurling to Ireland's heroic age. The sport appears in myth as a mark of courage, skill and youthful power.",
+      "keywords": ["setanta", "cu chulainn", "myth", "heroic age", "legend"]
+    },
+    {
+      "id": "heritage-gaa",
+      "title": "The Foundation of the GAA",
+      "answer": "In 1884, Michael Cusack helped establish the Gaelic Athletic Association to preserve and promote Ireland's native games. The GAA gave hurling a formal structure and helped secure its place in modern Irish life.",
+      "keywords": ["gaa", "gaelic athletic association", "michael cusack", "1884", "foundation"]
+    },
+    {
+      "id": "heritage-croke",
+      "title": "Croke Park and the Home of Gaelic Games",
+      "answer": "Croke Park became the heart of Gaelic games and an enduring symbol of Irish identity. It is closely linked to historic matches, commemorations and the broader story of the GAA.",
+      "keywords": ["croke park", "home of gaelic games", "all ireland", "hogan stand", "bloody sunday"]
+    },
+    {
+      "id": "heritage-modern",
+      "title": "Hurling Beyond Ireland",
+      "answer": "What began as an ancient Irish pastime is now played across the world. Clubs in London, New York and other international communities keep the game alive and connected to Irish culture.",
+      "keywords": ["modern era", "beyond ireland", "global", "international", "clubs", "world"]
+    }
+  ],
+  "players": [
+    {
+      "id": "player-mick-mackey",
+      "name": "Mick Mackey",
+      "answer": "Mick Mackey was the driving force behind Limerick's golden age. His athleticism, leadership and fearless style transformed expectations of what a hurler could achieve.",
+      "keywords": ["mick mackey", "limerick", "golden age", "athleticism", "leader"]
+    },
+    {
+      "id": "player-christy-ring",
+      "name": "Christy Ring",
+      "answer": "Christy Ring is widely regarded as one of the greatest hurlers of all time. He combined skill, power and elegance and inspired generations of players in Cork and beyond.",
+      "keywords": ["christy ring", "greatest hurler", "cork", "skill", "power", "elegance"]
+    },
+    {
+      "id": "player-nicky-rackard",
+      "name": "Nicky Rackard",
+      "answer": "Nicky Rackard was Wexford's great scoring hero. His leadership and remarkable talent helped lift the county to an All-Ireland title in 1955.",
+      "keywords": ["nicky rackard", "wexford", "1955", "scoring", "all ireland"]
+    },
+    {
+      "id": "player-henry-shefflin",
+      "name": "Henry Shefflin",
+      "answer": "Henry Shefflin, nicknamed 'King Henry', became a defining figure of Kilkenny's golden era. His leadership, composure and scoring made him one of the sport's all-time greats.",
+      "keywords": ["henry shefflin", "king henry", "kilkenny", "golden era", "record"]
+    },
+    {
+      "id": "player-joe-canning",
+      "name": "Joe Canning",
+      "answer": "Joe Canning is a modern hurling icon known for his vision, flair and spectacular scoring. He helped inspire Galway's revival and remains one of the game's most recognisable names.",
+      "keywords": ["joe canning", "galway", "modern icon", "vision", "flair", "scoring"]
+    },
+    {
+      "id": "player-tony-kelly",
+      "name": "Tony Kelly",
+      "answer": "Tony Kelly is one of the most naturally gifted players of the modern game. His creativity and elegance have made him the heartbeat of Clare hurling in recent years.",
+      "keywords": ["tony kelly", "clare", "creativity", "modern game", "gifted"]
+    },
+    {
+      "id": "player-tj-reid",
+      "name": "TJ Reid",
+      "answer": "TJ Reid combines power, precision and consistency. He has carried Kilkenny's traditions into a new era and established himself among the game's greatest forwards.",
+      "keywords": ["tj reid", "kilkenny", "all time leading scorer", "forward", "precision"]
+    }
+  ],
+  "pitches": [
+    {
+      "id": "pitch-inishturk",
+      "name": "Inishturk",
+      "location": "Mayo",
+      "answer": "Inishturk in Mayo is one of Ireland's most remote pitches, tucked between rugged hills on a tiny Atlantic island. It has become a symbol of how deeply hurling is tied to place and landscape.",
+      "keywords": ["inishturk", "mayo", "remote", "atlantic island", "edge of the atlantic"]
+    },
+    {
+      "id": "pitch-fintra",
+      "name": "Fintra",
+      "location": "Donegal",
+      "answer": "Fintra in Donegal is famous for its golden sands and Atlantic setting. The combination of beach, waves and hurling makes it one of the most visually iconic pitches in Ireland.",
+      "keywords": ["fintra", "donegal", "beach", "ocean", "golden sands"]
+    },
+    {
+      "id": "pitch-markievicz",
+      "name": "Markievicz Park",
+      "location": "Sligo",
+      "answer": "Markievicz Park in Sligo is known for the dramatic backdrop of Benbulben. The mountain forms a striking cultural and visual setting for Gaelic games.",
+      "keywords": ["markievicz", "sligo", "benbulben", "mountain", "backdrop"]
+    },
+    {
+      "id": "pitch-achill",
+      "name": "Achill Sound",
+      "location": "Mayo",
+      "answer": "Achill Sound combines sea, sky and sport, with mountain views and Atlantic waters framing the landscape around the pitch.",
+      "keywords": ["achill sound", "achill", "mayo", "sea", "mountain views"]
+    },
+    {
+      "id": "pitch-croke",
+      "name": "Croke Park",
+      "location": "Dublin",
+      "answer": "Croke Park is the home of Gaelic games in Dublin. It represents the national stage where hurling and football meet community, heritage and sport at scale.",
+      "keywords": ["croke park", "dublin", "home of gaelic games", "national stadium"]
+    },
+    {
+      "id": "pitch-dingle",
+      "name": "Gallarus",
+      "location": "Kerry",
+      "answer": "Gallarus on the Dingle Peninsula combines Atlantic beaches with dramatic Kerry scenery. This area is a reminder that hurling is tied to place as much as to competition.",
+      "keywords": ["gallarus", "dingle", "kerry", "shoreline", "beach"]
+    },
+    {
+      "id": "pitch-aran",
+      "name": "Inis Oírr",
+      "location": "Galway",
+      "answer": "Inis Oírr on the Aran Islands shows how island life, stone walls and Gaelic games combine in one of Ireland's most celebrated settings.",
+      "keywords": ["inis oirr", "aran islands", "galway", "island", "stone walls"]
+    }
+  ],
+  "productInfo": [
+    {
+      "id": "product-overview",
+      "title": "What kind of products does Spurl make?",
+      "answer": "Spurl is described as a handcrafted wooden kitchen products brand. The website resources currently highlight the wider heritage and cultural identity of the brand, while product-specific details such as materials, sizes and finishes are to be confirmed.",
+      "keywords": ["product", "wooden", "kitchen", "handcrafted", "wood", "materials", "finish"]
+    },
+    {
+      "id": "shipping-placeholder",
+      "title": "Shipping and delivery",
+      "answer": "Shipping costs and delivery terms are not yet confirmed in this knowledge base. Please check the live Spurl site for current shipping details once they are published.",
+      "keywords": ["shipping", "delivery", "postage", "cost", "shipping cost", "delivery cost"]
+    },
+    {
+      "id": "dispatch-placeholder",
+      "title": "Dispatch and processing times",
+      "answer": "Dispatch times are currently placeholders and not yet confirmed. Production and dispatch timing will need to be added when the live store information is available.",
+      "keywords": ["dispatch", "processing time", "lead time", "how long", "production time"]
+    },
+    {
+      "id": "engraving-placeholder",
+      "title": "Engraving and personalisation",
+      "answer": "Engraving details, personalisation options and any associated charges are currently placeholders and are not yet confirmed. These will be added as soon as the live product information is finalised.",
+      "keywords": ["engrave", "engraving", "personalisation", "custom text", "monogram"]
+    },
+    {
+      "id": "future-services-placeholder",
+      "title": "Future services",
+      "answer": "Future services may include custom orders, gift packaging, made-to-order pieces, additional wood finishes and other handcrafted options. These are placeholders for now and should be updated once confirmed.",
+      "keywords": ["future", "services", "custom order", "gift", "packaging", "made to order"]
+    }
+  ],
+  "recommendedFaqs": [
+    "Do you offer custom sizes for wooden kitchen pieces?",
+    "What wood types are used in your products?",
+    "How should I care for and maintain handcrafted wooden items?",
+    "Do you provide gift packaging or branded presentation?",
+    "Can I order a rush production or express dispatch?",
+    "Do you accept returns or exchanges on made-to-order items?"
+  ]
+}

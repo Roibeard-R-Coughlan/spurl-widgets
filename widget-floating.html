@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spurl Floating Widget</title>
+  <style>
+    :root { color-scheme: dark; --panel: rgba(7,19,15,0.97); --line: rgba(194,160,90,0.18); --text:#fff8ed; --gold:#c2a05a; }
+    * { box-sizing:border-box; }
+    body { margin:0; min-height:100vh; font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif; color:var(--text); background:linear-gradient(135deg,#07130f,#173629 45%,#0d231b); }
+    .demo { width:min(1080px,100vw); margin:0 auto; padding:2rem 1rem 4rem; }
+    .demo-card { border:1px solid var(--line); border-radius:22px; background:var(--panel); padding:1rem; box-shadow:0 18px 40px rgba(0,0,0,.28); }
+    .floating-widget { position:fixed; right:18px; bottom:18px; z-index:9999; width:340px; max-width:calc(100vw - 18px); border:1px solid var(--line); border-radius:18px; background:var(--panel); box-shadow:0 18px 40px rgba(0,0,0,.34); overflow:hidden; }
+    .floating-header { display:flex; align-items:center; justify-content:space-between; gap:.6rem; padding:.65rem .75rem; border-bottom:1px solid var(--line); }
+    .floating-title { font-size:.95rem; font-weight:700; }
+    .floating-subtitle { color:#dbe6de; font-size:.78rem; }
+    .floating-body { padding:.65rem .75rem .75rem; }
+    .chip-row { display:flex; flex-wrap:wrap; gap:.35rem; margin-bottom:.45rem; }
+    .chip { padding:.35rem .45rem; border:1px solid rgba(194,160,90,.24); border-radius:999px; background:rgba(255,255,255,.05); color:var(--text); font-size:.78rem; cursor:pointer; }
+    .chat-log { display:flex; flex-direction:column; gap:.45rem; max-height:220px; overflow:auto; }
+    .message { display:flex; align-items:flex-end; gap:.35rem; }
+    .message__avatar { width:1.8rem; height:1.8rem; display:grid; place-items:center; border-radius:999px; background:linear-gradient(135deg,#ffe9bf,#c2a05a); color:#102218; font-size:.74rem; font-weight:700; }
+    .message--bot .message__bubble { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); }
+    .message--user { justify-content:flex-end; }
+    .message--user .message__avatar { order:2; background:linear-gradient(135deg,#d9f7e5,#c2a05a); }
+    .message--user .message__bubble { background:linear-gradient(135deg,rgba(194,160,90,.22),rgba(255,255,255,.08)); border:1px solid rgba(194,160,90,.24); }
+    .message__bubble { max-width:92%; padding:.45rem .55rem; border-radius:12px 12px 12px 4px; color:var(--text); font-size:.86rem; line-height:1.35; }
+    .message--user .message__bubble { border-radius:12px 12px 4px 12px; }
+    .chat-form { display:grid; grid-template-columns:1fr auto; gap:.35rem; margin-top:.45rem; }
+    .chat-input { width:100%; min-height:40px; padding:.52rem .55rem; border:1px solid rgba(194,160,90,.25); border-radius:10px; background:rgba(255,255,255,.04); color:var(--text); font:inherit; }
+    .send-button { border:0; border-radius:10px; padding:0 .65rem; background:linear-gradient(135deg,#ffe9bf,#c2a05a); color:#102218; font-weight:700; cursor:pointer; }
+    @media (max-width:640px) { .floating-widget { right:8px; left:8px; bottom:8px; width:auto; } }
+  </style>
+</head>
+<body>
+  <main class="demo">
+    <article class="demo-card">
+      <h1>Floating “Ask Spurl” widget</h1>
+      <p>This is the Hostinger-friendly floating widget version of the assistant. It uses the same static knowledge base and can be placed on your site as a standalone page or embedded into a page section.</p>
+    </article>
+  </main>
+
+  <aside class="floating-widget" aria-label="Ask Spurl floating widget">
+    <div class="floating-header">
+      <div>
+        <div class="floating-title">Ask Spurl</div>
+        <div class="floating-subtitle">Static knowledge widget</div>
+      </div>
+      <span style="font-size:.85rem;color:#f0d49b;">●</span>
+    </div>
+    <div class="floating-body">
+      <div class="chip-row" data-suggestions></div>
+      <div class="chat-log" data-chat-log aria-live="polite"></div>
+      <form class="chat-form" data-chat-form>
+        <input class="chat-input" type="text" data-chat-input placeholder="Ask about the site…" autocomplete="off" />
+        <button class="send-button" type="submit">Go</button>
+      </form>
+    </div>
+  </aside>
+
+  <script src="js/knowledge-bot.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

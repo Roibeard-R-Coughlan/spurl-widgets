@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ask Spurl Widget</title>
+  <style>
+    :root { color-scheme: dark; --bg: #07130f; --panel: rgba(7,19,15,0.94); --line: rgba(194,160,90,0.18); --text:#fff8ed; --gold:#c2a05a; }
+    * { box-sizing: border-box; }
+    body { margin:0; font-family:Segoe UI, Tahoma, Geneva, Verdana, sans-serif; color:var(--text); background:linear-gradient(135deg,#07130f,#173629 45%,#0d231b); }
+    .widget-shell { width:min(420px,100vw); margin:0 auto; padding:0.8rem; }
+    .widget-card { border:1px solid var(--line); border-radius:22px; background:var(--panel); box-shadow:0 18px 40px rgba(0,0,0,.28); overflow:hidden; }
+    .widget-header { padding:0.8rem 0.85rem 0.35rem; border-bottom:1px solid var(--line); }
+    .eyebrow { text-transform:uppercase; letter-spacing:.18em; color:#f0d49b; font-size:.68rem; }
+    h1 { margin:.25rem 0 .2rem; font-size:1.02rem; }
+    p { margin:0; color:#dbe6de; font-size:.92rem; line-height:1.45; }
+    .widget-chat { display:flex; flex-direction:column; gap:.6rem; padding:.8rem .85rem .85rem; }
+    .chip-row { display:flex; flex-wrap:wrap; gap:.4rem; }
+    .chip { padding:.35rem .5rem; border:1px solid rgba(194,160,90,.24); border-radius:999px; background:rgba(255,255,255,.04); color:var(--text); font-size:.82rem; cursor:pointer; }
+    .chat-log { display:flex; flex-direction:column; gap:.6rem; max-height:280px; overflow:auto; }
+    .message { display:flex; align-items:flex-end; gap:.45rem; }
+    .message__avatar { width:1.9rem; height:1.9rem; display:grid; place-items:center; border-radius:999px; background:linear-gradient(135deg,#ffe9bf,#c2a05a); color:#102218; font-size:.78rem; font-weight:700; }
+    .message--bot .message__bubble { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.08); }
+    .message--user { justify-content:flex-end; }
+    .message--user .message__avatar { order:2; background:linear-gradient(135deg,#d9f7e5,#c2a05a); }
+    .message--user .message__bubble { background:linear-gradient(135deg,rgba(194,160,90,.22),rgba(255,255,255,.08)); border:1px solid rgba(194,160,90,.24); }
+    .message__bubble { max-width:92%; padding:.55rem .65rem; border-radius:14px 14px 14px 5px; color:var(--text); font-size:.9rem; line-height:1.45; }
+    .message--user .message__bubble { border-radius:14px 14px 5px 14px; }
+    .chat-form { display:grid; grid-template-columns:1fr auto; gap:.45rem; }
+    .chat-input { width:100%; min-height:42px; padding:.62rem .65rem; border:1px solid rgba(194,160,90,.25); border-radius:12px; background:rgba(255,255,255,.04); color:var(--text); font:inherit; }
+    .send-button { border:0; border-radius:12px; padding:0 .75rem; background:linear-gradient(135deg,#ffe9bf,#c2a05a); color:#102218; font-weight:700; cursor:pointer; }
+  </style>
+</head>
+<body>
+  <main class="widget-shell">
+    <section class="widget-card" aria-label="Ask Spurl widget">
+      <div class="widget-header">
+        <p class="eyebrow">Ask Spurl</p>
+        <h1>Static knowledge widget for Hostinger</h1>
+        <p>Use this floating-style widget on your live site with the same knowledge base as the main chatbot.</p>
+      </div>
+      <div class="widget-chat">
+        <div class="chip-row" data-suggestions></div>
+        <div class="chat-log" data-chat-log aria-live="polite"></div>
+        <form class="chat-form" data-chat-form>
+          <input class="chat-input" type="text" data-chat-input placeholder="Ask about pitches, heritage or products…" autocomplete="off" />
+          <button class="send-button" type="submit">Ask</button>
+        </form>
+      </div>
+    </section>
+  </main>
+  <script src="js/knowledge-bot.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

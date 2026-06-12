@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Spurl Assistant Embed</title>
+  <link rel="stylesheet" href="css/chatbot-embed.css" />
+</head>
+<body>
+  <main class="embed-shell">
+    <section class="embed-card">
+      <div class="embed-topbar">
+        <div>
+          <p class="eyebrow">Spurl Assistant</p>
+          <strong>Embed-ready chatbot for your Hostinger site</strong>
+        </div>
+        <span class="embed-chip">Live on GitHub Pages</span>
+      </div>
+
+      <div class="embed-grid">
+        <article class="embed-chat">
+          <div class="chat-header">
+            <div>
+              <h1>Ask the site about hurling, heritage and players</h1>
+              <p>Use this page as the chat widget on spurl.ie.</p>
+            </div>
+          </div>
+
+          <div class="chat-log" data-chat-log aria-live="polite"></div>
+
+          <div class="topic-row" data-suggestions></div>
+
+          <form class="chat-form" data-chat-form>
+            <input class="chat-input" type="text" data-chat-input placeholder="Ask about pitches, heritage or players…" autocomplete="off" aria-label="Type your question" />
+            <button class="send-button" type="submit">Send</button>
+          </form>
+          <p class="helper-text">Tip: this page is the embed-friendly version for your website.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="js/knowledge-bot.js"></script>
+  <script src="js/chatbot.js"></script>
+</body>
+</html>

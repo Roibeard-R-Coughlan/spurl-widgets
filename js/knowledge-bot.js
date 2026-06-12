@@ -1,0 +1,127 @@
+(function (global) {
+  const KNOWLEDGE_URL = 'data/spurl-knowledge.json';
+
+  function normalizeText(value) {
+    return String(value || '')
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, ' ')
+      .trim();
+  }
+
+  function tokenize(value) {
+    return normalizeText(value)
+      .split(/\s+/)
+      .filter(Boolean);
+  }
+
+  function unique(values) {
+    return Array.from(new Set(values.filter(Boolean)));
+  }
+
+  function scoreItem(query, item) {
+    const q = normalizeText(query);
+    const qTokens = tokenize(query);
+    const haystack = [item.title, item.question, item.name, item.location, item.answer, item.type || '', ...(item.keywords || [])].join(' ');
+    const hayTokens = tokenize(haystack);
+    const hay = normalizeText(haystack);
+
+    let score = 0;
+
+    if (q && hay.includes(q)) score += 80;
+    if (item.title && normalizeText(item.title).includes(q)) score += 40;
+    if (item.question && normalizeText(item.question).includes(q)) score += 35;
+    if (item.name && normalizeText(item.name).includes(q)) score += 35;
+
+    const exactMatches = unique(qTokens.filter((token) => hayTokens.includes(token)));
+    score += exactMatches.length * 18;
+
+    const keywordMatches = unique((item.keywords || []).filter((keyword) => normalizeText(keyword).includes(q) || q.includes(normalizeText(keyword))));
+    score += keywordMatches.length * 12;
+
+    const tokenSet = new Set(qTokens);
+    const overlap = hayTokens.filter((token) => tokenSet.has(token));
+    score += overlap.length * 6;
+
+    if (qTokens.length > 0 && overlap.length === 0) {
+      const fuzzyHits = qTokens.filter((token) => hayTokens.some((candidate) => candidate.startsWith(token) || token.startsWith(candidate) || candidate.includes(token) || token.includes(candidate)));
+      score += fuzzyHits.length * 4;
+    }
+
+    return score;
+  }
+
+  function flattenKnowledge(knowledge) {
+    const list = [];
+
+    if (Array.isArray(knowledge.siteOverview)) list.push(...knowledge.siteOverview.map((item) => ({ ...item, category: 'siteOverview' })));
+    if (Array.isArray(knowledge.faqs)) list.push(...knowledge.faqs.map((item) => ({ ...item, category: 'faqs' })));
+    if (Array.isArray(knowledge.heritage)) list.push(...knowledge.heritage.map((item) => ({ ...item, category: 'heritage' })));
+    if (Array.isArray(knowledge.players)) list.push(...knowledge.players.map((item) => ({ ...item, category: 'players' })));
+    if (Array.isArray(knowledge.pitches)) list.push(...knowledge.pitches.map((item) => ({ ...item, category: 'pitches' })));
+    if (Array.isArray(knowledge.productInfo)) list.push(...knowledge.productInfo.map((item) => ({ ...item, category: 'productInfo' })));
+    return list;
+  }
+
+  function findAnswer(query, knowledge) {
+    const items = flattenKnowledge(knowledge || {});
+    if (!items.length) return null;
+
+    const scored = items
+      .map((item) => ({ item, score: scoreItem(query, item) }))
+      .filter((entry) => entry.score > 0)
+      .sort((a, b) => b.score - a.score);
+
+    if (!scored.length) return null;
+
+    return scored[0].item;
+  }
+
+  function getSuggestions(knowledge) {
+    return Array.isArray(knowledge.quickPrompts) ? knowledge.quickPrompts : [];
+  }
+
+  function fallbackKnowledge() {
+    return {
+      metadata: { site: 'Spurl', version: 'fallback' },
+      quickPrompts: [
+        'What is Spurl.ie about?',
+        'Show me the GAA pitches featured on the site',
+        'Tell me about the heritage timeline',
+        'Who are the legendary hurling players?'
+      ],
+      siteOverview: [
+        {
+          id: 'fallback-about',
+          title: 'About Spurl',
+          answer: 'Spurl is a static knowledge-driven assistant for the Spurl.ie website. It is designed to answer site questions without any external services.',
+          keywords: ['spurl', 'about', 'site', 'website']
+        }
+      ],
+      faqs: [],
+      heritage: [],
+      players: [],
+      pitches: [],
+      productInfo: []
+    };
+  }
+
+  function loadKnowledge(callback) {
+    fetch(KNOWLEDGE_URL, { cache: 'no-store' })
+      .then((response) => {
+        if (!response.ok) throw new Error('Knowledge file not found');
+        return response.json();
+      })
+      .then((json) => callback(null, json))
+      .catch(() => callback(null, fallbackKnowledge()));
+  }
+
+  global.KnowledgeBot = {
+    loadKnowledge,
+    findAnswer,
+    getSuggestions,
+    fallbackKnowledge,
+    normalizeText,
+    tokenize,
+    scoreItem
+  };
+})(window);
