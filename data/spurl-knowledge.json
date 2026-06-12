@@ -106,7 +106,7 @@
     }
   ],
 
-  {
+  
   "shippingFAQ": [
     {
       "keywords": ["delivery", "shipping", "ireland", "irish delivery"],
@@ -178,15 +178,14 @@
       "keywords": ["where are orders shipped from", "dispatch location"],
       "question": "Where are orders shipped from?",
       "answer": "Orders are dispatched from Galway, Ireland."
-    }
+    },
 
     {
       "keywords": ["delivery cost", "shipping cost", "postage"],
       "question": "How much does shipping cost?",
       "answer": "Shipping costs vary depending on destination and service level. The exact cost will be calculated and displayed during checkout before payment."
     }
-  ]
-}
+  ],
   "faqs": [
     {
       "id": "faq-pitches",
