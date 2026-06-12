@@ -2,7 +2,6 @@ const widgetRoot = document.querySelector('.spurl-chara-widget') || document.bod
 const chatLog = widgetRoot.querySelector('[data-chat-log]');
 const input = widgetRoot.querySelector('[data-chat-input]');
 const form = widgetRoot.querySelector('[data-chat-form]');
-const launcher = widgetRoot.querySelector('[data-spurl-launcher]');
 const widget = document.querySelector('.spurl-chara-widget');
 const baseUrl = (window.__SPURL_WIDGET_BASE_URL__ || '').replace(/\/+$/, '/');
 const avatarImage = (baseUrl ? baseUrl : '') + 'assets/sloitar-chatbot.png';
@@ -25,9 +24,11 @@ function addMessage(text, role = 'bot') {
   const avatar = document.createElement('div');
   avatar.className = 'message__avatar';
   if (role === 'bot') {
-    avatar.innerHTML = '<img src="' + avatarImage + '" alt="" />';
+    avatar.textContent = 'Chara';
+    avatar.setAttribute('aria-label', 'Chara');
   } else {
-    avatar.textContent = 'You';
+    avatar.textContent = 'Tusa';
+    avatar.setAttribute('aria-label', 'Tusa');
   }
 
   const bubble = document.createElement('div');
@@ -92,7 +93,7 @@ function showWelcomeMessage() {
   if (welcomeShown) return;
   welcomeShown = true;
 
-  const welcome = "Dia duit 👋\nI'm CHARA, The Spurl Guide.\nAsk me about Spurl products, shipping, engraving, heritage, players, grounds, or the website.";
+  const welcome = "Dia duit 👋\nI'm Chara, The Spurl Guide.\nAsk me about Spurl products, shipping, engraving, heritage, players, grounds, or the website.";
   addMessage(welcome, 'bot');
 }
 
@@ -129,7 +130,7 @@ function initChat() {
   });
 
   document.addEventListener('spurl:chara-welcome', (event) => {
-    const text = event && event.detail && event.detail.text ? event.detail.text : 'Dia duit 👋\nI\'m CHARA, The Spurl Guide.';
+    const text = event && event.detail && event.detail.text ? event.detail.text : 'Dia duit 👋\nI\'m Chara, The Spurl Guide.';
     addMessage(text, 'bot');
   }, { once: false });
 
