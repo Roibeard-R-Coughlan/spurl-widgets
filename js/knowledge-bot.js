@@ -108,13 +108,25 @@
   }
 
   function loadKnowledge(callback) {
+    console.log('[CAINT] loading knowledge file from:', KNOWLEDGE_URL);
+
     fetch(KNOWLEDGE_URL, { cache: 'no-store' })
       .then((response) => {
-        if (!response.ok) throw new Error('Knowledge file not found');
+        if (!response.ok) {
+          const error = new Error('Knowledge file not found (' + response.status + ')');
+          console.error('[CAINT] knowledge request failed:', error.message, 'URL:', KNOWLEDGE_URL);
+          throw error;
+        }
         return response.json();
       })
-      .then((json) => callback(null, json))
-      .catch(() => callback(null, fallbackKnowledge()));
+      .then((json) => {
+        console.log('[CAINT] knowledge file loaded successfully');
+        callback(null, json);
+      })
+      .catch((error) => {
+        console.error('[CAINT] failed to load knowledge file, using fallback:', error);
+        callback(error, fallbackKnowledge());
+      });
   }
 
   global.KnowledgeBot = {

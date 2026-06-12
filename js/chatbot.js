@@ -1,9 +1,20 @@
-const suggestions = document.querySelector('[data-suggestions]');
-const chatLog = document.querySelector('[data-chat-log]');
-const input = document.querySelector('[data-chat-input]');
-const form = document.querySelector('[data-chat-form]');
+const widgetRoot = document.querySelector('.spurl-caint-widget') || document.body;
+const chatLog = widgetRoot.querySelector('[data-chat-log]');
+const input = widgetRoot.querySelector('[data-chat-input]');
+const form = widgetRoot.querySelector('[data-chat-form]');
+const launcher = widgetRoot.querySelector('[data-spurl-launcher]');
+const widget = document.querySelector('.spurl-caint-widget');
+const baseUrl = (window.__SPURL_WIDGET_BASE_URL__ || '').replace(/\/+$/, '/');
+const avatarImage = (baseUrl ? baseUrl : '') + 'assets/sloitar-chatbot.png';
 
 let knowledgeData = null;
+let welcomeShown = false;
+
+if (globalThis.__SPURL_CAINT_CHAT_INIT__) {
+  console.log('[CAINT] chatbot already initialized; skipping duplicate setup');
+} else {
+  globalThis.__SPURL_CAINT_CHAT_INIT__ = true;
+}
 
 function addMessage(text, role = 'bot') {
   if (!chatLog) return;
@@ -14,7 +25,7 @@ function addMessage(text, role = 'bot') {
   const avatar = document.createElement('div');
   avatar.className = 'message__avatar';
   if (role === 'bot') {
-    avatar.innerHTML = '<img src="assets/sloitar-chatbot.png" alt="" />';
+    avatar.innerHTML = '<img src="' + avatarImage + '" alt="" />';
   } else {
     avatar.textContent = 'You';
   }
@@ -30,77 +41,101 @@ function addMessage(text, role = 'bot') {
 }
 
 function getFallbackAnswer(query) {
+  console.warn('[CAINT] no direct answer found for:', query);
   const fallback = knowledgeData && knowledgeData.productInfo ? knowledgeData.productInfo.find((item) => /shipping|delivery|dispatch|engrave|future|product/i.test(item.title || '')) : null;
 
   if (fallback) {
     return `${fallback.answer} If you want a more specific answer, add keywords such as “shipping”, “engraving”, “dispatch time” or “wooden products”.`;
   }
 
-  return 'I can answer questions about the site’s GAA pitches, heritage, players and product information placeholders. Try asking “What is this site about?” or “Tell me about the heritage timeline.”';
+  return 'I can help with Spurl products, shipping, engraving, heritage, players, grounds and the site. Please try a more specific question if needed.';
 }
 
 function getAnswer(text) {
   if (!knowledgeData) {
+    console.warn('[CAINT] knowledge data not ready yet for:', text);
     return 'The knowledge base is still loading. Please try again in a moment.';
   }
 
   const match = window.KnowledgeBot.findAnswer(text, knowledgeData);
   if (match) {
+    console.log('[CAINT] answer matched from knowledge base:', match.title || match.question || text);
     return match.answer;
   }
 
+  console.warn('[CAINT] no knowledge match found for:', text);
   return getFallbackAnswer(text);
 }
 
-function setSuggestions(knowledge) {
-  if (!suggestions) return;
-
-  suggestions.innerHTML = '';
-  const prompts = window.KnowledgeBot.getSuggestions(knowledge);
-
-  prompts.forEach((prompt) => {
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'topic-button';
-    button.textContent = prompt;
-    button.addEventListener('click', () => {
-      if (input) input.value = prompt;
-      if (input) input.focus();
-      if (form) form.requestSubmit();
-    });
-    suggestions.appendChild(button);
-  });
-}
-
 function handleSubmit(event) {
-  event.preventDefault();
-  const text = input && input.value.trim();
+  console.log('[CAINT] submit event received');
+  if (event && typeof event.preventDefault === 'function') {
+    event.preventDefault();
+    event.stopPropagation();
+  }
 
-  if (!text) return;
+  const text = input && input.value.trim();
+  if (!text) {
+    console.warn('[CAINT] submit ignored because the input was empty');
+    return false;
+  }
 
   addMessage(text, 'user');
   if (input) input.value = '';
 
   const response = getAnswer(text);
   setTimeout(() => addMessage(response, 'bot'), 220);
+  return false;
+}
+
+function showWelcomeMessage() {
+  if (welcomeShown) return;
+  welcomeShown = true;
+
+  const welcome = "Dia duit 👋\nI'm CAINT, The Spurl Guide.\nAsk me about Spurl products, shipping, engraving, heritage, players, grounds, or the website.";
+  addMessage(welcome, 'bot');
 }
 
 function initChat() {
+  console.log('[CAINT] chatbot initialization started');
+
   if (!window.KnowledgeBot) {
-    setTimeout(initChat, 100);
+    console.warn('[CAINT] KnowledgeBot not ready yet; retrying');
+    setTimeout(initChat, 150);
     return;
   }
 
-  window.KnowledgeBot.loadKnowledge((error, data) => {
-    knowledgeData = data || window.KnowledgeBot.fallbackKnowledge();
-    setSuggestions(knowledgeData);
-  });
+  console.log('[CAINT] KnowledgeBot available');
 
   if (form) {
-    form.addEventListener('submit', handleSubmit);
+    form.noValidate = true;
+    form.setAttribute('novalidate', 'true');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      return handleSubmit(event);
+    }, false);
   }
 
-  addMessage('Caint is here to guide you through Spurl. Ask about hurling, heritage, players, and the site.', 'bot');
+  window.KnowledgeBot.loadKnowledge((error, data) => {
+    if (error) {
+      console.error('[CAINT] knowledge file request failed:', error);
+      knowledgeData = data || window.KnowledgeBot.fallbackKnowledge();
+      addMessage('The knowledge base is temporarily unavailable, but I can still answer general Spurl questions. Try asking about products, shipping, heritage, or players.', 'bot');
+    } else {
+      console.log('[CAINT] knowledge data loaded successfully');
+      knowledgeData = data || window.KnowledgeBot.fallbackKnowledge();
+    }
+  });
+
+  document.addEventListener('spurl:caint-welcome', (event) => {
+    const text = event && event.detail && event.detail.text ? event.detail.text : 'Dia duit 👋\nI\'m CAINT, The Spurl Guide.';
+    addMessage(text, 'bot');
+  }, { once: false });
+
+  showWelcomeMessage();
+  console.log('[CAINT] chatbot initialization complete');
 }
 
+console.log('[CAINT] widget script loaded');
 initChat();

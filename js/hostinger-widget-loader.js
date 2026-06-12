@@ -57,14 +57,15 @@
       .spurl-caint-widget > * { pointer-events: auto; }
       .spurl-caint-launcher {
         position: relative;
-        width: 72px;
-        height: 72px;
-        border: 1px solid rgba(194,160,90,0.35);
+        width: 74px;
+        height: 74px;
+        border: 1px solid rgba(194,160,90,0.45);
         border-radius: 999px;
         background:
-          linear-gradient(145deg, rgba(7,19,15,0.14), rgba(7,19,15,0.08)),
+          radial-gradient(circle at 30% 30%, rgba(255,233,191,0.18), transparent 18%),
+          linear-gradient(145deg, rgba(7,19,15,0.18), rgba(7,19,15,0.08)),
           url("${widgetBaseUrl()}assets/sloitar-chatbot.png") center / cover no-repeat;
-        box-shadow: 0 14px 28px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.02) inset;
+        box-shadow: 0 14px 30px rgba(0,0,0,0.30), 0 0 0 1px rgba(255,255,255,0.02) inset;
         cursor: pointer;
         color: #fff8ed;
         display: inline-flex;
@@ -94,9 +95,9 @@
       }
       .spurl-caint-launcher:hover,
       .spurl-caint-launcher:focus-visible {
-        transform: translateY(-2px) scale(1.02);
-        box-shadow: 0 18px 34px rgba(0,0,0,0.35), 0 0 0 1px rgba(194,160,90,0.30) inset;
-        filter: saturate(1.05);
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 18px 38px rgba(0,0,0,0.36), 0 0 0 1px rgba(194,160,90,0.35) inset;
+        filter: saturate(1.08) contrast(1.02);
         outline: none;
       }
       .spurl-caint-launcher::after {
@@ -132,10 +133,11 @@
         bottom: calc(100% + 12px);
         width: min(380px, calc(100vw - 24px));
         max-height: calc(100vh - 24px);
-        border: 1px solid rgba(194,160,90,0.18);
+        border: 1px solid rgba(194,160,90,0.22);
         border-radius: 18px;
         background: linear-gradient(180deg, rgba(7,19,15,0.98), rgba(7,19,15,0.96));
-        box-shadow: 0 18px 42px rgba(0,0,0,0.35);
+        backdrop-filter: blur(8px);
+        box-shadow: 0 18px 42px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.03);
         overflow: hidden;
         display: flex;
         flex-direction: column;
@@ -159,7 +161,7 @@
         gap: 0.75rem;
         padding: 0.75rem 0.8rem;
         border-bottom: 1px solid rgba(194,160,90,0.18);
-        background: linear-gradient(180deg, rgba(194,160,90,0.10), rgba(7,19,15,0.98));
+        background: linear-gradient(180deg, rgba(194,160,90,0.12), rgba(7,19,15,0.98));
       }
       .spurl-caint-title {
         font-size: 1rem;
@@ -186,6 +188,13 @@
         cursor: pointer;
         font-size: 1rem;
         line-height: 1;
+        transition: transform 140ms ease, background 140ms ease;
+      }
+      .spurl-caint-close:hover,
+      .spurl-caint-close:focus-visible {
+        transform: scale(1.05);
+        background: rgba(194,160,90,0.14);
+        outline: none;
       }
       .spurl-caint-body {
         display: flex;
@@ -283,9 +292,34 @@
       }
       .spurl-caint-message--user .spurl-caint-message__bubble { border-radius: 12px 12px 4px 12px; }
       .spurl-caint-form { display: grid; grid-template-columns: 1fr auto; gap: 0.35rem; margin-top: 0.45rem; }
-      .spurl-caint-input { width: 100%; min-height: 40px; padding: 0.52rem 0.55rem; border: 1px solid rgba(194,160,90,0.25); border-radius: 10px; background: rgba(255,255,255,0.04); color: #fff8ed; font: inherit; }
+      .spurl-caint-input {
+        width: 100%;
+        min-height: 40px;
+        padding: 0.52rem 0.55rem;
+        border: 1px solid rgba(194,160,90,0.28);
+        border-radius: 10px;
+        background: rgba(255,255,255,0.04);
+        color: #fff8ed;
+        font: inherit;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+      }
       .spurl-caint-input:focus-visible { outline: 2px solid rgba(194,160,90,0.8); outline-offset: 2px; }
-      .spurl-caint-send { border: 0; border-radius: 10px; padding: 0 0.65rem; background: linear-gradient(135deg, #ffe9bf, #c2a05a); color: #102218; font-weight: 700; cursor: pointer; min-height: 40px; }
+      .spurl-caint-send {
+        border: 0;
+        border-radius: 10px;
+        padding: 0 0.65rem;
+        background: linear-gradient(135deg, #ffe9bf, #c2a05a);
+        color: #102218;
+        font-weight: 700;
+        cursor: pointer;
+        min-height: 40px;
+        box-shadow: 0 8px 16px rgba(194,160,90,0.18);
+      }
+      .spurl-caint-send:hover,
+      .spurl-caint-send:focus-visible {
+        filter: brightness(1.02);
+        outline: none;
+      }
       @keyframes spurl-caint-breathe { 0%,100% { box-shadow: 0 14px 28px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.02) inset; } 50% { box-shadow: 0 16px 32px rgba(0,0,0,0.32), 0 0 0 1px rgba(194,160,90,0.18) inset; } }
       @media (max-width: 640px) {
         .spurl-caint-widget { right: 10px; bottom: 10px; left: 10px; align-items: stretch; }
@@ -300,6 +334,8 @@
 
   function injectWidgetMarkup() {
     if (document.querySelector('.spurl-caint-widget')) return;
+
+    console.log('[CAINT] injecting floating widget into page');
 
     const widget = document.createElement('aside');
     widget.className = 'spurl-caint-widget';
@@ -332,14 +368,37 @@
     const launcher = widget.querySelector('[data-spurl-launcher]');
     const closeButton = widget.querySelector('[data-spurl-close]');
 
+    function updateLauncherVisibility() {
+      if (widget.classList.contains('is-open')) {
+        launcher.style.display = 'none';
+      } else {
+        launcher.style.display = 'inline-flex';
+      }
+    }
+
     function openWidget() {
+      console.log('[CAINT] opening widget panel');
       widget.classList.add('is-open');
       launcher.setAttribute('aria-expanded', 'true');
+      updateLauncherVisibility();
+      if (!widget.dataset.welcomeShown) {
+        widget.dataset.welcomeShown = 'true';
+        setTimeout(() => {
+          const chatLog = widget.querySelector('[data-chat-log]');
+          if (chatLog && !chatLog.textContent.trim()) {
+            const welcome = 'Dia duit 👋\nI\'m CAINT, The Spurl Guide.\nAsk me about Spurl products, shipping, engraving, heritage, players, grounds, or the website.';
+            const evt = new CustomEvent('spurl:caint-welcome', { detail: { text: welcome } });
+            document.dispatchEvent(evt);
+          }
+        }, 120);
+      }
     }
 
     function closeWidget() {
+      console.log('[CAINT] closing widget panel');
       widget.classList.remove('is-open');
       launcher.setAttribute('aria-expanded', 'false');
+      updateLauncherVisibility();
     }
 
     launcher.addEventListener('click', () => {
@@ -363,9 +422,12 @@
         closeWidget();
       }
     });
+
+    updateLauncherVisibility();
   }
 
   function initialize() {
+    console.log('[CAINT] widget loader initialized');
     injectStyles();
     injectWidgetMarkup();
 
@@ -373,9 +435,15 @@
     global.__SPURL_WIDGET_BASE_URL__ = baseUrl;
 
     loadScript(baseUrl + 'js/knowledge-bot.js')
-      .then(() => loadScript(baseUrl + 'js/chatbot.js'))
+      .then(() => {
+        console.log('[CAINT] knowledge-bot.js loaded');
+        return loadScript(baseUrl + 'js/chatbot.js');
+      })
+      .then(() => {
+        console.log('[CAINT] chatbot.js loaded');
+      })
       .catch((error) => {
-        console.error('Spurl widget failed to initialize:', error);
+        console.error('[CAINT] widget failed to initialize:', error);
       });
   }
 
