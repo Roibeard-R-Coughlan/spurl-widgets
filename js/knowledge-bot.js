@@ -54,7 +54,8 @@
     const list = [];
 
     if (Array.isArray(knowledge.siteOverview)) list.push(...knowledge.siteOverview.map((item) => ({ ...item, category: 'siteOverview' })));
-    if (Array.isArray(knowledge.faqs)) list.push(...knowledge.faqs.map((item) => ({ ...item, category: 'faqs' })));
+    if (Array.isArray(knowledge.faqs)) list.push(...knowledge.faqs.map((item) => ({ ...item, category: 'faqs'})));
+    if (Array.isArray(knowledge.shippingFAQ)) list.push(...knowledge.shippingFAQ.map((item) => ({ ...item, category: 'shippingFAQ' })));
     if (Array.isArray(knowledge.heritage)) list.push(...knowledge.heritage.map((item) => ({ ...item, category: 'heritage' })));
     if (Array.isArray(knowledge.players)) list.push(...knowledge.players.map((item) => ({ ...item, category: 'players' })));
     if (Array.isArray(knowledge.pitches)) list.push(...knowledge.pitches.map((item) => ({ ...item, category: 'pitches' })));
@@ -85,9 +86,9 @@
       metadata: { site: 'Spurl', version: 'fallback' },
       quickPrompts: [
         'What is Spurl.ie about?',
-        'Show me the GAA pitches featured on the site',
+        'Where do you ship from?',
         'Tell me about the heritage timeline',
-        'Who are the legendary hurling players?'
+        'Where do you deliver to?',
       ],
       siteOverview: [
         {
