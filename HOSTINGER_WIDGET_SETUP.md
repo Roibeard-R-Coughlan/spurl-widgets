@@ -1,4 +1,4 @@
-# Hostinger CAINT floating widget setup
+# Hostinger CHARA floating widget setup
 
 ## Why the iframe approach is limiting
 
@@ -11,7 +11,7 @@ Use a script-injected floating widget rather than an iframe:
 - it is anchored to the viewport with fixed positioning
 - it is not limited by any container or page section
 - it works with Hostinger Global Code / Custom Code injection
-- it reuses the existing CAINT branding and knowledge base logic
+- it reuses the existing CHARA branding and knowledge base logic
 
 ## Files involved
 
@@ -36,4 +36,4 @@ Use a script-injected floating widget rather than an iframe:
 
 5. Save and publish.
 
-The loader will inject the CAINT launcher and chat panel directly into every page where the snippet is active.
+The loader will inject the CHARA launcher and chat panel directly into every page where the snippet is active.

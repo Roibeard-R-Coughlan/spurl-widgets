@@ -1,3 +1,5 @@
+// ACTIVE: chat UI runtime used by the live Hostinger CHARA widget.
+// This file keeps the chat interaction logic intact and works with the injected loader.
 const widgetRoot = document.querySelector('.spurl-chara-widget') || document.body;
 const chatLog = widgetRoot.querySelector('[data-chat-log]');
 const input = widgetRoot.querySelector('[data-chat-input]');
@@ -93,7 +95,7 @@ function showWelcomeMessage() {
   if (welcomeShown) return;
   welcomeShown = true;
 
-  const welcome = "Dia duit 👋\nI'm Chara, The Spurl Guide.\nAsk me about Spurl products, shipping, engraving, heritage, players, grounds, or the website.";
+  const welcome = "Dia duit 👋\n\nI'm CHARA,\nyour Spurl guide.";
   addMessage(welcome, 'bot');
 }
 
@@ -130,7 +132,7 @@ function initChat() {
   });
 
   document.addEventListener('spurl:chara-welcome', (event) => {
-    const text = event && event.detail && event.detail.text ? event.detail.text : 'Dia duit 👋\nI\'m Chara, The Spurl Guide.';
+    const text = event && event.detail && event.detail.text ? event.detail.text : 'Dia duit 👋\n\nI\'m CHARA,\nyour Spurl guide.';
     addMessage(text, 'bot');
   }, { once: false });
 

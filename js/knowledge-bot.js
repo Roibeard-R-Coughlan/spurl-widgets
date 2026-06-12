@@ -1,3 +1,4 @@
+// ACTIVE: knowledge lookup runtime used by the live Hostinger widget.
 (function (global) {
   const BASE_URL = (global.__SPURL_WIDGET_BASE_URL__ || '').replace(/\/+$|$/, '/');
   const KNOWLEDGE_URL = BASE_URL + 'data/spurl-knowledge.json';

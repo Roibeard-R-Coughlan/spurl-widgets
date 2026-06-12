@@ -1,3 +1,5 @@
+// ACTIVE: live Hostinger-injected CHARA widget runtime.
+// This loader injects the floating widget into external pages and loads the chat/knowledge scripts.
 (function (global) {
   if (global.__SPURL_CHARA_WIDGET_LOADER__) return;
   global.__SPURL_CHARA_WIDGET_LOADER__ = true;
@@ -57,15 +59,14 @@
       .spurl-chara-widget > * { pointer-events: auto; }
       .spurl-chara-launcher {
         position: relative;
-        width: 60px;
-        height: 60px;
-        border: 1px solid rgba(194,160,90,0.45);
+        width: 56px;
+        height: 56px;
+        border: 1px solid rgba(194,160,90,0.42);
         border-radius: 999px;
         background:
-          radial-gradient(circle at 30% 30%, rgba(255,233,191,0.18), transparent 18%),
-          linear-gradient(145deg, rgba(7,19,15,0.18), rgba(7,19,15,0.08)),
-          url("${widgetBaseUrl()}assets/sloitar-chatbot.png") center / cover no-repeat;
-        box-shadow: 0 14px 28px rgba(0,0,0,0.30), 0 0 0 1px rgba(255,255,255,0.02) inset;
+          radial-gradient(circle at 30% 30%, rgba(255,233,191,0.16), transparent 18%),
+          linear-gradient(145deg, rgba(7,19,15,0.18), rgba(7,19,15,0.08));
+        box-shadow: 0 12px 24px rgba(0,0,0,0.28), 0 0 0 1px rgba(255,255,255,0.02) inset;
         cursor: pointer;
         color: transparent;
         display: inline-flex;
@@ -73,16 +74,40 @@
         justify-content: center;
         overflow: hidden;
         user-select: none;
-        transition: transform 160ms ease, box-shadow 180ms ease, filter 180ms ease;
+        transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease;
         text-indent: -9999px;
+      }
+      .spurl-chara-launcher::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: url("${widgetBaseUrl()}assets/sloitar-chatbot.png") center / cover no-repeat;
+        opacity: 0.25;
+        transition: opacity 180ms ease, transform 180ms ease;
+        pointer-events: none;
+      }
+      .spurl-chara-launcher::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(7,19,15,0.02));
+        opacity: 0.85;
+        pointer-events: none;
       }
       @media (hover: hover) and (pointer: fine) {
         .spurl-chara-launcher:hover,
         .spurl-chara-launcher:focus-visible {
-          transform: translateY(-1px) scale(1.06);
-          box-shadow: 0 16px 32px rgba(0,0,0,0.35), 0 0 0 1px rgba(194,160,90,0.35) inset, 0 0 18px rgba(194,160,90,0.18);
-          filter: saturate(1.08) contrast(1.02);
+          transform: translateY(-1px) scale(1.05);
+          box-shadow: 0 14px 28px rgba(0,0,0,0.32), 0 0 0 1px rgba(194,160,90,0.35) inset, 0 0 14px rgba(194,160,90,0.12);
+          filter: saturate(1.04) contrast(1.02);
           outline: none;
+        }
+        .spurl-chara-launcher:hover::before,
+        .spurl-chara-launcher:focus-visible::before {
+          opacity: 0.95;
+          transform: scale(1.02);
         }
       }
       .spurl-chara-panel {
@@ -234,7 +259,7 @@
       }
       @media (max-width: 640px) {
         .spurl-chara-widget { right: 10px; bottom: 10px; left: 10px; align-items: stretch; }
-        .spurl-chara-launcher { width: 68px; height: 68px; align-self: flex-end; }
+        .spurl-chara-launcher { width: 64px; height: 64px; align-self: flex-end; }
         .spurl-chara-panel { width: 100%; max-width: none; }
         .spurl-chara-message__avatar { width: 28px; height: 28px; flex-basis: 28px; }
       }
@@ -291,7 +316,7 @@
         setTimeout(() => {
           const chatLog = widget.querySelector('[data-chat-log]');
           if (chatLog && !chatLog.textContent.trim()) {
-            const welcome = 'Dia duit 👋\nI\'m Chara, The Spurl Guide.\nAsk me about Spurl products, shipping, engraving, heritage, players, grounds, or the website.';
+            const welcome = 'Dia duit 👋\n\nI\'m CHARA,\nyour Spurl guide.';
             const evt = new CustomEvent('spurl:chara-welcome', { detail: { text: welcome } });
             document.dispatchEvent(evt);
           }
