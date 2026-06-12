@@ -96,7 +96,7 @@ function initChat() {
     form.addEventListener('submit', handleSubmit);
   }
 
-  addMessage('Hi! I am the Spurl assistant. Ask me about the hurling pitches, the heritage timeline, or the players featured on the site.', 'bot');
+  addMessage('Hi! I am the Spurl assistant. Ask me about the hurling, the website features or anything else related to the site.', 'bot');
 }
 
 initChat();

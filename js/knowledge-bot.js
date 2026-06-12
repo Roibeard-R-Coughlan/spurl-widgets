@@ -94,7 +94,7 @@
         {
           id: 'fallback-about',
           title: 'About Spurl',
-          answer: 'Spurl is a static knowledge-driven assistant for the Spurl.ie website. It is designed to answer site questions without any external services.',
+          answer: 'Spurl is a static knowledge-driven assistant for the Spurl.ie website. It is designed to answer site questions without any external services. If you require further assistance, please contact us using the contact form.',
           keywords: ['spurl', 'about', 'site', 'website']
         }
       ],
